@@ -28,6 +28,9 @@ public class Paciente {
         
     }
     
+    /**
+     *muestra los atributos del paciente
+     */
     public void mostrar(){
         System.out.println("Nombre: " + nombre);
         System.out.println("Apellidos: " + apellidos);
@@ -35,10 +38,44 @@ public class Paciente {
         System.out.println("Telefono de contacto: " + telefonoFamilia);
         System.out.println("Centro de residencia: " + centro);
     }
+
+    /**
+     *Re-escribe los datos del paciente sustituyendolos
+     * @param nombre
+     * @param apellidos
+     * @param telefono
+     * @param centro
+     */
     public void actualizarDatos(String nombre, String apellidos, String telefono, String centro){
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefonoFamilia = telefono;
         this.centro = centro;     
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getTelefonoFamilia() {
+        return telefonoFamilia;
+    }
+
+    public String getCentro() {
+        return centro;
+    }
+
+    public Scanner getTeclado() {
+        return teclado;
+    }
+    
+    
 }
