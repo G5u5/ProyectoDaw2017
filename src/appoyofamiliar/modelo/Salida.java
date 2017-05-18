@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author Jesús Durántez Prieto
+ * @author Trinidad Ibáñez
  */
 public class Salida {
     private Empleado empleado;
