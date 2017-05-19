@@ -13,16 +13,16 @@ import java.util.*;
  */
 
 public class Plantilla {
-    private LinkedList listaPlantilla;
+    private LinkedList<Usuario> listaPlantilla;
     
     public Plantilla(){
-        listaPlantilla = new LinkedList();
+        listaPlantilla = new LinkedList<Usuario>();
     }
     
     /**
      *Genera un iterador que recorre la LinkedList, mostrando cada elemento encontrado.
      */
-    public void mostrar(){
+    public void mostrarPlantilla(){
         if (listaPlantilla != null){
             Iterator iterador = listaPlantilla.iterator();
             Usuario marcado = (Usuario) iterador.next();
@@ -33,21 +33,33 @@ public class Plantilla {
             }
         } else {
             Scanner teclado = new Scanner(System.in);
+            String opcion = "";
             System.out.println("No existe un registro de usuarios actualmente.");
             System.out.println("¿Desea iniciar la creacion de usuarios? [si/no]");
-            String opcion = teclado.nextLine();
-            switch (opcion){
-                case "si":
-                    nuevoUsuario();
-                    break;
-                case "no":
-                    
-                    break;
-            }
+            do{
+                opcion = teclado.nextLine();
+                switch (opcion){
+                    case "si":
+                        nuevoUsuario();
+                        break;
+                    case "no":
+                        break;
+                    default:
+                        System.out.println("Introduzca una opción válida.");
+                        System.out.println("¿Desea iniciar la creacion de usuarios? [si/no]");
+                        break;
+                }
+            }while(!(opcion.toLowerCase().equals("si")) && !(opcion.toLowerCase().equals("no")));
         }
     }
     
     public void nuevoUsuario(){
+        
+    }
+    
+    public Usuario getUsuario(int indice){
+        
+        return listaPlantilla.get(indice);
         
     }
     
@@ -57,5 +69,11 @@ public class Plantilla {
     
     public void modificarUsuario(int indice){
         ((Usuario) listaPlantilla.get(indice)).modificarDatos();
+    }
+    
+    public String[][] obtenerDatosTabla(){
+        String[][] tabla = new String[listaPlantilla.size()][6];
+        
+        return tabla;
     }
 }
