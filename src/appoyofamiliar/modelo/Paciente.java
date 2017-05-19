@@ -72,10 +72,6 @@ public class Paciente {
     public String getCentro() {
         return centro;
     }
-
-    public Scanner getTeclado() {
-        return teclado;
-    }
     
     
 }
