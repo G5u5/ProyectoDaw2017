@@ -13,7 +13,14 @@ public class ConjuntoPaciente {
    LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
    
    public void mostrar(){
-       System.out.println(pacientes);
+       Iterator lista = pacientes.iterator();
+       Paciente marcado = (Paciente) lista.next();
+       while (lista.hasNext()){
+           System.out.println("Nombre: " + marcado.getNombre());
+           System.out.println("Apellidos " + marcado.getApellidos());
+           System.out.println("DNI: " + marcado.getDni());
+           System.out.println("Teléfono: " + marcado.getTelefonoFamilia());
+       }
    }
    public void nuevoPaciente(){
        Scanner teclado = new Scanner(System.in);
