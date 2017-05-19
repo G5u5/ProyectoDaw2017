@@ -28,10 +28,18 @@ public class ConjuntoSalida {
     public void nuevaSalida(){
         Scanner teclado = new Scanner(System.in);
         System.out.println("Introduce los datos de la nueva salida.");
-        System.out.println("Nombre del empleado:");
-        String empleado = teclado.nextLine();
+        System.out.println(":");
+        for(int i = 0; i<obtenerDatosTabla().length; i++){
+            System.out.print(i + ".-");
+            for(int j = 0; j<tabla[i].length; j++){
+                System.out.print(j);
+            }
+            System.out.println("");
+        }
+        Empleado empleado = (Empleado) Plantilla.getUsuario(emple);
         System.out.println("Nombre del paciente");
         String paciente = teclado.nextLine();
+        
         System.out.println("Nombre del médico:");
         String medico = teclado.nextLine();
         System.out.println("Especialidad de la consulta");
@@ -45,7 +53,8 @@ public class ConjuntoSalida {
         System.out.println("Transporte utilizado");
         String transporte = teclado.nextLine();
         System.out.println("Fecha de inicio de salida:");
-        Date fechaInicio = teclado.nextInt();
+        
         salidas.add(new Salida(empleado, paciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio));
+        (Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, Date fechaInicio)
     }
 }

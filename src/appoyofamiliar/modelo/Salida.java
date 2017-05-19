@@ -23,7 +23,7 @@ public class Salida {
     private Date fechaInicio;
     private Date fechaFin;
 
-    public Salida(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, Date fechaInicio, Date fechaFin) {
+    public Salida(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, Date fechaInicio) {
         this.empleado = empleado;
         this.paciente = paciente;
         this.medico = medico;
@@ -33,18 +33,17 @@ public class Salida {
         this.descripcion = descripcion;
         this.transporte = transporte;
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
     }
     
     /**
      *Muestra los datos de las salidas
      */
     public void mostrar(){
-        System.out.println("Empleado a cargo:" + empleado);
-        System.out.println("Paciente:" + paciente);
-        System.out.println("Médico responsable:" + medico);
-        System.out.println("Especialidad de la consulta:" + especialidad);
-        System.out.println("Centro médico:" + centro);
+        System.out.println("Empleado a cargo: " + empleado);
+        System.out.println("Paciente: " + paciente);
+        System.out.println("Médico responsable: " + medico);
+        System.out.println("Especialidad de la consulta: " + especialidad);
+        System.out.println("Centro médico: " + centro);
         System.out.println("Área:" + area);
         System.out.println("Descripción de la salida:" + descripcion);
         System.out.println("Transporte utiliazdo:" + transporte);
