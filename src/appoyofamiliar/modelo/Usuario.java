@@ -49,5 +49,7 @@ public abstract class Usuario {
         this.clave = clave;
     }
     
-    
+    public void holatrini(){
+        
+    }
 }
