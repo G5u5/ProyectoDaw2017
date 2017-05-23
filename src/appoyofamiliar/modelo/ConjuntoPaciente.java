@@ -11,7 +11,7 @@ import java.util.*;
  * @author Felipe José Ruiz
  */
 public class ConjuntoPaciente {
-   LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
+  private LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
    
     /**
      *Itera la lista para mostrar cada atributo del objeto paciente de la lista \n
@@ -47,16 +47,43 @@ public class ConjuntoPaciente {
        String centro = teclado.nextLine();
        pacientes.push(new Paciente(nombre, apellidos, dni, telefonoFamilia, centro));
    }
+
+    /**
+     *devuelve el paciente alojado en la posición del indice establecido
+     * @param indice
+     * @return
+     */
     public Paciente getPaciente (int indice) {
        return pacientes.get(indice);
     
 }
     
-   public Paciente borrarPaciente(int indice){
+    /**
+     *elimina el paciente de la lista con el indice establecido 
+     * @param indice
+     * @return
+     */
+    public Paciente borrarPaciente(int indice){
        return pacientes.remove(indice);
    }
-   
-   public void obtenerDatosTabla(){
-       
+   public Paciente modificarPaciente(int indice){
+       return getPaciente(indice).actualizarDatos(nombre, apellidos, telefono, centro);
    }
+   
+    /**
+     *Se recorre la lista y devuelve los datos en formato de matriz de Strings
+     * @return
+     */
+    public String [][] obtenerDatosTabla() {
+        String [][] arrayStock = new String [pacientes.size()][6];
+        for (int indice = 0; indice < pacientes.size(); indice++  )  {
+            Paciente paciente = pacientes.get(indice);
+            arrayStock[indice][0] = paciente.getNombre();
+            arrayStock[indice][1] = paciente.getApellidos();
+            arrayStock[indice][2] = paciente.getDni();
+            arrayStock[indice][3] = paciente.getTelefonoFamilia();
+            arrayStock[indice][4] = paciente.getCentro();
+        }      
+        return arrayStock;
+    }
 }

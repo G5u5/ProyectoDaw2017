@@ -72,6 +72,26 @@ public class Paciente {
     public String getCentro() {
         return centro;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setTelefonoFamilia(String telefonoFamilia) {
+        this.telefonoFamilia = telefonoFamilia;
+    }
+
+    public void setCentro(String centro) {
+        this.centro = centro;
+    }
     
     
 }
