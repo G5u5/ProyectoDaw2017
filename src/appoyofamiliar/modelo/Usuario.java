@@ -34,8 +34,6 @@ public abstract class Usuario {
     public String[] obtenerDatos(){
         String[] listaDatos = {this.identificador, this.nombre, this.apellidos, this.dni, this.telefono, this.direccion};
         return listaDatos;
-        
-        
     }
     
     /**
@@ -49,5 +47,29 @@ public abstract class Usuario {
      */
     public void cambiarClave(String clave){
         this.clave = clave;
+    }
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
     }
 }

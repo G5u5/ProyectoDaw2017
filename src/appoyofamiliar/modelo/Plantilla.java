@@ -57,10 +57,21 @@ public class Plantilla {
         
     }
     
+    
     public Usuario getUsuario(int indice){
-        
         return listaPlantilla.get(indice);
+    }
+    
+    public Usuario getUsuarioDni(String denei){
+        Usuario encontrado = null;
         
+        for (int i = 0; i < listaPlantilla.size(); i++){
+            if (listaPlantilla.get(i).getDni().equals(denei)){
+                encontrado = listaPlantilla.get(i);
+            }
+        } 
+        
+        return encontrado;
     }
     
     public void borrarUsuario(int indice){
@@ -68,12 +79,19 @@ public class Plantilla {
     }
     
     public void modificarUsuario(int indice){
-        ((Usuario) listaPlantilla.get(indice)).modificarDatos();
+        listaPlantilla.get(indice).modificarDatos();
     }
     
     public String[][] obtenerDatosTabla(){
         String[][] tabla = new String[listaPlantilla.size()][6];
-        
+        for (int i = 0; i < listaPlantilla.size(); i++){
+            tabla[i][0]= listaPlantilla.get(i).getIdentificador();
+            tabla[i][1]= listaPlantilla.get(i).getNombre();
+            tabla[i][2]= listaPlantilla.get(i).getApellidos();
+            tabla[i][3]= listaPlantilla.get(i).getDni();
+            tabla[i][4]= listaPlantilla.get(i).getTelefono();
+            tabla[i][5]= listaPlantilla.get(i).getDireccion();
+        }
         return tabla;
     }
 }
