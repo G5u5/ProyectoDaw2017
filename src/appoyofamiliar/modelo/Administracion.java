@@ -10,7 +10,7 @@ package appoyofamiliar.modelo;
  * @author Jesús Durántez Prieto
  */
 public class Administracion {
-    private Plantilla trabajadores; 
+    public Plantilla trabajadores; 
     private ConjuntoSalida salidas;
     private ConjuntoPaciente pacientes;
     private Usuario usuarioActual;

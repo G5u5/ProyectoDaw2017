@@ -9,6 +9,12 @@ package appoyofamiliar.modelo;
  *
  * @author Jesús Durántez Prieto
  */
-public class Empleado {
+public class Empleado extends Usuario {
+    
+    
+    @Override
+    public void modificarDatos(){
+        
+    }
     
 }

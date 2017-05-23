@@ -13,7 +13,7 @@ import java.util.*;
  */
 
 public class Plantilla {
-    private LinkedList<Usuario> listaPlantilla;
+    private static LinkedList<Usuario> listaPlantilla;
     
     public Plantilla(){
         listaPlantilla = new LinkedList<Usuario>();
@@ -62,7 +62,7 @@ public class Plantilla {
         return listaPlantilla.get(indice);
     }
     
-    public Usuario getUsuarioDni(String denei){
+    public static Usuario getUsuarioDni(String denei){
         Usuario encontrado = null;
         
         for (int i = 0; i < listaPlantilla.size(); i++){
