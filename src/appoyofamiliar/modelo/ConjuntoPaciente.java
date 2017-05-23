@@ -11,7 +11,7 @@ import java.util.*;
  * @author Felipe José Ruiz
  */
 public class ConjuntoPaciente {
-  private LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
+  private static LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
    
     /**
      *Itera la lista para mostrar cada atributo del objeto paciente de la lista \n
@@ -55,9 +55,18 @@ public class ConjuntoPaciente {
      */
     public Paciente getPaciente (int indice) {
        return pacientes.get(indice);
-    
-}
-    
+   }
+     public static Paciente getPacienteDni(String denei){
+        Paciente encontrado = null;
+        
+        for (int i = 0; i < pacientes.size(); i++){
+            if (pacientes.get(i).getDni().equals(denei)){
+                encontrado = pacientes.get(i);
+            }
+        } 
+        
+        return encontrado;
+    }
     /**
      *elimina el paciente de la lista con el indice establecido 
      * @param indice
