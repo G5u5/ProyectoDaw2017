@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package appoyofamiliar.modelo;
-import java.lang.reflect.Array;
 import java.util.*;
 /**
  *
@@ -75,8 +74,22 @@ public class ConjuntoPaciente {
     public Paciente borrarPaciente(int indice){
        return pacientes.remove(indice);
    }
-   public Paciente modificarPaciente(int indice){
-       return getPaciente(indice).actualizarDatos(nombre, apellidos, telefono, centro);
+
+    /**
+     *Actualiza los datos del paciente selecionado por el indice de la lista
+     * @param indice
+     */
+    public void modificarPaciente(int indice){
+       Scanner modifica = new Scanner(System.in);
+       System.out.println("Nuevo nombre del paciente:");
+       String nombre = modifica.nextLine();
+       System.out.println("Nuevo apellido del paciente:");
+       String apellidos = modifica.nextLine();
+       System.out.println("Nuevo telefono de contacto familiar");
+       String telefono = modifica.nextLine();
+       System.out.println("Nuevo centro de ingreso");
+       String centro = modifica.nextLine();
+       getPaciente(indice).actualizarDatos(nombre, apellidos, telefono, centro);
    }
    
     /**
@@ -84,7 +97,7 @@ public class ConjuntoPaciente {
      * @return
      */
     public String [][] obtenerDatosTabla() {
-        String [][] arrayStock = new String [pacientes.size()][6];
+        String [][] arrayStock = new String [pacientes.size()][5];
         for (int indice = 0; indice < pacientes.size(); indice++  )  {
             Paciente paciente = pacientes.get(indice);
             arrayStock[indice][0] = paciente.getNombre();
