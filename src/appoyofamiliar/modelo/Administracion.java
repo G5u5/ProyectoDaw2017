@@ -13,7 +13,7 @@ public class Administracion {
     public Plantilla trabajadores; 
     private ConjuntoSalida salidas;
     private ConjuntoPaciente pacientes;
-    private Usuario usuarioActual;
+    private Usuario usuarioActual;;
 
     public Administracion(Plantilla trabajadores, ConjuntoSalida salidas, ConjuntoPaciente pacientes, Usuario usuarioActual) {
         this.trabajadores = trabajadores;
@@ -26,5 +26,5 @@ public class Administracion {
         this.trabajadores = trabajadores;
         this.salidas = salidas;
         this.pacientes = pacientes;
-    }
+    }    
 }

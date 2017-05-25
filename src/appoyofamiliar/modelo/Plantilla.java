@@ -69,13 +69,16 @@ public class Plantilla {
             if (listaPlantilla.get(i).getDni().equals(denei)){
                 encontrado = listaPlantilla.get(i);
             }
-        } 
-        
+        }
         return encontrado;
     }
     
     public void borrarUsuario(int indice){
         listaPlantilla.remove(indice);
+    }
+    
+    public void borrarUsuario(Usuario usuario){
+        listaPlantilla.remove(usuario);
     }
     
     public void modificarUsuario(int indice){

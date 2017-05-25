@@ -127,15 +127,15 @@ public class ConjuntoSalida {
     public String[][] obtenerDatosTabla(){
         String[][] tabla = new String[salidas.size()][9];
         for (int i = 0; i < salidas.size(); i++){
-            tabla[i][0]= salidas.get(i).obtenerDatos()[1];
-            tabla[i][1]= salidas.get(i).Paciente.getNombre();
+            tabla[i][0]= salidas.get(i).getEmpleado().getNombre();
+            tabla[i][1]= salidas.get(i).getPaciente().getNombre();
             tabla[i][2]= salidas.get(i).getMedico();
             tabla[i][3]= salidas.get(i).getEspecialidad();
             tabla[i][4]= salidas.get(i).getCentro();
             tabla[i][5]= salidas.get(i).getDescripcion();
             tabla[i][6]= salidas.get(i).getTransporte();
-            tabla[i][7]= salidas.get(i).getFechaInicio();
-            tabla[i][8]= salidas.get(i).getFechaFin();
+            tabla[i][7]= salidas.get(i).getFechaInicio().toString();
+            tabla[i][8]= salidas.get(i).getFechaFin().toString();
         }
         return tabla;
     }
