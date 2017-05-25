@@ -6,6 +6,7 @@
 package appoyofamiliar.modelo;
 
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -78,4 +79,47 @@ public class Salida {
         this.transporte = transporte;
         this.fechaInicio = fechaInicio;
     }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public String getCentro() {
+        return centro;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getTransporte() {
+        return transporte;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    
+    
 }
