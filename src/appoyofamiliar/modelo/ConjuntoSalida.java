@@ -14,6 +14,9 @@ import java.util.*;
 public class ConjuntoSalida {
     private LinkedList<Salida> salidas = new LinkedList<Salida>();
     
+    /**
+     *Muestra los datos de una salida
+     */
     public void mostrar(){
        Iterator lista = salidas.iterator();
        Salida marcado = (Salida) lista.next();
@@ -30,14 +33,9 @@ public class ConjuntoSalida {
        }
     }
     
-    public void mostrarPaciente(String paciente){
-        System.out.println("");
-    }
-    
-    public void mostrarEmpleado(String empleado){
-        System.out.println("");
-    }
-    
+    /**
+     *Crea una salida
+     */
     public void nuevaSalida(){
         Scanner teclado = new Scanner(System.in);
         System.out.println("Introduce los datos de la nueva salida.");
@@ -66,6 +64,11 @@ public class ConjuntoSalida {
         obtenerFecha(fecha);
     }
         
+    /**
+     *Convierte una String en una fecha tipo Date y la retorna
+     * @param fecha
+     * @return
+     */
     public Date obtenerFecha(String fecha) {
         Date testDate = null;
         SimpleDateFormat formatoFecha = new SimpleDateFormat("DD/MM/YYYY");
@@ -86,10 +89,18 @@ public class ConjuntoSalida {
         return retorno;
     }
     
+    /**
+     *Borra una salida
+     * @param indice
+     */
     public void borrarSalida(int indice){
         salidas.remove(indice);
     }
     
+    /**
+     *Modifica algunos datos de una salida existente
+     * @param indice
+     */
     public void modificarSalida(int indice){
         Empleado empleado;
         String medico;
@@ -124,6 +135,10 @@ public class ConjuntoSalida {
         salidas.get(indice).actualizarDatos(empleado, medico, especialidad, centro, descripcion, transporte, fechaInicio);
     }
     
+    /**
+     *Muestra los datos de las salidas en forma de tabla
+     * @return
+     */
     public String[][] obtenerDatosTabla(){
         String[][] tabla = new String[salidas.size()][9];
         for (int i = 0; i < salidas.size(); i++){
