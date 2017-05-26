@@ -42,8 +42,19 @@ public abstract class Usuario {
      * @param direccion
      */
     public Usuario(String nombre, String apellidos, String dni, String telefono, String direccion) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
+            
+    /**
+     * Modifica los datos del objeto Usuario que llama al metodo
+     * Metodo abstracto que se redefine en las clases especificas.
+     */
+    public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion){
         this.identificador = identificador;
-        this.clave = clave;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
@@ -51,35 +62,6 @@ public abstract class Usuario {
         this.direccion = direccion;
     }
         
-    /**
-     *Muestra por pantalla los datos de la cuenta de usuario que llama al método.
-     */
-    public void verDatosPropios(){
-        System.out.println("Datos de la cuenta:");
-        System.out.println("------------------------------");
-        System.out.println("Usuario: " + this.identificador);
-        System.out.println("Nombre: " + this.nombre);
-        System.out.println("Apellidos " + this.apellidos);
-        System.out.println("DNI: " + this.dni);
-        System.out.println("Telefono: " + telefono);
-        System.out.println("Direccion: " + direccion);
-    }
-    
-    /**
-     * Devuelve los datos del usuario en un array
-     * @return String[identificador, nombre, apellidos, dni, telefono, direccion]
-     */
-    public String[] obtenerDatos(){
-        String[] listaDatos = {this.identificador, this.nombre, this.apellidos, this.dni, this.telefono, this.direccion};
-        return listaDatos;
-    }
-    
-    /**
-     * Modifica los datos del objeto Usuario que llama al metodo
-     * Metodo abstracto que se redefine en las clases especificas.
-     */
-    public abstract void modificarDatos();
-    
     /**
      *Cambia la clave del usuario que llama al método
      * @param clave

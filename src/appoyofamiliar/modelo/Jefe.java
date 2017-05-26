@@ -13,6 +13,8 @@ import java.util.*;
  */
 public class Jefe extends Usuario{
     
+    private String cargo;
+    
     /**
      * Creacion de usuario Jefe con todos los datos
      * @param identificador
@@ -52,18 +54,34 @@ public class Jefe extends Usuario{
     }
     
     public String[] getDatosEmpleado(Empleado empleado){
-        String[] arrayDatos = new String[5];
+        String[] arrayDatos = new String[7];
         
-        arrayDatos[0] = empleado.obtenerDatos()[0];
-        arrayDatos[1] = empleado.obtenerDatos()[1];
-        arrayDatos[2] = empleado.obtenerDatos()[2];
-        arrayDatos[3] = empleado.obtenerDatos()[3];
-        arrayDatos[4] = empleado.obtenerDatos()[4];
-        arrayDatos[5] = empleado.obtenerDatos()[5];
-        arrayDatos[6] = empleado.obtenerDatos()[6];
+        arrayDatos[0] = empleado.getIdentificador();
+        arrayDatos[1] = empleado.getNombre();
+        arrayDatos[2] = empleado.getApellidos();
+        arrayDatos[3] = empleado.getDni();
+        arrayDatos[4] = empleado.getTelefono();
+        arrayDatos[5] = empleado.getDireccion();
+        arrayDatos[6] = empleado.getLocalidad();
         
         return arrayDatos;
     }
+    
+    public String[] getDatosEncargado(Encargado encargado){
+        String[] arrayDatos = new String[8];
+        
+        arrayDatos[0] = encargado.getIdentificador();
+        arrayDatos[1] = encargado.getNombre();
+        arrayDatos[2] = encargado.getApellidos();
+        arrayDatos[3] = encargado.getDni();
+        arrayDatos[4] = encargado.getTelefono();
+        arrayDatos[5] = encargado.getDireccion();
+        arrayDatos[6] = encargado.getLocalidad();
+        arrayDatos[7] = encargado.getArea();
+        
+        return arrayDatos;
+    }
+    
     //salidas.get(i).obtenerDatos()[1]
     //public void actualizarDatos(String nombre, String apellidos, String telefono, String centro){
     public void modificarPaciente(Paciente paciente, String nombre, String apellidos, String telefono, String centro){
@@ -89,14 +107,17 @@ public class Jefe extends Usuario{
         conjunto.borrarUsuario(marcado);
     }
     
-    /**
+    /*
      * + verSalida()
      * + modificarSalida()
      * + informeSalidas()
      */
     
-    @Override
-    public void modificarDatos(){
-        
+    /**
+     * Modificar los datos del usuario Jefe
+     */
+    public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String cargo){
+        super.modificarDatos(identificador, nombre, apellidos, dni, telefono, direccion);
+        this.cargo = cargo;
     }
 }

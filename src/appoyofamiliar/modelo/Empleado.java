@@ -41,23 +41,23 @@ public class Empleado extends Usuario {
         this.localidad = localidad;
     }
     
-    
-    @Override
-    public String[] obtenerDatos(){
-        
-        String[] listaDatos = new String[super.obtenerDatos().length];
-        
-        for (int i = 0; i < super.obtenerDatos().length; i++){
-            listaDatos[i] = (super.obtenerDatos())[i];
-        }
-        
-        listaDatos[super.obtenerDatos().length] = this.localidad;
-        
-        return listaDatos;
+    /**
+     * Modificar los datos del usuario Empleado
+     * @param identificador
+     * @param nombre
+     * @param apellidos
+     * @param dni
+     * @param telefono
+     * @param direccion
+     * @param localidad
+     */
+    public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad){
+        super.modificarDatos(identificador, nombre, apellidos, dni, telefono, direccion);
+        this.localidad = localidad;
+    }
+
+    public String getLocalidad() {
+        return localidad;
     }
     
-    @Override
-    public void modificarDatos(){
-        
-    }
 }

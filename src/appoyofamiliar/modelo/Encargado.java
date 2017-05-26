@@ -41,8 +41,25 @@ public class Encargado extends Empleado{
         this.area = area;
     }
     
-    @Override
-    public void modificarDatos(){
-        
+    /**
+     * Modificar los datos del usuario Encargado.
+     * 
+     * @param identificador
+     * @param nombre
+     * @param apellidos
+     * @param dni
+     * @param telefono
+     * @param direccion
+     * @param localidad
+     * @param area
+     */
+    public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area){
+        super.modificarDatos(identificador, nombre, apellidos, dni, telefono, direccion);
+        this.area = area;
     }
+
+    public String getArea() {
+        return area;
+    }
+    
 }
