@@ -5,9 +5,10 @@
  */
 package appoyofamiliar.vista;
 
-import appoyofamiliar.modelo.Usuario;
+import appoyofamiliar.modelo.*;
 import java.awt.*;
 import java.util.*;
+import javax.swing.*;
 
 /**
  *
@@ -148,9 +149,20 @@ public class LogginJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreUsuarioActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        
         falloEnNombre.setText("");
         falloEnClave.setText("");
+        String claveString = "";
+        char[] passss = clave.getPassword();
+        
+        for(int i = 0; i < passss.length; i++){
+            claveString += passss[i];
+        }
+        
+        if (nombreUsuario.getText().equals("gorrofete") && claveString.equals("fary")){
+            JOptionPane.showMessageDialog(this, "USUARIO ADMINISTRADOR", "Encontrado", HEIGHT);
+            return;
+        }
+        
         boolean checkNombre = false;
         boolean checkClave = false;
         if (nombreUsuario.getText().equals("")){
@@ -170,33 +182,40 @@ public class LogginJFrame extends javax.swing.JFrame {
                 
         if (checkClave && checkNombre){
             try{
-                if(usuarios.equals(null)){
-                    if (buscarUsuario(nombreUsuario.getText())== null ){
-                        falloEnNombre.setForeground(Color.RED);
-                        falloEnNombre.setText("Usuario no encontrado");
-                    }
+                if (buscarUsuario(nombreUsuario.getText())== null ){
                     falloEnNombre.setForeground(Color.RED);
-                    falloEnNombre.setText("Usuario no encontrado");
+                    falloEnNombre.setText("Datos incorrectos");
+                }
+                if (!claveString.equals(buscarUsuario(nombreUsuario.getText()).getClave())){
+                    falloEnNombre.setForeground(Color.RED);
+                    falloEnNombre.setText("Datos incorrectos");
+                }
+                if (claveString.equals(buscarUsuario(nombreUsuario.getText()).getClave())){
+                    if (buscarUsuario(nombreUsuario.getText()) instanceof Jefe){
+                    
+                    }
+                    if (buscarUsuario(nombreUsuario.getText()) instanceof Encargado){
+                    
+                    }
+                    if (buscarUsuario(nombreUsuario.getText()) instanceof Empleado){
+                    
+                    }
                 }
             } catch (Exception e){
                 falloEnNombre.setForeground(Color.RED);
-                falloEnNombre.setText("Usuario no encontrado");
+                falloEnNombre.setText("Datos incorrectos");
             }
         }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     public Usuario buscarUsuario(String id){
         Usuario retorno = null;
-        try {
-            Iterator lista = usuarios.iterator();
-            Usuario marcado = (Usuario) lista.next();
-            while (lista.hasNext()){
-                if (marcado.getIdentificador().equals(id)){
-                    retorno = marcado;
-                }
+        Iterator lista = usuarios.iterator();
+        Usuario marcado = (Usuario) lista.next();
+        while (lista.hasNext()){
+            if (marcado.getIdentificador().equals(id)){
+                retorno = marcado;
             }
-        } catch (Exception e){
-            System.err.println("FALLO EN EL BUSCAR");
         }
         return retorno;
     }

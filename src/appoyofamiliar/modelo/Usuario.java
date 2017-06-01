@@ -94,4 +94,10 @@ public abstract class Usuario {
     public String getDireccion() {
         return direccion;
     }
+
+    public String getClave() {
+        return clave;
+    }
+    
+    
 }
