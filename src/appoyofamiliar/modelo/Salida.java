@@ -37,22 +37,6 @@ public class Salida {
     }
     
     /**
-     *Muestra los datos de las salidas
-     */
-    public void mostrar(){
-        System.out.println("Empleado a cargo: " + empleado);
-        System.out.println("Paciente: " + paciente);
-        System.out.println("Médico responsable: " + medico);
-        System.out.println("Especialidad de la consulta: " + especialidad);
-        System.out.println("Centro médico: " + centro);
-        System.out.println("Área:" + area);
-        System.out.println("Descripción de la salida:" + descripcion);
-        System.out.println("Transporte utiliazdo:" + transporte);
-        System.out.println("Fecha de salida:" + fechaInicio);
-        System.out.println("Fecha de vuelta:" + fechaFin);
-    }
-    
-    /**
      * Se introduce una fecha de finalización para una de las salidas
      * @param fechaFin
      */

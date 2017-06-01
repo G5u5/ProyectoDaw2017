@@ -15,25 +15,6 @@ public class ConjuntoSalida {
     private LinkedList<Salida> salidas = new LinkedList<Salida>();
     
     /**
-     *Muestra los datos de una salida
-     */
-    public void mostrar(){
-       Iterator lista = salidas.iterator();
-       Salida marcado = (Salida) lista.next();
-       while (lista.hasNext()){
-           System.out.println("Nombre del empleado: " + marcado.getEmpleado());
-           System.out.println("Nombre del paciente: " + marcado.getPaciente());
-           System.out.println("Nombre del médico: " + marcado.getMedico());
-           System.out.println("Especialidad: " + marcado.getEspecialidad());
-           System.out.println("Centro: " + marcado.getCentro());
-           System.out.println("Descripción de la salida: " + marcado.getDescripcion());
-           System.out.println("Transporte utilizado: " + marcado.getTransporte());
-           System.out.println("Fecha de inicio: " + marcado.getFechaInicio());
-           System.out.println("Fecha de finalización: " + marcado.getFechaFin());
-       }
-    }
-    
-    /**
      *Crea una salida
      */
     public void nuevaSalida(){
@@ -153,5 +134,9 @@ public class ConjuntoSalida {
             tabla[i][8]= salidas.get(i).getFechaFin().toString();
         }
         return tabla;
+    }
+
+    public LinkedList<Salida> getSalidas() {
+        return salidas;
     }
 }
