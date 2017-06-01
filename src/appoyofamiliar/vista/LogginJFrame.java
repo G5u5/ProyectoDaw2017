@@ -6,7 +6,8 @@
 package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.Usuario;
-import java.util.LinkedList;
+import java.awt.*;
+import java.util.*;
 
 /**
  *
@@ -20,6 +21,7 @@ public class LogginJFrame extends javax.swing.JFrame {
      */
     public LogginJFrame() {
         initComponents();
+        usuarios = null;
     }
     
     public LogginJFrame(LinkedList<Usuario> usuarios) {
@@ -40,8 +42,11 @@ public class LogginJFrame extends javax.swing.JFrame {
         botonSalir = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        clave = new javax.swing.JPasswordField();
+        falloEnNombre = new javax.swing.JLabel();
+        falloEnClave = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,19 +70,25 @@ public class LogginJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Bienvenido, introduzca su nombre ");
+        jLabel1.setText("AppoyoFamiliar");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("de usuario y contraseña");
-
-        jPasswordField1.setMinimumSize(new java.awt.Dimension(14, 24));
-        jPasswordField1.setPreferredSize(new java.awt.Dimension(119, 24));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        clave.setMinimumSize(new java.awt.Dimension(14, 24));
+        clave.setPreferredSize(new java.awt.Dimension(119, 24));
+        clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                claveActionPerformed(evt);
             }
         });
+
+        falloEnNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        falloEnClave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel3.setText("Usuario:");
+
+        jLabel4.setText("Contraseña:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,33 +96,47 @@ public class LogginJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nombreUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(falloEnNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(falloEnClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(falloEnNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(falloEnClave, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonSalir)
                     .addComponent(botonAceptar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -119,18 +144,66 @@ public class LogginJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioActionPerformed
-        // TODO add your handling code here:
+        botonAceptarActionPerformed(evt);
     }//GEN-LAST:event_nombreUsuarioActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        if (nombreUsuario.getText() == null){
-            
+        
+        falloEnNombre.setText("");
+        falloEnClave.setText("");
+        boolean checkNombre = false;
+        boolean checkClave = false;
+        if (nombreUsuario.getText().equals("")){
+            falloEnNombre.setForeground(Color.RED);
+            falloEnNombre.setText("Introduzca su identificador");
+            checkNombre = false;
+        } else {
+            checkNombre = true;
+        }
+        if (clave.getPassword().length == 0){
+            falloEnClave.setForeground(Color.RED);
+            falloEnClave.setText("Introduzca su clave");
+            checkClave = false;
+        } else {
+            checkClave = true;
+        }
+                
+        if (checkClave && checkNombre){
+            try{
+                if(usuarios.equals(null)){
+                    if (buscarUsuario(nombreUsuario.getText())== null ){
+                        falloEnNombre.setForeground(Color.RED);
+                        falloEnNombre.setText("Usuario no encontrado");
+                    }
+                    falloEnNombre.setForeground(Color.RED);
+                    falloEnNombre.setText("Usuario no encontrado");
+                }
+            } catch (Exception e){
+                falloEnNombre.setForeground(Color.RED);
+                falloEnNombre.setText("Usuario no encontrado");
+            }
         }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    public Usuario buscarUsuario(String id){
+        Usuario retorno = null;
+        try {
+            Iterator lista = usuarios.iterator();
+            Usuario marcado = (Usuario) lista.next();
+            while (lista.hasNext()){
+                if (marcado.getIdentificador().equals(id)){
+                    retorno = marcado;
+                }
+            }
+        } catch (Exception e){
+            System.err.println("FALLO EN EL BUSCAR");
+        }
+        return retorno;
+    }
+    
+    private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_claveActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         System.exit(0);
@@ -174,9 +247,12 @@ public class LogginJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JPasswordField clave;
+    private javax.swing.JLabel falloEnClave;
+    private javax.swing.JLabel falloEnNombre;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }
