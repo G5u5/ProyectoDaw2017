@@ -67,6 +67,12 @@ public class Jefe extends Usuario{
         return arrayDatos;
     }
     
+    /**
+     * Devuelve un array con los datos del encargado que se pasa como parámetro
+     * [identificador, nombre, apellidos, dni, telefono, direccion, localidad, area]
+     * @param encargado
+     * @return
+     */
     public String[] getDatosEncargado(Encargado encargado){
         String[] arrayDatos = new String[8];
         
@@ -78,6 +84,20 @@ public class Jefe extends Usuario{
         arrayDatos[5] = encargado.getDireccion();
         arrayDatos[6] = encargado.getLocalidad();
         arrayDatos[7] = encargado.getArea();
+        
+        return arrayDatos;
+    }
+    
+    public String[] getDatosJefe(Jefe jefe){
+        String[] arrayDatos = new String[7];
+        
+        arrayDatos[0] = jefe.getIdentificador();
+        arrayDatos[1] = jefe.getNombre();
+        arrayDatos[2] = jefe.getApellidos();
+        arrayDatos[3] = jefe.getDni();
+        arrayDatos[4] = jefe.getTelefono();
+        arrayDatos[5] = jefe.getDireccion();
+        arrayDatos[6] = jefe.getCargo();
         
         return arrayDatos;
     }
@@ -96,9 +116,7 @@ public class Jefe extends Usuario{
     }
             
     /**
-     * + getDatosEmpleado()
      * + crearEmpleado()
-     * + getDatosJefe()
      * + crearJefe()
      * + modificarUsuario()
     */
@@ -120,4 +138,10 @@ public class Jefe extends Usuario{
         super.modificarDatos(identificador, nombre, apellidos, dni, telefono, direccion);
         this.cargo = cargo;
     }
+
+    public String getCargo() {
+        return cargo;
+    }
+    
+    
 }
