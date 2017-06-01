@@ -16,13 +16,12 @@ import javax.swing.*;
  */
 public class LogginJFrame extends javax.swing.JFrame {
     
-    LinkedList<Usuario> usuarios;
+    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     /**
      * Creates new form LogginJFrame
      */
     public LogginJFrame() {
         initComponents();
-        usuarios = null;
     }
     
     public LogginJFrame(LinkedList<Usuario> usuarios) {
@@ -151,6 +150,8 @@ public class LogginJFrame extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         falloEnNombre.setText("");
         falloEnClave.setText("");
+        String idUsuario = nombreUsuario.getText();
+        Usuario marcado;
         String claveString = "";
         char[] passss = clave.getPassword();
         
@@ -158,14 +159,14 @@ public class LogginJFrame extends javax.swing.JFrame {
             claveString += passss[i];
         }
         
-        if (nombreUsuario.getText().equals("gorrofete") && claveString.equals("fary")){
+        if (idUsuario.toLowerCase().equals("gorrofete") && claveString.toLowerCase().equals("fary")){
             JOptionPane.showMessageDialog(this, "USUARIO ADMINISTRADOR", "Encontrado", HEIGHT);
             return;
         }
         
         boolean checkNombre = false;
         boolean checkClave = false;
-        if (nombreUsuario.getText().equals("")){
+        if (idUsuario.equals("")){
             falloEnNombre.setForeground(Color.RED);
             falloEnNombre.setText("Introduzca su identificador");
             checkNombre = false;
@@ -181,40 +182,40 @@ public class LogginJFrame extends javax.swing.JFrame {
         }
                 
         if (checkClave && checkNombre){
-            try{
-                if (buscarUsuario(nombreUsuario.getText())== null ){
-                    falloEnNombre.setForeground(Color.RED);
-                    falloEnNombre.setText("Datos incorrectos");
+            marcado = buscarUsuario(idUsuario);
+            if (claveString.equals(marcado.getClave())){
+                falloEnNombre.setText("");
+                falloEnClave.setText("");
+                clave.setText("");
+                nombreUsuario.setText("");
+                nombreUsuario.grabFocus();
+                if (marcado instanceof Jefe){
+                    JefeJFrame jefejf = new JefeJFrame(marcado, this);
+                    jefejf.setVisible(true);
+                    this.setVisible(false);
                 }
-                if (!claveString.equals(buscarUsuario(nombreUsuario.getText()).getClave())){
-                    falloEnNombre.setForeground(Color.RED);
-                    falloEnNombre.setText("Datos incorrectos");
+                if (marcado instanceof Encargado){
+                    EncargadoJFrame encjf = new EncargadoJFrame(marcado, this);
+                    encjf.setVisible(true);
+                    this.setVisible(false);
+                    
+                } else if (marcado instanceof Empleado){
+                    EmpleadoJFrame empjf = new EmpleadoJFrame(marcado, this);
+                    empjf.setVisible(true);
+                    this.setVisible(false);
                 }
-                if (claveString.equals(buscarUsuario(nombreUsuario.getText()).getClave())){
-                    if (buscarUsuario(nombreUsuario.getText()) instanceof Jefe){
-                    
-                    }
-                    if (buscarUsuario(nombreUsuario.getText()) instanceof Encargado){
-                    
-                    }
-                    if (buscarUsuario(nombreUsuario.getText()) instanceof Empleado){
-                    
-                    }
-                }
-            } catch (Exception e){
-                falloEnNombre.setForeground(Color.RED);
-                falloEnNombre.setText("Datos incorrectos");
+            } else {
+                falloEnNombre.setForeground(Color.red);
+                falloEnNombre.setText("DATOS INCORRECTOS");
             }
         }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     public Usuario buscarUsuario(String id){
         Usuario retorno = null;
-        Iterator lista = usuarios.iterator();
-        Usuario marcado = (Usuario) lista.next();
-        while (lista.hasNext()){
-            if (marcado.getIdentificador().equals(id)){
-                retorno = marcado;
+        for (int i = 0; i < usuarios.size(); i++) {
+            if ((((usuarios.get(i)).getIdentificador()).toLowerCase()).equals(id)){
+                retorno = usuarios.get(i);
             }
         }
         return retorno;

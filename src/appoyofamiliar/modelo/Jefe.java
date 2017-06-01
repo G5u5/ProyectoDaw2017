@@ -25,8 +25,9 @@ public class Jefe extends Usuario{
      * @param telefono
      * @param direccion
      */
-    public Jefe(String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion) {
+    public Jefe(String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String cargo) {
         super(identificador, clave, nombre, apellidos, dni, telefono, direccion);
+        this.cargo = cargo;
     }
     
     /**

@@ -5,8 +5,8 @@
  */
 package appoyofamiliar.modelo;
 
-import java.util.Iterator;
-import java.util.Scanner;
+import appoyofamiliar.vista.*;
+import java.util.*;
 
 /**
  *
@@ -18,7 +18,17 @@ public class ApPoyoFamiliar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
         
+        Jefe pepe = new Jefe("Pepe", "pepeluis", "Sr. Pepe", "Pepe de Pepe", "123456789P", "978456123", "Calle del señor Pepe", "El puto boss");
+        Empleado pepito = new Empleado("Pepito", "pepitoluis", "Sr. Pepito", "Pepito de Pepito", "987654321P", "978123456", "Calle del señor Pepito", "Palencia");
+        Encargado pepote = new Encargado("Pepote", "pepoteluis", "Sr. Pepote", "Pepote de Pe", "654987321P", "978415263", "Calle del señor Pepote", "Palencia" , "Norte");
+        usuarios.add(pepe);
+        usuarios.add(pepito);
+        usuarios.add(pepote);
+        
+        LogginJFrame ljf = new LogginJFrame(usuarios);
+        ljf.setVisible(true);
     }
     
     /**
