@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Jefe extends Usuario{
     
-    private String cargo;
+    private String sede;
     
     /**
      * Creacion de usuario Jefe con todos los datos
@@ -25,9 +25,9 @@ public class Jefe extends Usuario{
      * @param telefono
      * @param direccion
      */
-    public Jefe(String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String cargo) {
+    public Jefe(String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String sede) {
         super(identificador, clave, nombre, apellidos, dni, telefono, direccion);
-        this.cargo = cargo;
+        this.sede = sede;
     }
     
     /**
@@ -38,8 +38,9 @@ public class Jefe extends Usuario{
      * @param telefono
      * @param direccion
      */
-    public Jefe(String nombre, String apellidos, String dni, String telefono, String direccion) {
+    public Jefe(String nombre, String apellidos, String dni, String telefono, String direccion, String sede) {
         super(nombre, apellidos, dni, telefono, direccion);
+        this.sede = sede;
     }
     
     public String[] getDatosPaciente(Paciente paciente){
@@ -98,7 +99,7 @@ public class Jefe extends Usuario{
         arrayDatos[3] = jefe.getDni();
         arrayDatos[4] = jefe.getTelefono();
         arrayDatos[5] = jefe.getDireccion();
-        arrayDatos[6] = jefe.getCargo();
+        arrayDatos[6] = jefe.getSede();
         
         return arrayDatos;
     }
@@ -135,13 +136,13 @@ public class Jefe extends Usuario{
     /**
      * Modificar los datos del usuario Jefe
      */
-    public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String cargo){
+    public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String sede){
         super.modificarDatos(identificador, nombre, apellidos, dni, telefono, direccion);
-        this.cargo = cargo;
+        this.sede = sede;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getSede() {
+        return sede;
     }
     
     
