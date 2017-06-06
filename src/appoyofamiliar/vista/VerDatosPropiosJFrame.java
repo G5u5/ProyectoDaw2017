@@ -6,25 +6,22 @@
 package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.*;
-import java.awt.Color;
 
 /**
  *
  * @author Jesús Durántez Prieto
  */
-public class VerDatosUsuario extends javax.swing.JDialog {
+public class VerDatosPropiosJFrame extends javax.swing.JFrame {
     
-    private Usuario usuario;
+    Usuario usuario;
     /**
-     * Creates new form VerDatosUsuario
+     * Creates new form VerDatosPropiosJFrame
      */
-    public VerDatosUsuario(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public VerDatosPropiosJFrame() {
         initComponents();
     }
     
-    public VerDatosUsuario(java.awt.Frame parent, boolean modal, Usuario user) {
-        super(parent, modal);
+    public VerDatosPropiosJFrame(Usuario user) {
         initComponents();
         usuario = user;
         
@@ -64,11 +61,7 @@ public class VerDatosUsuario extends javax.swing.JDialog {
         direccion.setEditable(false);
         cajaDato1.setEditable(false);
         cajaDato2.setEditable(false);
-        
     }
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,43 +71,27 @@ public class VerDatosUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         identificador = new javax.swing.JTextField();
         nombreUsuario = new javax.swing.JTextField();
         apellidos = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         dni = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         direccion = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         cajaDato1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         labelDato1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         labelDato2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         cajaDato2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel3.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Datos personales");
-
-        jLabel4.setText("Usuario:");
-
-        jLabel5.setText("Nombre:");
-
-        jLabel6.setText("Apellidos:");
-
-        jLabel7.setText("D.N.I.:");
-
-        jLabel8.setText("Teléfono:");
-
-        jLabel9.setText("Dirección:");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton2.setText("ACEPTAR");
         jButton2.setMaximumSize(new java.awt.Dimension(115, 32));
@@ -126,21 +103,6 @@ public class VerDatosUsuario extends javax.swing.JDialog {
             }
         });
 
-        cajaDato1.setMaximumSize(new java.awt.Dimension(147, 24));
-        cajaDato1.setMinimumSize(new java.awt.Dimension(147, 24));
-        cajaDato1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cajaDato1ActionPerformed(evt);
-            }
-        });
-
-        labelDato1.setText("dato1");
-
-        labelDato2.setText("dato2");
-
-        cajaDato2.setMaximumSize(new java.awt.Dimension(147, 24));
-        cajaDato2.setMinimumSize(new java.awt.Dimension(147, 24));
-
         jButton1.setText("Cambiar Clave");
         jButton1.setMaximumSize(new java.awt.Dimension(115, 32));
         jButton1.setMinimumSize(new java.awt.Dimension(115, 32));
@@ -150,6 +112,37 @@ public class VerDatosUsuario extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Datos personales");
+
+        jLabel4.setText("Usuario:");
+
+        jLabel5.setText("Nombre:");
+
+        jLabel6.setText("Apellidos:");
+
+        cajaDato1.setMaximumSize(new java.awt.Dimension(147, 24));
+        cajaDato1.setMinimumSize(new java.awt.Dimension(147, 24));
+        cajaDato1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cajaDato1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("D.N.I.:");
+
+        labelDato1.setText("dato1");
+
+        jLabel8.setText("Teléfono:");
+
+        labelDato2.setText("dato2");
+
+        jLabel9.setText("Dirección:");
+
+        cajaDato2.setMaximumSize(new java.awt.Dimension(147, 24));
+        cajaDato2.setMinimumSize(new java.awt.Dimension(147, 24));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,12 +236,7 @@ public class VerDatosUsuario extends javax.swing.JDialog {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cajaDato1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDato1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cajaDato1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
@@ -257,6 +245,10 @@ public class VerDatosUsuario extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         (new CambiarClaveJFrame(usuario)).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cajaDato1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaDato1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cajaDato1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,27 +267,20 @@ public class VerDatosUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VerDatosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerDatosPropiosJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VerDatosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerDatosPropiosJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VerDatosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerDatosPropiosJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VerDatosUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerDatosPropiosJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VerDatosUsuario dialog = new VerDatosUsuario(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new VerDatosPropiosJFrame().setVisible(true);
             }
         });
     }

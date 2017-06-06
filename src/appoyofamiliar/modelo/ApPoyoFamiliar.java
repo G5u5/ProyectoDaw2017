@@ -27,8 +27,7 @@ public class ApPoyoFamiliar {
         usuarios.add(pepito);
         usuarios.add(pepote);
         
-        LogginJFrame ljf = new LogginJFrame(usuarios);
-        ljf.setVisible(true);
+        (new LogginJFrame(usuarios)).setVisible(true);
     }
     
     /**

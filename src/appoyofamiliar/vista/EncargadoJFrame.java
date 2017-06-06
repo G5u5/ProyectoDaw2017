@@ -155,8 +155,7 @@ public class EncargadoJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cambiarUsuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VerDatosUsuario vdu = new VerDatosUsuario(this, true, usuario);
-        vdu.setVisible(true);
+        (new VerDatosPropiosJFrame(usuario)).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

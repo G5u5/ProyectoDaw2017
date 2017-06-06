@@ -99,5 +99,8 @@ public abstract class Usuario {
         return clave;
     }
     
+    public boolean compararClaves(String clave){
+        return this.clave.equals(clave);
+    }
     
 }
