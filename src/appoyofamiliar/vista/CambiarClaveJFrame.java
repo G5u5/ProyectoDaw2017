@@ -72,10 +72,20 @@ public class CambiarClaveJFrame extends javax.swing.JFrame {
         passNueva.setMaximumSize(new java.awt.Dimension(150, 2147483647));
         passNueva.setMinimumSize(new java.awt.Dimension(150, 22));
         passNueva.setPreferredSize(new java.awt.Dimension(150, 22));
+        passNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passNuevaActionPerformed(evt);
+            }
+        });
 
         passConfirm.setMaximumSize(new java.awt.Dimension(150, 2147483647));
         passConfirm.setMinimumSize(new java.awt.Dimension(150, 22));
         passConfirm.setPreferredSize(new java.awt.Dimension(150, 22));
+        passConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passConfirmActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("CANCELAR");
         jButton1.setMaximumSize(new java.awt.Dimension(110, 32));
@@ -161,7 +171,7 @@ public class CambiarClaveJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void passAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passAnteriorActionPerformed
-        // TODO add your handling code here:
+        jButton2ActionPerformed(evt);
     }//GEN-LAST:event_passAnteriorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -197,6 +207,7 @@ public class CambiarClaveJFrame extends javax.swing.JFrame {
                 errores.setText("No puede ser la misma clave");
             } else if (claveNuevaString.equals(claveConfirmString)){
                 usuario.cambiarClave(claveNuevaString);
+                this.setVisible(false);
             } else {
                 errores.setForeground(Color.red);
                 errores.setText("Claves no coinciden");
@@ -205,8 +216,15 @@ public class CambiarClaveJFrame extends javax.swing.JFrame {
             errores.setForeground(Color.red);
             errores.setText("Clave incorrecta");
         }
-        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void passNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passNuevaActionPerformed
+        jButton2ActionPerformed(evt);
+    }//GEN-LAST:event_passNuevaActionPerformed
+
+    private void passConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passConfirmActionPerformed
+        jButton2ActionPerformed(evt);
+    }//GEN-LAST:event_passConfirmActionPerformed
 
     /**
      * @param args the command line arguments

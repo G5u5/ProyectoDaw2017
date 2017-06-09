@@ -183,31 +183,34 @@ public class LogginJFrame extends javax.swing.JFrame {
         } else {
             checkClave = true;
         }
-        if (true){
-            System.out.println("hola");
-        }      
+             
         if (checkClave && checkNombre){
             marcado = buscarUsuario(idUsuario);
-            if (claveString.equals(marcado.getClave())){
-                falloEnNombre.setText("");
-                falloEnClave.setText("");
-                clave.setText("");
-                nombreUsuario.setText("");
-                nombreUsuario.grabFocus();
-                if (marcado instanceof Jefe){
-                    JefeJFrame jefejf = new JefeJFrame(marcado, this);
-                    jefejf.setVisible(true);
-                    this.setVisible(false);
-                }
-                if (marcado instanceof Encargado){
-                    EncargadoJFrame encjf = new EncargadoJFrame(marcado, this);
-                    encjf.setVisible(true);
-                    this.setVisible(false);
-                    
-                } else if (marcado instanceof Empleado){
-                    EmpleadoJFrame empjf = new EmpleadoJFrame(marcado, this);
-                    empjf.setVisible(true);
-                    this.setVisible(false);
+            if (marcado != null){
+                if (claveString.equals(marcado.getClave())){
+                    falloEnNombre.setText("");
+                    falloEnClave.setText("");
+                    clave.setText("");
+                    nombreUsuario.setText("");
+                    nombreUsuario.grabFocus();
+                    if (marcado instanceof Jefe){
+                        JefeJFrame jefejf = new JefeJFrame(marcado, this, usuarios);
+                        jefejf.setVisible(true);
+                        this.setVisible(false);
+                    }
+                    if (marcado instanceof Encargado){
+                        EncargadoJFrame encjf = new EncargadoJFrame(marcado, this);
+                        encjf.setVisible(true);
+                        this.setVisible(false);
+
+                    } else if (marcado instanceof Empleado){
+                        EmpleadoJFrame empjf = new EmpleadoJFrame(marcado, this);
+                        empjf.setVisible(true);
+                        this.setVisible(false);
+                    }
+                } else {
+                    falloEnNombre.setForeground(Color.red);
+                    falloEnNombre.setText("DATOS INCORRECTOS");
                 }
             } else {
                 falloEnNombre.setForeground(Color.red);
@@ -220,7 +223,7 @@ public class LogginJFrame extends javax.swing.JFrame {
         Usuario retorno = null;
         for (int i = 0; i < usuarios.size(); i++) {
             if ((((usuarios.get(i)).getIdentificador()).toLowerCase()).equals(id)){
-                retorno = usuarios.get(i);
+                retorno = (Usuario) usuarios.get(i);
             }
         }
         return retorno;

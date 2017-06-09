@@ -6,6 +6,7 @@
 package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.*;
+import java.util.*;
 
 /**
  *
@@ -15,6 +16,7 @@ public class JefeJFrame extends javax.swing.JFrame {
 
     private Jefe usuario;
     private LogginJFrame ljfPadre;
+    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     /**
      * Creates new form JefeJFrame
      */
@@ -22,9 +24,10 @@ public class JefeJFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    public JefeJFrame(Usuario usuario, LogginJFrame ljf) {
+    public JefeJFrame(Usuario usuario, LogginJFrame ljf, LinkedList<Usuario> usuarios) {
         initComponents();
         this.usuario = (Jefe) usuario;
+        this.usuarios = usuarios;
         ljfPadre = ljf;
         nombreUsuario.setText(this.usuario.getIdentificador());
         nombreSede.setText(this.usuario.getSede());
@@ -109,6 +112,11 @@ public class JefeJFrame extends javax.swing.JFrame {
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton4.setText("<html>\n GESTIONAR\n<br/>\nENCARGADOS\n</html>");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("<html>\n GESTIONAR\n<br/>\nJEFES\n</html>");
 
@@ -213,6 +221,10 @@ public class JefeJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         (new VerDatosPropiosJFrame(usuario)).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        (new GestionarEncargados((Usuario)usuario, usuarios)).setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
