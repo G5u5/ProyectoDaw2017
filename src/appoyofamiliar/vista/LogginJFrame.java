@@ -148,13 +148,18 @@ public class LogginJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreUsuarioActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        falloEnNombre.setText("");
-        falloEnClave.setText("");
+        
         String idUsuario = nombreUsuario.getText();
         Usuario marcado;
+        
+        //Variables de comprobación de campos
+        boolean checkNombre = false;
+        boolean checkClave = false;
+        falloEnNombre.setText("");
+        falloEnClave.setText("");
+        
         String claveString = "";
         char[] passss = clave.getPassword();
-        
         for(int i = 0; i < passss.length; i++){
             claveString += passss[i];
         }
@@ -163,9 +168,7 @@ public class LogginJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "USUARIO ADMINISTRADOR", "Encontrado", HEIGHT);
             return;
         }
-        
-        boolean checkNombre = false;
-        boolean checkClave = false;
+                
         if (idUsuario.equals("")){
             falloEnNombre.setForeground(Color.RED);
             falloEnNombre.setText("Introduzca su identificador");
@@ -180,7 +183,9 @@ public class LogginJFrame extends javax.swing.JFrame {
         } else {
             checkClave = true;
         }
-                
+        if (true){
+            System.out.println("hola");
+        }      
         if (checkClave && checkNombre){
             marcado = buscarUsuario(idUsuario);
             if (claveString.equals(marcado.getClave())){
