@@ -7,13 +7,16 @@ package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jesús Durántez Prieto
  */
 public class NuevoEncargado extends javax.swing.JFrame {
-    LinkedList<Encargado> encList = new LinkedList<Encargado>();
+    private LinkedList<Encargado> encList = new LinkedList<Encargado>();
+    private LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
+    private Usuario usuario;
     /**
      * Creates new form NuevoEncargado
      */
@@ -21,9 +24,11 @@ public class NuevoEncargado extends javax.swing.JFrame {
         initComponents();
     }
     
-    public NuevoEncargado(LinkedList<Encargado> encList) {
+    public NuevoEncargado(Usuario usuario, LinkedList<Encargado> encList, LinkedList<Usuario> usrs) {
         initComponents();
+        this.usuario = usuario;
         this.encList = encList;
+        this.usuarios = usrs;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +61,8 @@ public class NuevoEncargado extends javax.swing.JFrame {
         botonSalir = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("NUEVO ENCARGADO");
 
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -89,7 +95,60 @@ public class NuevoEncargado extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Area:");
 
+        identificadorBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                identificadorBoxActionPerformed(evt);
+            }
+        });
+
+        claveBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                claveBoxActionPerformed(evt);
+            }
+        });
+
+        nombreBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreBoxActionPerformed(evt);
+            }
+        });
+
+        apellidosBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apellidosBoxActionPerformed(evt);
+            }
+        });
+
+        dniBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dniBoxActionPerformed(evt);
+            }
+        });
+
+        telefonoBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefonoBoxActionPerformed(evt);
+            }
+        });
+
         direccionBox.setPreferredSize(new java.awt.Dimension(173, 24));
+        direccionBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                direccionBoxActionPerformed(evt);
+            }
+        });
+
+        localidadBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                localidadBoxActionPerformed(evt);
+            }
+        });
+
+        areaBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaBoxActionPerformed(evt);
+            }
+        });
 
         botonSalir.setText("SALIR");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -212,16 +271,61 @@ public class NuevoEncargado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        
+        if (buscarUsuario()){
+            JOptionPane.showMessageDialog(this, "El usuario ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        usuarios.add(new Encargado(identificadorBox.getText(), claveBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), localidadBox.getText(),areaBox.getText()));
+        JOptionPane.showMessageDialog(this, "Usuario " + identificadorBox.getText() + " creado correctamente", "Encargado creado", JOptionPane.OK_OPTION);
+        this.setVisible(false);
+        (new GestionarEncargados(this.usuario, this.usuarios)).setVisible(true);
     }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void identificadorBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificadorBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_identificadorBoxActionPerformed
+
+    private void claveBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_claveBoxActionPerformed
+
+    private void localidadBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localidadBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_localidadBoxActionPerformed
+
+    private void areaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_areaBoxActionPerformed
+
+    private void telefonoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_telefonoBoxActionPerformed
+
+    private void dniBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dniBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_dniBoxActionPerformed
+
+    private void nombreBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_nombreBoxActionPerformed
+
+    private void apellidosBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_apellidosBoxActionPerformed
+
+    private void direccionBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionBoxActionPerformed
+        botonAceptarActionPerformed(evt);
+    }//GEN-LAST:event_direccionBoxActionPerformed
     
     private boolean buscarUsuario(){
         String id = identificadorBox.getText();
         boolean retorno = false;
-        for (int i = 0; i < encList.size(); i++){
-            if 
+        for (int i = 0; i < usuarios.size(); i++){
+            Usuario marcado = usuarios.get(i);
+            if (id.toLowerCase().equals(marcado.getIdentificador().toLowerCase())){
+                retorno = true;
+            }
         }
-        
         return retorno;
     }
     /**

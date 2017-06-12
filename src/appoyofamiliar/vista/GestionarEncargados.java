@@ -16,6 +16,7 @@ import javax.swing.table.*;
 public class GestionarEncargados extends javax.swing.JFrame {
     
     private Usuario usuario;
+    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     LinkedList<Encargado> encargados = new LinkedList<Encargado>();
     String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
     DefaultTableModel dtm;
@@ -30,6 +31,7 @@ public class GestionarEncargados extends javax.swing.JFrame {
     public GestionarEncargados(Usuario usr, LinkedList<Usuario> usrs) {
         initComponents();
         this.usuario = usr;
+        usuarios = usrs;
         generarLista(usrs);
         dtm = new DefaultTableModel(generarTabla(),cabecera);
         tablaEncargados.setModel(dtm);
@@ -72,7 +74,8 @@ public class GestionarEncargados extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("GESTION ENCARGADOS");
 
         jButton1.setText("CREAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +104,11 @@ public class GestionarEncargados extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaEncargados);
 
         jButton6.setText("SALIR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -149,8 +157,13 @@ public class GestionarEncargados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        (new NuevoEncargado(encargados)).setVisible(true);
+        this.setVisible(false);
+        (new NuevoEncargado(usuario, encargados, usuarios)).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
