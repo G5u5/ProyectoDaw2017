@@ -44,7 +44,7 @@ public class GestionarEncargados extends javax.swing.JFrame {
     }
     
     private String[][] generarTabla(){
-        String[][] tabla = new String[encargados.size()][];
+        String[][] tabla = new String[encargados.size()][5];
         for (int i = 0; i < encargados.size(); i++){
             tabla[i][0]= encargados.get(i).getNombre();
             tabla[i][1]= encargados.get(i).getApellidos();
@@ -75,6 +75,11 @@ public class GestionarEncargados extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("CREAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("MODIFICAR");
 
@@ -142,6 +147,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        (new NuevoEncargado(encargados)).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -22,6 +22,9 @@ public class Encargado extends Empleado{
      * @param dni
      * @param telefono
      * @param direccion
+     * @param localidad
+     * @param area
+     * 
      */
     public Encargado(String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area) {
         super(identificador, clave, nombre, apellidos, dni, telefono, direccion, localidad);

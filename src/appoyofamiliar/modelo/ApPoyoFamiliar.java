@@ -26,6 +26,7 @@ public class ApPoyoFamiliar {
         usuarios.add(pepe);
         usuarios.add(pepito);
         usuarios.add(pepote);
+        //INSERT INTO `ApoyoFamiliar`.`Usuario` (`Identificador`, `Clave`, `Nombre`, `Apellidos`, `Dni`, `Telefono`, `Direccion`, `sede`, `localidad`, `area`) VALUES ('Pipe', 'pepi', 'Felipe', 'ruiz', '72418564F', '979161434', 'C/ Mayor 41, 3º B', 'Palencia', NULL, NULL)
         
         (new LogginJFrame(usuarios)).setVisible(true);
     }
