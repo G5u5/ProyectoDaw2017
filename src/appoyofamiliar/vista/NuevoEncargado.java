@@ -275,7 +275,10 @@ public class NuevoEncargado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El usuario ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        usuarios.add(new Encargado(identificadorBox.getText(), claveBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), localidadBox.getText(),areaBox.getText()));
+        Usuario nu = new Encargado(identificadorBox.getText(), claveBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), localidadBox.getText(),areaBox.getText()); 
+        nu.cambiarControl("insertar");
+        usuarios.add(nu);
+        
         JOptionPane.showMessageDialog(this, "Usuario " + identificadorBox.getText() + " creado correctamente", "Encargado creado", JOptionPane.OK_OPTION);
         this.setVisible(false);
         (new GestionarEncargados(this.usuario, this.usuarios)).setVisible(true);

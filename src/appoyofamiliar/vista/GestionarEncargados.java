@@ -48,11 +48,13 @@ public class GestionarEncargados extends javax.swing.JFrame {
     private String[][] generarTabla(){
         String[][] tabla = new String[encargados.size()][5];
         for (int i = 0; i < encargados.size(); i++){
-            tabla[i][0]= encargados.get(i).getNombre();
-            tabla[i][1]= encargados.get(i).getApellidos();
-            tabla[i][2]= encargados.get(i).getDni();
-            tabla[i][3]= encargados.get(i).getTelefono();
-            tabla[i][4]= encargados.get(i).getArea();
+            if(!encargados.get(i).getControl().equals("borrar")){
+                tabla[i][0]= encargados.get(i).getNombre();
+                tabla[i][1]= encargados.get(i).getApellidos();
+                tabla[i][2]= encargados.get(i).getDni();
+                tabla[i][3]= encargados.get(i).getTelefono();
+                tabla[i][4]= encargados.get(i).getArea();
+            }
         }
         return tabla;
     }
@@ -173,8 +175,9 @@ public class GestionarEncargados extends javax.swing.JFrame {
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         int ind = tablaEncargados.getSelectedRow();
         Usuario marcado = encargados.get(ind);
-        usuarios.remove(marcado);
-        encargados.remove((Encargado)marcado);
+        int indice = usuarios.indexOf(marcado);
+        usuarios.get(indice).cambiarControl("borrar");
+        encargados.remove(marcado);
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     /**

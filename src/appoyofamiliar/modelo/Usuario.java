@@ -12,6 +12,7 @@ package appoyofamiliar.modelo;
 public abstract class Usuario {
     
     private String identificador, clave, nombre, apellidos, dni, telefono, direccion;
+    private String control;//"mantener", "modificar", "borrar", "insertar"
 
     /**
      * Creacion de Usuario con todos los datos
@@ -22,6 +23,7 @@ public abstract class Usuario {
      * @param dni
      * @param telefono
      * @param direccion
+     * @param control
      */
     public Usuario(String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion) {
         this.identificador = identificador;
@@ -31,6 +33,7 @@ public abstract class Usuario {
         this.dni = dni;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.control = "mantener";
     }
     
     /**
@@ -103,4 +106,17 @@ public abstract class Usuario {
         return this.clave.equals(clave);
     }
     
+    /**
+     * Lista de valores posibles:
+     * "mantener"  "modificar"  "borrar"  "insertar"
+     * @param c
+     */
+    public void cambiarControl(String c){
+        //"mantener", "modificar", "borrar", "insertar"
+        this.control = c;
+    }
+    
+    public String getControl(){
+        return this.control;
+    }
 }
