@@ -20,6 +20,8 @@ public class ApPoyoFamiliar {
     public static void main(String[] args) {
         LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
         
+        //COMENTAR este bloque para que cargue los datos desde la base de datos
+        //NO BORRAR
         Jefe pepe = new Jefe("Pepe", "pepe", "Sr. Pepe", "Pepe de Pepe", "123456789P", "978456123", "Calle del señor Pepe", "Valladolid");
         Empleado pepito = new Empleado("Pepito", "pepi", "Sr. Pepito", "Pepito de Pepito", "987654321P", "978123456", "Calle del señor Pepito", "Palencia");
         Encargado pepote = new Encargado("Pepote", "pepo", "Sr. Pepote", "Pepote de Pe", "654987321P", "978415263", "Calle del señor Pepote", "Palencia" , "Norte");
