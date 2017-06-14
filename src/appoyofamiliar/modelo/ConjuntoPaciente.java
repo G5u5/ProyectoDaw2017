@@ -20,11 +20,11 @@ public class ConjuntoPaciente {
        Iterator lista = pacientes.iterator();
        Paciente marcado = (Paciente) lista.next();
        while (lista.hasNext()){
-           System.out.println("Nombre: " + marcado.getNombre());
-           System.out.println("Apellidos " + marcado.getApellidos());
-           System.out.println("DNI: " + marcado.getDni());
-           System.out.println("Teléfono: " + marcado.getTelefonoFamilia());
-           System.out.println("Centro: " + marcado.getCentro());
+           marcado.getNombre();
+           marcado.getApellidos();
+           marcado.getDni();
+           marcado.getTelefonoFamilia();
+           marcado.getCentro();
        }
    }
 

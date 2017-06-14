@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Plantilla {
     private static LinkedList<Usuario> listaPlantilla;
-    
+            
     public Plantilla(){
         listaPlantilla = new LinkedList<Usuario>();
     }
@@ -23,6 +23,7 @@ public class Plantilla {
         
         listaPlantilla.add(u);
     }
+    
         
     public Usuario getUsuario(int indice){
         return listaPlantilla.get(indice);

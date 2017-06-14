@@ -19,7 +19,7 @@ public class ConexionBD {
     
     private ConexionBD() throws SQLException {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://192.168.1.12:3306/ventasbd","root","mysql");
+            conn = DriverManager.getConnection("jdbc:mysql://10.1.3.103:3306/ApoyoFamiliar","root","mysql");
             stmt = conn.createStatement();
         }
         catch(SQLException e) {
@@ -53,4 +53,53 @@ public class ConexionBD {
             }
         }
     }
+    
+    
+    public void insertarDatos(String tabla, String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area) throws SQLException{
+    try{
+        if( tabla == "Usuario"){
+            
+        String Query = "INSERT INTO " + tabla + " VALUES("
+                + "\"" + identificador + "\","
+                + "\"" + clave + "\","
+                + "\"" + nombre + "\","
+                + "\"" + apellidos + "\","
+                + "\"" + dni + "\","
+                + "\"" + telefono + "\","
+                + "\"" + direccion + "\")";
+            stmt.executeUpdate(Query);
+        }
+        else if( tabla == "Empleado"){
+             String Query = "INSERT INTO " + tabla + " VALUES("
+                + "\"" + identificador + "\","
+                + "\"" + clave + "\","
+                + "\"" + nombre + "\","
+                + "\"" + apellidos + "\","
+                + "\"" + dni + "\","
+                + "\"" + telefono + "\","
+                + "\"" + direccion + "\","
+                + "\"" + localidad + "\")";
+            stmt.executeUpdate(Query);
+        }
+        else if ( tabla == "Encargado"){
+            String Query = "INSERT INTO " + tabla + " VALUES("
+                + "\"" + identificador + "\","
+                + "\"" + clave + "\","
+                + "\"" + nombre + "\","
+                + "\"" + apellidos + "\","
+                + "\"" + dni + "\","
+                + "\"" + telefono + "\","
+                + "\"" + direccion + "\","
+                + "\"" + localidad + "\","
+                + "\"" + area + "\")";
+            stmt.executeUpdate(Query);
+        }
+        
+    }
+    catch(SQLException e){
+        
+    }
+    
+    }
+    
 }

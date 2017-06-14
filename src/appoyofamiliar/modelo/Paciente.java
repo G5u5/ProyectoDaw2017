@@ -28,16 +28,6 @@ public class Paciente {
         
     }
     
-    /**
-     *muestra los atributos del paciente
-     */
-    public void mostrar(){
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Apellidos: " + apellidos);
-        System.out.println("DNI: " + dni);
-        System.out.println("Telefono de contacto: " + telefonoFamilia);
-        System.out.println("Centro de residencia: " + centro);
-    }
 
     /**
      *Re-escribe los datos del paciente sustituyendolos
