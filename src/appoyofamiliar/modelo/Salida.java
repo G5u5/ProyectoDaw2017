@@ -23,6 +23,7 @@ public class Salida {
     private String transporte;
     private Date fechaInicio;
     private Date fechaFin;
+    private String control; //mantener, modificar, borrar, insertar
 
     public Salida(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, Date fechaInicio) {
         this.empleado = empleado;
@@ -34,6 +35,7 @@ public class Salida {
         this.descripcion = descripcion;
         this.transporte = transporte;
         this.fechaInicio = fechaInicio;
+        this.control = "insertar";
     }
     
     /**
