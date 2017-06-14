@@ -32,19 +32,8 @@ public class ConjuntoPaciente {
      *Introduce por medio de Scanner los datos de un nuevo paciente e incluye
      * el paciente al final de la lista.
      */
-    public void nuevoPaciente(){
-       Scanner teclado = new Scanner(System.in);
-       System.out.println("Introducir nombre del paciente");
-       String nombre = teclado.nextLine();
-       System.out.println("Introducir apellidos del paciente");
-       String apellidos = teclado.nextLine();
-       System.out.println("Introducir DNI del paciente");
-       String dni = teclado.nextLine();
-       System.out.println("Introducir telefono de contacto con los familiares");
-       String telefonoFamilia = teclado.nextLine();
-       System.out.println("Introducir centro de residencia");
-       String centro = teclado.nextLine();
-       pacientes.push(new Paciente(nombre, apellidos, dni, telefonoFamilia, centro));
+    public void nuevoPaciente(Paciente p){
+       pacientes.add(p);
    }
 
     /**
