@@ -5,13 +5,18 @@
  */
 package appoyofamiliar.controlador;
 
+import appoyofamiliar.modelo.ConjuntoPaciente;
+import appoyofamiliar.modelo.Paciente;
 import java.sql.ResultSet;
 import appoyofamiliar.modelo.Jefe;
 import appoyofamiliar.modelo.Encargado;
 import appoyofamiliar.modelo.Empleado;
+import appoyofamiliar.modelo.Paciente;
 import appoyofamiliar.modelo.Usuario;
 import java.sql.SQLException;
 import appoyofamiliar.modelo.Plantilla;
+import appoyofamiliar.modelo.ConjuntoSalida;
+import appoyofamiliar.modelo.Salida;
 /**
  *
  * @author Felipe Ruiz
@@ -19,6 +24,7 @@ import appoyofamiliar.modelo.Plantilla;
 public class SQLUsuarios {
     private static SQLUsuarios instancia = null;
     private Plantilla pl = new Plantilla();
+    private ConjuntoPaciente pc = new ConjuntoPaciente();
     
     public static SQLUsuarios instancia() {
         if (instancia == null) {
@@ -28,7 +34,7 @@ public class SQLUsuarios {
         return instancia;
     }
     
-    public void descargarDatos(Usuario u) throws SQLException {
+    public void descargarDatosU(Usuario u) throws SQLException {
         Empleado em = null;
         Encargado en = null;
         Jefe je = null;
@@ -45,14 +51,12 @@ public class SQLUsuarios {
                 i++;
                 em = new Empleado (rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(9));
                 pl.nuevoUsuario(em);
-                }
-                else if (rsi.getString(8) != null){
+                } else if (rsi.getString(8) != null){
                     rsi.absolute(i);
                     i++;
                     je = new Jefe(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(8));
                     pl.nuevoUsuario(je);
-                }
-                else if (rsi.getString(10) != null && rsi.getString(9) != null){
+                } else if (rsi.getString(10) != null && rsi.getString(9) != null){
                     rsi.absolute(i);
                     i++;
                     en = new Encargado(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(9), rsi.getString(10));
@@ -64,7 +68,39 @@ public class SQLUsuarios {
             e.printStackTrace();
         }
     }
-    
+    public void descargarDatosP(ConjuntoPaciente p) throws SQLException {
+        int j = 1;
+        Paciente pa = null;
+        try{
+            
+            ResultSet rsi = ConexionBD.instancia().getStatement().executeQuery(
+                    "select * from Paciente"
+            );
+            while (rsi.next()) {
+                rsi.absolute(j);
+                j++;
+                pa = new Paciente(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5));
+                pc.nuevoPaciente(pa);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void descargarDatosS(ConjuntoSalida s) throws SQLException {
+        int k = 1;
+        Salida sa = null;
+        try{
+            ResultSet rsi = ConexionBD.instancia().getStatement().executeQuery(
+                    "select * from Salida"
+            );
+            while (rsi.next()) {
+                rsi.absolute(k);
+                k++;
+                sa = new Salida(rsi.getObject(1,Paciente),rsi.getObject(2,Empleado), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(8), rsi.getDate(9));
+            }
+        }
+    }
     public void crearEm(Empleado em) {        
         try {
                

@@ -27,7 +27,6 @@ public class Paciente {
         this.centro = centro;
         
     }
-    
 
     /**
      *Re-escribe los datos del paciente sustituyendolos

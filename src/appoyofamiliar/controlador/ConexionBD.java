@@ -55,45 +55,23 @@ public class ConexionBD {
     }
     
     
-    public void insertarDatos(String tabla, String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area) throws SQLException{
+    public void insertarDatos(String tabla, String identificador, String clave, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area, String sede) throws SQLException{
     try{
         if( tabla == "Usuario"){
             
         String Query = "INSERT INTO " + tabla + " VALUES("
-                + "\"" + identificador + "\","
-                + "\"" + clave + "\","
-                + "\"" + nombre + "\","
-                + "\"" + apellidos + "\","
-                + "\"" + dni + "\","
-                + "\"" + telefono + "\","
-                + "\"" + direccion + "\")";
+                + "'" + identificador + "',"
+                + "'" + clave + "',"
+                + "'" + nombre + "',"
+                + "'" + apellidos + "',"
+                + "'" + dni + "',"
+                + "'" + telefono + "',"
+                + "'" + direccion + "',"
+                + "'" + sede + "',"
+                + "'" + localidad + ","
+                + "'" + area + "')";
             stmt.executeUpdate(Query);
-        }
-        else if( tabla == "Empleado"){
-             String Query = "INSERT INTO " + tabla + " VALUES("
-                + "\"" + identificador + "\","
-                + "\"" + clave + "\","
-                + "\"" + nombre + "\","
-                + "\"" + apellidos + "\","
-                + "\"" + dni + "\","
-                + "\"" + telefono + "\","
-                + "\"" + direccion + "\","
-                + "\"" + localidad + "\")";
-            stmt.executeUpdate(Query);
-        }
-        else if ( tabla == "Encargado"){
-            String Query = "INSERT INTO " + tabla + " VALUES("
-                + "\"" + identificador + "\","
-                + "\"" + clave + "\","
-                + "\"" + nombre + "\","
-                + "\"" + apellidos + "\","
-                + "\"" + dni + "\","
-                + "\"" + telefono + "\","
-                + "\"" + direccion + "\","
-                + "\"" + localidad + "\","
-                + "\"" + area + "\")";
-            stmt.executeUpdate(Query);
-        }
+        } 
         
     }
     catch(SQLException e){

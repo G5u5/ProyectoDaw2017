@@ -110,8 +110,8 @@ public class Jefe extends Usuario{
     public void modificarPaciente(Paciente paciente, String nombre, String apellidos, String telefono, String centro){
         paciente.actualizarDatos(nombre, apellidos, telefono, centro);
     }
-    public void crearPaciente(ConjuntoPaciente conjunto){
-        conjunto.nuevoPaciente();
+    public void crearPaciente(ConjuntoPaciente conjunto, Paciente p){
+        conjunto.nuevoPaciente(p);
     }
     
     public void borrarPaciente(ConjuntoPaciente conjunto, int indice){
