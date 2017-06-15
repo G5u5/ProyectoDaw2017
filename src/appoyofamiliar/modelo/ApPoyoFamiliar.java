@@ -5,6 +5,7 @@
  */
 package appoyofamiliar.modelo;
 
+import appoyofamiliar.controlador.SQLUsuarios;
 import appoyofamiliar.vista.*;
 import java.util.*;
 
@@ -30,7 +31,11 @@ public class ApPoyoFamiliar {
         usuarios.add(pepote);
         //INSERT INTO `ApoyoFamiliar`.`Usuario` (`Identificador`, `Clave`, `Nombre`, `Apellidos`, `Dni`, `Telefono`, `Direccion`, `sede`, `localidad`, `area`) VALUES ('Pipe', 'pepi', 'Felipe', 'ruiz', '72418564F', '979161434', 'C/ Mayor 41, 3º B', 'Palencia', NULL, NULL)
         
+        
+        //usuarios = SQLUsuarios.instancia().descargarDatosU();
+        
         (new LogginJFrame(usuarios)).setVisible(true);
+        
     }
     
     /**
