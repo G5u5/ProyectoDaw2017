@@ -63,7 +63,6 @@ public class SQLUsuarios {
         catch (Exception e) {
             System.err.println("ERROR: Fallo al descargar los datos de los Usuarios.");
         }
-        
         return llu;
     }
     
@@ -83,7 +82,6 @@ public class SQLUsuarios {
         catch (Exception e){
             System.err.println("ERROR: Fallo al descargar los datos de los Pacientes.");
         }
-        
         return llp;
     }
     
@@ -118,13 +116,13 @@ public class SQLUsuarios {
         try {
             ConexionBD.instancia().getStatement().execute(
                     "insert into Usuario (identificador, clave, nombre, apellidos, dni, telefono, direccion, localidad) values (" +
-                    "'" + em.getIdentificador()+ "'" + ", " +
-                    "'" + em.getClave()+ "'" + ", " +
-                    "'" + em.getNombre()+ "'" + ", " +
-                    "'" + em.getApellidos() + "'" + ", " +
-                    "'" + em.getDni() + "'" + ", " +
-                    "'" + em.getTelefono() + "'"  + "," +
-                    "'" + em.getDireccion() + "'" +
+                    "'" + em.getIdentificador()+ "', " +
+                    "'" + em.getClave()+ "', " +
+                    "'" + em.getNombre()+ "', " +
+                    "'" + em.getApellidos() + "', " +
+                    "'" + em.getDni() + "', " +
+                    "'" + em.getTelefono() + "', " +
+                    "'" + em.getDireccion() + "', " +
                     "'" + em.getLocalidad() + "'" +
                     ")"
                 ); 
@@ -140,14 +138,14 @@ public class SQLUsuarios {
                
             ConexionBD.instancia().getStatement().execute(
                     "insert into Usuario (identificador, clave, nombre, apellidos, dni, telefono, direccion, localidad, area) values (" +
-                    "'" + en.getIdentificador()+ "'" + ", " +
-                    "'" + en.getClave()+ "'" + ", " +
-                    "'" + en.getNombre()+ "'" + ", " +
-                    "'" + en.getApellidos() + "'" + ", " +
-                    "'" + en.getDni() + "'" + ", " +
-                    "'" + en.getTelefono() + "'"  + "," +
-                    "'" + en.getDireccion() + "'" +
-                    "'" + en.getLocalidad() + "'" +
+                    "'" + en.getIdentificador()+ "', " +
+                    "'" + en.getClave()+ "', " +
+                    "'" + en.getNombre()+ "', " +
+                    "'" + en.getApellidos() + "', " +
+                    "'" + en.getDni() + "', " +
+                    "'" + en.getTelefono() + "', " +
+                    "'" + en.getDireccion() + "', " +
+                    "'" + en.getLocalidad() + "', " +
                     "'" + en.getArea() + "'" +
                     ")"
                 ); 
@@ -163,13 +161,13 @@ public class SQLUsuarios {
                
             ConexionBD.instancia().getStatement().execute(
                     "insert into Usuario (identificador, clave, nombre, apellidos, dni, telefono, direccion, sede) values (" +
-                    "'" + je.getIdentificador()+ "'" + ", " +
-                    "'" + je.getClave()+ "'" + ", " +
-                    "'" + je.getNombre()+ "'" + ", " +
-                    "'" + je.getApellidos() + "'" + ", " +
-                    "'" + je.getDni() + "'" + ", " +
-                    "'" + je.getTelefono() + "'"  + "," +
-                    "'" + je.getDireccion() + "'" +
+                    "'" + je.getIdentificador()+ "', " +
+                    "'" + je.getClave()+ "', " +
+                    "'" + je.getNombre()+ "', " +
+                    "'" + je.getApellidos() + "', " +
+                    "'" + je.getDni() + "', " +
+                    "'" + je.getTelefono() + "', " +
+                    "'" + je.getDireccion() + "', " +
                     "'" + je.getSede() + "'" +
                     ")"
                 ); 
@@ -180,40 +178,115 @@ public class SQLUsuarios {
     }
     
     public void guardarPaciente(Paciente p){
-    
+         //Guarda el objeto Paciente pasado como parametro en la base de datos.
+        try {
+            ConexionBD.instancia().getStatement().execute(
+                    "insert into Paciente (nombre, apellidos, dni, telefonoFamilia, centro) values (" +
+                    "'" + p.getNombre() + "', " +
+                    "'" + p.getApellidos() + "', " +
+                    "'" + p.getDni() + "', " +
+                    "'" + p.getTelefonoFamilia() + "', " +
+                    "'" + p.getCentro() + "'" +
+                    ")"
+                ); 
+            
+        } catch (Exception e) {
+            System.err.println("ERROR: Fallo en sentencia INSERT al crear el Paciente.");
+        }  
     }
     
     public void guardarSalida(Salida sa){
-        
-    }     
-        
-    public void guardarHoraFin(Date h){
-        
-    }
-    
-    // ------------- MODIFICAR -----------------------
-    
-    public void modificarUsuario(Usuario u){
-        /**
-         * Sobreescribe los datos del Usuario ya modificado que se pasa como parámetro.
-         * El identificador no puede cambiar nunca.
-         */
-         
+       //Guarda el objeto Salida pasado como parametro en la base de datos.
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "update Usuario set clave='" + u.getClave()
-                            + "', nombre='" + u.getNombre() + "',"
-                            + "', apellidos='" + u.getNombre() + "',"
-                            + "', dni='" + u.getNombre() + "',"
-                            + "', telefono='" + u.getNombre() + "',"
-                            + "', direccion='" + u.getNombre() + "',"
-                            + "', sede='" + u.getNombre() + "',"
-                            + "', localidad='" + u.getNombre() + "',"
-                            + "', area='" + u.getNombre() + "',"
-                            + "where Identificador='" + u.getIdentificador() + "';"
+                    "insert into Salida (Identificador, dniPaciente, medico, espcialidad, centro, area, descripcion, transporte, fechaInicio, fechaFin) values (" +
+                    "'" + sa.getEmpleado().getIdentificador() + "', " +
+                    "'" + sa.getPaciente().getDni() + "', " +
+                    "'" + sa.getMedico() + "', " +
+                    "'" + sa.getEspecialidad() + "', " +
+                    "'" + sa.getCentro() + "', " +
+                    "'" + sa.getArea()+ "', " +
+                    "'" + sa.getDescripcion()+ "', " +
+                    "'" + sa.getTransporte() + "', " +
+                    "'" + sa.getFechaInicio() + "', " +
+                    "'" + sa.getFechaFin() + "'" +
+                    ")"
+                ); 
+            
+        } catch (Exception e) {
+            System.err.println("ERROR: Fallo en sentencia INSERT al crear la Salida.");
+        }   
+    }     
+        
+    // ------------- MODIFICAR -----------------------
+    
+    public void modificarEmpleado(Empleado em){
+        /**
+         * Sobreescribe los datos del Empleado ya modificado que se pasa como parámetro.
+         * El identificador no puede cambiar nunca. En caso de querer cambiar el Identificador
+         * hay que borrarlo y crear uno nuevo.
+         */
+        
+        try {
+            ConexionBD.instancia().getStatement().execute(
+                    "update Usuario set clave='" + em.getClave()
+                            + "', nombre='" + em.getNombre() + "',"
+                            + "', apellidos='" + em.getApellidos() + "',"
+                            + "', dni='" + em.getDni() + "',"
+                            + "', telefono='" + em.getTelefono() + "',"
+                            + "', direccion='" + em.getDireccion() + "',"
+                            + "', localidad='" + em.getLocalidad() + "',"
+                            + "where Identificador='" + em.getIdentificador() + "';"
                     );
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al modificar el Usuario");
+            System.err.println("ERROR: Fallo de conexión al modificar el Jefe");
+        }
+    }
+    
+    public void modificarEncargado(Encargado en){
+        /**
+         * Sobreescribe los datos del Encargado ya modificado que se pasa como parámetro.
+         * El identificador no puede cambiar nunca. En caso de querer cambiar el Identificador
+         * hay que borrarlo y crear uno nuevo.
+         */
+        
+        try {
+            ConexionBD.instancia().getStatement().execute(
+                    "update Usuario set clave='" + en.getClave()
+                            + "', nombre='" + en.getNombre() + "',"
+                            + "', apellidos='" + en.getApellidos() + "',"
+                            + "', dni='" + en.getDni() + "',"
+                            + "', telefono='" + en.getTelefono() + "',"
+                            + "', direccion='" + en.getDireccion() + "',"
+                            + "', localidad='" + en.getLocalidad() + "',"
+                            + "', area='" + en.getArea() + "',"
+                            + "where Identificador='" + en.getIdentificador() + "';"
+                    );
+        } catch (Exception e) {
+            System.err.println("ERROR: Fallo de conexión al modificar el Encargado");
+        }
+    }
+    
+    public void modificarJefe(Jefe je){
+        /**
+         * Sobreescribe los datos del Jefe ya modificado que se pasa como parámetro.
+         * El identificador no puede cambiar nunca. En caso de querer cambiar el Identificador
+         * hay que borrarlo y crear uno nuevo.
+         */
+        
+        try {
+            ConexionBD.instancia().getStatement().execute(
+                    "update Usuario set clave='" + je.getClave()
+                            + "', nombre='" + je.getNombre() + "',"
+                            + "', apellidos='" + je.getApellidos() + "',"
+                            + "', dni='" + je.getDni() + "',"
+                            + "', telefono='" + je.getTelefono() + "',"
+                            + "', direccion='" + je.getDireccion() + "',"
+                            + "', sede='" + je.getSede() + "',"
+                            + "where Identificador='" + je.getIdentificador() + "';"
+                    );
+        } catch (Exception e) {
+            System.err.println("ERROR: Fallo de conexión al modificar el Jefe");
         }
     }
     
@@ -298,7 +371,6 @@ public class SQLUsuarios {
         }
     }
     
-    
     //--------------------------------------------------------------------------
     //    OTROS MÉTODOS
     //--------------------------------------------------------------------------
@@ -339,5 +411,5 @@ public class SQLUsuarios {
         return em;
     }
     
-     
+       
 }
