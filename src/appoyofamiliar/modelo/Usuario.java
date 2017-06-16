@@ -125,4 +125,12 @@ public abstract class Usuario {
     public String getControl(){
         return this.control;
     }
+    
+    /**
+     * "mantener", "modificar", "borrar", "insertar"
+     * @param control 
+     */
+    public void setControl(String control) {
+        this.control = control;
+    }
 }

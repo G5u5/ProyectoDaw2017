@@ -413,7 +413,7 @@ public class SQLUsuarios {
     }
     
     //--------------------------------------------------------------------------
-    //    OTROS MÉTODOS
+    //------- OTROS MÉTODOS
     //--------------------------------------------------------------------------
     
     private Paciente obtenerPaciente(String denei){

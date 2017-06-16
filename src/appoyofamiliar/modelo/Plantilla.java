@@ -5,6 +5,7 @@
  */
 package appoyofamiliar.modelo;
 
+import appoyofamiliar.controlador.SQLUsuarios;
 import java.util.*;
 
 /**
@@ -13,51 +14,80 @@ import java.util.*;
  */
 
 public class Plantilla {
-    private static LinkedList<Usuario> listaPlantilla;
-            
-    public Plantilla(){
-        listaPlantilla = new LinkedList<Usuario>();
+    private LinkedList<Usuario> listaPlantilla;
+    private static Plantilla instancia;
+    
+    private Plantilla(){
+        listaPlantilla = SQLUsuarios.instancia().descargarDatosU();
+    }
+    
+    public static Plantilla instancia(){
+        if (instancia == null){
+            instancia = new Plantilla();
+        }
+        return instancia;
     }
     
     public void nuevoUsuario(Usuario u){
-        
+        u.setControl("insertar");
         listaPlantilla.add(u);
     }
-    
         
-    public Usuario getUsuario(int indice){
-        return listaPlantilla.get(indice);
-    }
-    
-    public static Usuario getUsuarioDni(String denei){
-        Usuario encontrado = null;
-        
-        for (int i = 0; i < listaPlantilla.size(); i++){
-            if (listaPlantilla.get(i).getDni().equals(denei)){
-                encontrado = listaPlantilla.get(i);
-            }
+    public Usuario getUsuario(String ident){
+        if (obtenerPosicionUsuario(ident) >= 0){
+            return listaPlantilla.get(obtenerPosicionUsuario(ident));
+        } else {
+            return null;
         }
-        return encontrado;
     }
     
-    public void borrarUsuario(int indice){
-        listaPlantilla.remove(indice);
+    /**
+     * Cambia el control del usuario para ser borrado a la hora de guardar la
+     * informacion en la base de datos.
+     */
+    public void borrarUsuario(String ident){
+        listaPlantilla.get(obtenerPosicionUsuario(ident)).setControl("borrar");
     }
     
-    public void borrarUsuario(Usuario usuario){
-        listaPlantilla.remove(usuario);
+    public void modificarJefe(String identificador){
+        
     }
+    
+    //--------------------------------------------------------------------------
+    //------- GETTERS
+    //--------------------------------------------------------------------------
     
     public String[][] obtenerDatosTabla(){
         String[][] tabla = new String[listaPlantilla.size()][6];
         for (int i = 0; i < listaPlantilla.size(); i++){
-            tabla[i][0]= listaPlantilla.get(i).getIdentificador();
-            tabla[i][1]= listaPlantilla.get(i).getNombre();
-            tabla[i][2]= listaPlantilla.get(i).getApellidos();
-            tabla[i][3]= listaPlantilla.get(i).getDni();
-            tabla[i][4]= listaPlantilla.get(i).getTelefono();
-            tabla[i][5]= listaPlantilla.get(i).getDireccion();
+            if (!listaPlantilla.get(i).getControl().equals("borrar")){
+                tabla[i][0]= listaPlantilla.get(i).getIdentificador();
+                tabla[i][1]= listaPlantilla.get(i).getNombre();
+                tabla[i][2]= listaPlantilla.get(i).getApellidos();
+                tabla[i][3]= listaPlantilla.get(i).getDni();
+                tabla[i][4]= listaPlantilla.get(i).getTelefono();
+                tabla[i][5]= listaPlantilla.get(i).getDireccion();
+            }
         }
         return tabla;
+    }
+
+    public LinkedList<Usuario> getPlantilla() {
+        return listaPlantilla;
+    }
+    
+    
+    
+    //--------------------------------------------------------------------------
+    //------- OTROS MÉTODOS
+    //--------------------------------------------------------------------------
+    
+    private int obtenerPosicionUsuario(String id){
+        for( int i = 0; i<listaPlantilla.size(); i++){
+            if (listaPlantilla.get(i).getIdentificador().equals(id)){
+                return i;
+            }
+        }
+        return -1;
     }
 }

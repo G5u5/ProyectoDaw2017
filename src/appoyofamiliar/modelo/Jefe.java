@@ -114,25 +114,16 @@ public class Jefe extends Usuario{
         conjunto.nuevoPaciente(p);
     }
     
-    public void borrarPaciente(ConjuntoPaciente conjunto, int indice){
-        conjunto.borrarPaciente(indice);
+    public void borrarPaciente(){
+        
     }
-            
     /**
-     * + crearEmpleado()
-     * + crearJefe()
-     * + modificarUsuario()
-    */
-    
-    public void borrarUsuario(Plantilla conjunto, Usuario marcado){
-        conjunto.borrarUsuario(marcado);
+     * Utiliza el método de borrado de los objetos de la clase Usuario
+     * que lo marca para ser borrado al descargar la informacion en la base de datos.
+     */        
+    public void borrarUsuario(Usuario u){
+        Plantilla.instancia().borrarUsuario(u.getIdentificador());
     }
-    
-    /*
-     * + verSalida()
-     * + modificarSalida()
-     * + informeSalidas()
-     */
     
     /**
      * Modificar los datos del usuario Jefe

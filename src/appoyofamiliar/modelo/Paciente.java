@@ -15,9 +15,11 @@ public class Paciente {
     private String dni;
     private String telefonoFamilia;
     private String centro;
+    private String control;//"mantener", "modificar", "borrar", "insertar"
     
-    Scanner teclado = new Scanner(System.in);
-       
+    //--------------------------------------------------------------------------
+    //------- CONSTRUCTOR
+    //--------------------------------------------------------------------------
     
     public Paciente(String nombre, String apellidos, String dni, String telefonoFamilia, String centro) {
         this.nombre = nombre;
@@ -25,9 +27,12 @@ public class Paciente {
         this.dni = dni;
         this.telefonoFamilia = telefonoFamilia;
         this.centro = centro;
-        
+        this.control = "mantener";
     }
-
+    
+    //--------------------------------------------------------------------------
+    //------- MANEJO DE DATOS
+    //--------------------------------------------------------------------------
     /**
      *Re-escribe los datos del paciente sustituyendolos
      * @param nombre
@@ -39,9 +44,13 @@ public class Paciente {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefonoFamilia = telefono;
-        this.centro = centro;     
+        this.centro = centro;
+        this.control = "modificar";
     }
 
+    //--------------------------------------------------------------------------
+    //------- GETTERS
+    //--------------------------------------------------------------------------
     public String getNombre() {
         return nombre;
     }
@@ -62,25 +71,18 @@ public class Paciente {
         return centro;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public void setTelefonoFamilia(String telefonoFamilia) {
-        this.telefonoFamilia = telefonoFamilia;
-    }
-
-    public void setCentro(String centro) {
-        this.centro = centro;
+    public String getControl() {
+        return control;
     }
     
+    //--------------------------------------------------------------------------
+    //------- SETTERS
+    //--------------------------------------------------------------------------
     
+    /**
+     * "mantener", "modificar", "borrar", "insertar"
+     */
+    public void setControl(String c){
+        this.control = c;
+    }
 }

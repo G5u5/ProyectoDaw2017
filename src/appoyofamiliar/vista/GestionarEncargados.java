@@ -15,11 +15,12 @@ import javax.swing.table.*;
  */
 public class GestionarEncargados extends javax.swing.JFrame {
     
-    private Usuario usuario;
     LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     LinkedList<Encargado> encargados = new LinkedList<Encargado>();
-    String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
-    DefaultTableModel dtm;
+    private Jefe usuario;
+    private String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
+    private DefaultTableModel dtm;
+    
     
     /**
      * Creates new form GestionarEncargados
@@ -28,11 +29,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
         initComponents();
     }
     
-    public GestionarEncargados(Usuario usr, LinkedList<Usuario> usrs) {
+    public GestionarEncargados(Jefe usr) {
         initComponents();
         this.usuario = usr;
-        usuarios = usrs;
-        generarLista(usrs);
+        generarLista(Plantilla.instancia().getPlantilla());
         dtm = new DefaultTableModel(generarTabla(),cabecera);
         tablaEncargados.setModel(dtm);
     }
@@ -170,7 +170,7 @@ public class GestionarEncargados extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
-        (new NuevoEncargado(usuario, encargados, usuarios)).setVisible(true);
+        (new NuevoEncargado(usuario)).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -179,10 +179,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         int ind = tablaEncargados.getSelectedRow();
-        Usuario marcado = encargados.get(ind);
-        int indice = usuarios.indexOf(marcado);
-        usuarios.get(indice).cambiarControl("borrar");
-        encargados.remove(marcado);
+        usuario.borrarUsuario(encargados.get(ind));
+        generarLista(Plantilla.instancia().getPlantilla());
+        dtm = new DefaultTableModel(generarTabla(),cabecera);
+        tablaEncargados.setModel(dtm);
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

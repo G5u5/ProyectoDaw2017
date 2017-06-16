@@ -193,17 +193,7 @@ public class NuevoPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        if (buscarUsuario()){
-            JOptionPane.showMessageDialog(this, "El usuario ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Usuario nu = new Encargado(nombreBox.getText(), claveBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), apellidosBox.getText(),areaBox.getText()); 
-        nu.cambiarControl("insertar");
-        usuarios.add(nu);
         
-        JOptionPane.showMessageDialog(this, "Usuario " + nombreBox.getText() + " creado correctamente", "Encargado creado", JOptionPane.OK_OPTION);
-        this.setVisible(false);
-        (new GestionarEncargados(this.usuario, this.usuarios)).setVisible(true);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void nombreBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreBoxActionPerformed

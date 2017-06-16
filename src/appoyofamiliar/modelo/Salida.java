@@ -106,6 +106,11 @@ public class Salida {
         return fechaFin;
     }
 
+    public String getControl() {
+        return control;
+    }
     
-    
+    public void setContro(String c){
+        this.control = c;
+    }
 }
