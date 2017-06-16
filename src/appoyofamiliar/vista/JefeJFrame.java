@@ -110,6 +110,11 @@ public class JefeJFrame extends javax.swing.JFrame {
 
         jButton3.setText("<html>\nGESTIONAR\n<br/>\nEMPLEADOS\n</html>");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("<html>\n GESTIONAR\n<br/>\nENCARGADOS\n</html>");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -119,8 +124,18 @@ public class JefeJFrame extends javax.swing.JFrame {
         });
 
         jButton5.setText("<html>\n GESTIONAR\n<br/>\nJEFES\n</html>");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("VER SALIDAS");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,7 +230,7 @@ public class JefeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreSedeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        (new GestionarPacientes((Usuario)usuario, usuarios)).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -225,6 +240,18 @@ public class JefeJFrame extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         (new GestionarEncargados((Usuario)usuario, usuarios)).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        (new GestionarEmpleados((Usuario)usuario, usuarios)).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        (new GestionarJefes((Usuario)usuario, usuarios)).setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        (new VerSalidas((Usuario)usuario, usuarios)).setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

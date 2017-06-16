@@ -31,7 +31,6 @@ public class SQLUsuarios {
         if (instancia == null) {
             instancia = new SQLUsuarios();
         }
-        
         return instancia;
     }
     
@@ -59,6 +58,7 @@ public class SQLUsuarios {
                     
                 }
             }
+            ConexionBD.desconectar();
         } 
         catch (Exception e) {
             System.err.println("ERROR: Fallo al descargar los datos de los Usuarios.");
@@ -67,7 +67,7 @@ public class SQLUsuarios {
     }
     
     public LinkedList<Paciente> descargarDatosP() throws SQLException {
-        
+    //Descarga los datos de la tabla "Paciente" y crea la lista correspondiente    
         LinkedList<Paciente> llp = new LinkedList<Paciente>();
         
         try{
@@ -78,6 +78,7 @@ public class SQLUsuarios {
             while (rsi.next()) {
                 llp.add(new Paciente(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5)));
             }
+            ConexionBD.desconectar();
         }
         catch (Exception e){
             System.err.println("ERROR: Fallo al descargar los datos de los Pacientes.");
@@ -86,6 +87,8 @@ public class SQLUsuarios {
     }
     
     public LinkedList<Salida> descargarDatosS() throws SQLException {
+    //Descarga los datos de la tabla "Salida" y crea la lista correspondiente
+    
         LinkedList<Salida> lls = new LinkedList<Salida>();
         Salida sa = null;
         try{
@@ -94,11 +97,12 @@ public class SQLUsuarios {
             );
             while (rsi.next()) {
                 sa = new Salida(obtenerEmpleado(rsi.getString(1)), obtenerPaciente(rsi.getString(2)), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(8), rsi.getDate(9));
-                lls.add(sa);
                 if (rsi.getDate(10) != null){
                     sa.cerrarSalida(rsi.getDate(10));
                 }
+                lls.add(sa);
             }
+            ConexionBD.desconectar();
         }catch (Exception e){
             System.err.println("ERROR: Fallo al descargar los datos de las Salidas.");
         }
@@ -125,7 +129,8 @@ public class SQLUsuarios {
                     "'" + em.getDireccion() + "', " +
                     "'" + em.getLocalidad() + "'" +
                     ")"
-                ); 
+                );
+            ConexionBD.desconectar();
             
         } catch (Exception e) {
             System.err.println("ERROR: Fallo en sentencia INSERT al crear el Empleado.");
@@ -148,7 +153,8 @@ public class SQLUsuarios {
                     "'" + en.getLocalidad() + "', " +
                     "'" + en.getArea() + "'" +
                     ")"
-                ); 
+                );
+            ConexionBD.desconectar();
             
         } catch (Exception e) {
             System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Encargado.");
@@ -171,6 +177,7 @@ public class SQLUsuarios {
                     "'" + je.getSede() + "'" +
                     ")"
                 ); 
+            ConexionBD.desconectar();
             
         } catch (Exception e) {
             System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Jefe.");
@@ -189,6 +196,7 @@ public class SQLUsuarios {
                     "'" + p.getCentro() + "'" +
                     ")"
                 ); 
+            ConexionBD.desconectar();
             
         } catch (Exception e) {
             System.err.println("ERROR: Fallo en sentencia INSERT al crear el Paciente.");
@@ -212,7 +220,8 @@ public class SQLUsuarios {
                     "'" + sa.getFechaFin() + "'" +
                     ")"
                 ); 
-            
+            ConexionBD.desconectar();
+                    
         } catch (Exception e) {
             System.err.println("ERROR: Fallo en sentencia INSERT al crear la Salida.");
         }   
@@ -229,15 +238,17 @@ public class SQLUsuarios {
         
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "update Usuario set clave='" + em.getClave()
-                            + "', nombre='" + em.getNombre() + "',"
-                            + "', apellidos='" + em.getApellidos() + "',"
-                            + "', dni='" + em.getDni() + "',"
-                            + "', telefono='" + em.getTelefono() + "',"
-                            + "', direccion='" + em.getDireccion() + "',"
-                            + "', localidad='" + em.getLocalidad() + "',"
-                            + "where Identificador='" + em.getIdentificador() + "';"
-                    );
+                "update Usuario set clave='" + em.getClave()
+                    + "', nombre='" + em.getNombre() 
+                    + "', apellidos='" + em.getApellidos()
+                    + "', dni='" + em.getDni()
+                    + "', telefono='" + em.getTelefono()
+                    + "', direccion='" + em.getDireccion()
+                    + "', localidad='" + em.getLocalidad()
+                    + "' where Identificador='" + em.getIdentificador() + "';"
+                );
+            ConexionBD.desconectar();
+            
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al modificar el Jefe");
         }
@@ -252,16 +263,17 @@ public class SQLUsuarios {
         
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "update Usuario set clave='" + en.getClave()
-                            + "', nombre='" + en.getNombre() + "',"
-                            + "', apellidos='" + en.getApellidos() + "',"
-                            + "', dni='" + en.getDni() + "',"
-                            + "', telefono='" + en.getTelefono() + "',"
-                            + "', direccion='" + en.getDireccion() + "',"
-                            + "', localidad='" + en.getLocalidad() + "',"
-                            + "', area='" + en.getArea() + "',"
-                            + "where Identificador='" + en.getIdentificador() + "';"
-                    );
+                "update Usuario set clave='" + en.getClave()
+                    + "', nombre='" + en.getNombre()
+                    + "', apellidos='" + en.getApellidos()
+                    + "', dni='" + en.getDni()
+                    + "', telefono='" + en.getTelefono()
+                    + "', direccion='" + en.getDireccion()
+                    + "', localidad='" + en.getLocalidad()
+                    + "', area='" + en.getArea()
+                    + "' where Identificador='" + en.getIdentificador() + "';"
+                );
+            ConexionBD.desconectar();
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al modificar el Encargado");
         }
@@ -276,15 +288,17 @@ public class SQLUsuarios {
         
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "update Usuario set clave='" + je.getClave()
-                            + "', nombre='" + je.getNombre() + "',"
-                            + "', apellidos='" + je.getApellidos() + "',"
-                            + "', dni='" + je.getDni() + "',"
-                            + "', telefono='" + je.getTelefono() + "',"
-                            + "', direccion='" + je.getDireccion() + "',"
-                            + "', sede='" + je.getSede() + "',"
-                            + "where Identificador='" + je.getIdentificador() + "';"
-                    );
+                "update Usuario set clave='" + je.getClave()
+                    + "', nombre='" + je.getNombre() 
+                    + "', apellidos='" + je.getApellidos()
+                    + "', dni='" + je.getDni()
+                    + "', telefono='" + je.getTelefono()
+                    + "', direccion='" + je.getDireccion()
+                    + "', sede='" + je.getSede()
+                    + "' where Identificador='" + je.getIdentificador() + "';"
+                );
+            ConexionBD.desconectar();
+            
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al modificar el Jefe");
         }
@@ -299,12 +313,13 @@ public class SQLUsuarios {
         
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "update Usuario set nombre='" + p.getNombre()
-                            + "', apellidos='" + p.getApellidos() + "',"
-                            + "', telefonoFamilia='" + p.getTelefonoFamilia() + "',"
-                            + "', centro='" + p.getCentro() + "',"
-                            + "where dni='" + p.getDni() + "';"
-                    );
+                "update Usuario set nombre='" + p.getNombre()
+                    + "', apellidos='" + p.getApellidos()
+                    + "', telefonoFamilia='" + p.getTelefonoFamilia()
+                    + "', centro='" + p.getCentro()
+                    + "' where dni='" + p.getDni() + "';"
+                );
+            ConexionBD.desconectar();
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al modificar el Paciente");
         }
@@ -318,16 +333,16 @@ public class SQLUsuarios {
          */
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "update Usuario set medico='" + s.getMedico()
-                            + "', especialidad='" + s.getEspecialidad() + "',"
-                            + "', centro='" + s.getCentro() + "',"
-                            + "', area='" + s.getArea() + "',"
-                            + "', descripcion='" + s.getDescripcion() + "',"
-                            + "', transporte='" + s.getTransporte() + "',"
-                            + "where Identificador='" + s.getEmpleado().getIdentificador() + "'"
-                            + " AND dniPaciente='" + s.getPaciente().getDni()+ "'"
-                            + " AND fechaInicio='" + s.getFechaInicio() + "';"
-                    );
+                "update Usuario set medico='" + s.getMedico()
+                    + "', especialidad='" + s.getEspecialidad()
+                    + "', centro='" + s.getCentro()
+                    + "', area='" + s.getArea()
+                    + "', descripcion='" + s.getDescripcion()
+                    + "', transporte='" + s.getTransporte()
+                    + "' where Identificador='" + s.getEmpleado().getIdentificador()
+                    + "' AND dniPaciente='" + s.getPaciente().getDni()
+                    + "' AND fechaInicio='" + s.getFechaInicio() + "';"
+                );
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al modificar el Usuario");
         }
@@ -410,6 +425,5 @@ public class SQLUsuarios {
         }
         return em;
     }
-    
-       
+
 }
