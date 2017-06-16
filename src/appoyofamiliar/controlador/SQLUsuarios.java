@@ -97,6 +97,9 @@ public class SQLUsuarios {
             while (rsi.next()) {
                 sa = new Salida(obtenerEmpleado(rsi.getString(1)), obtenerPaciente(rsi.getString(2)), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(8), rsi.getDate(9));
                 lls.add(sa);
+                if (rsi.getDate(10) != null){
+                    sa.cerrarSalida(rsi.getDate(10));
+                }
             }
         }catch (Exception e){
             System.err.println("ERROR: Fallo al descargar los datos de las Salidas.");
@@ -107,6 +110,9 @@ public class SQLUsuarios {
     //--------------------------------------------------------------------------
     //    CARGA DE DATOS. Guarda o modifica los datos marcados en la base de datos.
     //--------------------------------------------------------------------------
+    
+    // ------------- GUARDAR -----------------------
+    
     public void guardarNuevoEmpleado(Empleado em) {        
         //Guarda el objeto Empleado pasado como parametro en la base de datos.
         try {
@@ -127,6 +133,7 @@ public class SQLUsuarios {
             System.err.println("ERROR: Fallo en sentencia INSERT al crear el Empleado.");
         }        
     }
+    
     public void guardarNuevoEncargado(Encargado en) {        
         //Guarda el objeto Encargado pasado como parametro en la base de datos.
         try {
@@ -149,6 +156,7 @@ public class SQLUsuarios {
             System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Encargado.");
         }        
     }
+    
     public void guardarNuevoJefe(Jefe je) {        
         //Guarda el objeto Jefe pasado como parametro en la base de datos.
         try {
@@ -170,6 +178,20 @@ public class SQLUsuarios {
             System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Jefe.");
         }        
     }
+    
+    public void guardarPaciente(Paciente p){
+    
+    }
+    
+    public void guardarSalida(Salida sa){
+        
+    }     
+        
+    public void guardarHoraFin(Date h){
+        
+    }
+    
+    // ------------- MODIFICAR -----------------------
     
     public void modificarUsuario(Usuario u){
         /**
@@ -218,7 +240,8 @@ public class SQLUsuarios {
     public void modificarSalida(Salida s){
         /**
          * Sobreescribe los datos de la Salida ya modificada que se pasa como parámetro.
-         * El identificador no puede cambiar nunca.
+         * Identificador, paciente y fechaInicio no puede cambiar nunca. En caso de 
+         * querer cambiar alguno de estos datos, se borrará la salida y se creará una nueva.
          */
         try {
             ConexionBD.instancia().getStatement().execute(
@@ -237,9 +260,7 @@ public class SQLUsuarios {
         }
     }
     
-    public void guardarHoraFin(Date h){
-        
-    }
+    // ------------- BORRAR -----------------------
     
     public void borrarUsuario(Usuario u) {
         //Borra un usuario de la base de datos
@@ -251,7 +272,6 @@ public class SQLUsuarios {
             System.err.println("ERROR: Fallo de conexión al borrar el Usuario");
         }
     }
-    
     
     public void borrarPaciente(Paciente p) {
         //Borra un Paciente de la base de datos

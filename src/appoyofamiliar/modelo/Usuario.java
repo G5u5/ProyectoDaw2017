@@ -55,6 +55,12 @@ public abstract class Usuario {
     /**
      * Modifica los datos del objeto Usuario que llama al metodo
      * Metodo abstracto que se redefine en las clases especificas.
+     * @param identificador
+     * @param nombre
+     * @param apellidos
+     * @param dni
+     * @param telefono
+     * @param direccion
      */
     public void modificarDatos(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion){
         this.identificador = identificador;

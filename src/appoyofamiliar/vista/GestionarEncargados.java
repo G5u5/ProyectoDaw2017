@@ -96,6 +96,11 @@ public class GestionarEncargados extends javax.swing.JFrame {
         });
 
         jButton5.setText("VER DATOS");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         tablaEncargados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,6 +184,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
         usuarios.get(indice).cambiarControl("borrar");
         encargados.remove(marcado);
     }//GEN-LAST:event_botonBorrarActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
