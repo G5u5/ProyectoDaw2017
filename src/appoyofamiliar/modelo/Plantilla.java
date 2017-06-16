@@ -32,14 +32,6 @@ public class Plantilla {
         u.setControl("insertar");
         listaPlantilla.add(u);
     }
-        
-    public Usuario getUsuario(String ident){
-        if (obtenerPosicionUsuario(ident) >= 0){
-            return listaPlantilla.get(obtenerPosicionUsuario(ident));
-        } else {
-            return null;
-        }
-    }
     
     /**
      * Cambia el control del usuario para ser borrado a la hora de guardar la
@@ -76,7 +68,13 @@ public class Plantilla {
         return listaPlantilla;
     }
     
-    
+    public Usuario getUsuario(String ident){
+        if (obtenerPosicionUsuario(ident) >= 0){
+            return listaPlantilla.get(obtenerPosicionUsuario(ident));
+        } else {
+            return null;
+        }
+    }
     
     //--------------------------------------------------------------------------
     //------- OTROS MÉTODOS

@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  */
 public class NuevoEncargado extends javax.swing.JFrame {
     private LinkedList<Encargado> encList = new LinkedList<Encargado>();
-    private LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     private Usuario usuario;
     /**
      * Creates new form NuevoEncargado
@@ -24,11 +23,19 @@ public class NuevoEncargado extends javax.swing.JFrame {
         initComponents();
     }
     
-    public NuevoEncargado(Usuario usuario, LinkedList<Encargado> encList, LinkedList<Usuario> usrs) {
+    public NuevoEncargado(Usuario usuario) {
         initComponents();
         this.usuario = usuario;
-        this.encList = encList;
-        this.usuarios = usrs;
+        generarLista(Plantilla.instancia().getPlantilla());
+        
+    }
+    
+    private void generarLista(LinkedList<Usuario> usrs){
+        for (int i = 0; i < usrs.size(); i++){
+            if (usrs.get(i) instanceof Encargado){
+                encList.add((Encargado)usrs.get(i));
+            }
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -271,7 +278,7 @@ public class NuevoEncargado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        
+        Plantilla.instancia().nuevoUsuario(usuario);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void identificadorBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificadorBoxActionPerformed
@@ -310,17 +317,6 @@ public class NuevoEncargado extends javax.swing.JFrame {
         botonAceptarActionPerformed(evt);
     }//GEN-LAST:event_direccionBoxActionPerformed
     
-    private boolean buscarUsuario(){
-        String id = identificadorBox.getText();
-        boolean retorno = false;
-        for (int i = 0; i < usuarios.size(); i++){
-            Usuario marcado = usuarios.get(i);
-            if (id.toLowerCase().equals(marcado.getIdentificador().toLowerCase())){
-                retorno = true;
-            }
-        }
-        return retorno;
-    }
     /**
      * @param args the command line arguments
      */

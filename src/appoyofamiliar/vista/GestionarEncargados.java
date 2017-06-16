@@ -15,7 +15,6 @@ import javax.swing.table.*;
  */
 public class GestionarEncargados extends javax.swing.JFrame {
     
-    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     LinkedList<Encargado> encargados = new LinkedList<Encargado>();
     private Jefe usuario;
     private String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
@@ -169,8 +168,7 @@ public class GestionarEncargados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        (new NuevoEncargado(usuario)).setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

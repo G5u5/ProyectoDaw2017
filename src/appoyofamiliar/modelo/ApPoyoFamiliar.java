@@ -21,7 +21,7 @@ public class ApPoyoFamiliar {
      */
     public static void main(String[] args) {
         
-        //(new LogginJFrame(SQLUsuarios.instancia().descargarDatosU())).setVisible(true);
+        (new LogginJFrame(SQLUsuarios.instancia().descargarDatosU())).setVisible(true);
         
         //COMENTAR este bloque para que cargue los datos desde la base de datos
         //NO BORRAR
@@ -36,11 +36,7 @@ public class ApPoyoFamiliar {
         usuarios.add(pepito);
         usuarios.add(pepote);
         ----------------------------------------------------------------------*/
-        try{
-        ConexionBD.instancia().getStatement().execute("INSERT INTO Usuario (`Identificador`, `Clave`, `Nombre`, `Apellidos`, `Dni`, `Telefono`, `Direccion`, `sede`, `localidad`, `area`) VALUES ('Pipe', 'pepi', 'Felipe', 'ruiz', '72418564F', '979161434', 'C/ Mayor 41, 3º B', 'Palencia', NULL, NULL)");
-        } catch (Exception e){
-            System.err.println("FAAAAAIIILLL");
-        }    
+         
         //usuarios = SQLUsuarios.instancia().descargarDatosU();
         
         /*----CÓDIGO PARA PROBAR QUE CADA OBJETO GUARDADO ES DE LA CLASE QUE LE CORRESPONDE------------
