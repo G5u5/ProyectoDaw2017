@@ -4,47 +4,37 @@
  * and open the template in the editor.
  */
 package appoyofamiliar.modelo;
+import appoyofamiliar.controlador.SQLUsuarios;
 import java.util.*;
 /**
  *
  * @author Felipe José Ruiz
  */
 public class ConjuntoPaciente {
-  private static LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
-   
-    /**
-     *Itera la lista para mostrar cada atributo del objeto paciente de la lista \n
-     * El 
-     */
-    public void mostrar(){
-       Iterator lista = pacientes.iterator();
-       Paciente marcado = (Paciente) lista.next();
-       while (lista.hasNext()){
-           marcado.getNombre();
-           marcado.getApellidos();
-           marcado.getDni();
-           marcado.getTelefonoFamilia();
-           marcado.getCentro();
-       }
-   }
-
+    private static LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
+    private static ConjuntoPaciente instancia = null;
+        
+    private ConjuntoPaciente(){
+        pacientes = SQLUsuarios.instancia().descargarDatosP();
+        
+    }
+    
+    public static ConjuntoPaciente instancia(){
+        if (instancia == null){
+            instancia = new ConjuntoPaciente();
+        }
+        return instancia;
+    }
+    
     /**
      *Introduce por medio de Scanner los datos de un nuevo paciente e incluye
      * el paciente al final de la lista.
      */
     public void nuevoPaciente(Paciente p){
        pacientes.add(p);
-   }
-
-    /**
-     *devuelve el paciente alojado en la posición del indice establecido
-     * @param indice
-     * @return
-     */
-    public Paciente getPaciente (int indice) {
-       return pacientes.get(indice);
-   }
-     public static Paciente getPacienteDni(String denei){
+    }
+    
+    public static Paciente getPacienteDni(String denei){
         Paciente encontrado = null;
         
         for (int i = 0; i < pacientes.size(); i++){
@@ -52,49 +42,55 @@ public class ConjuntoPaciente {
                 encontrado = pacientes.get(i);
             }
         } 
-        
         return encontrado;
     }
+    
     /**
      *elimina el paciente de la lista con el indice establecido 
      * @param indice
      * @return
      */
-    public Paciente borrarPaciente(int indice){
-       return pacientes.remove(indice);
-   }
-
+    public void borrarPaciente(String dni){
+        
+    }
+    
+    /**
+     * Muestra por consola los datos del paciente. No tiene utilidad con interface gráfica.
+     */
+    public void mostrar(){
+        Iterator lista = pacientes.iterator();
+        Paciente marcado = (Paciente) lista.next();
+        while (lista.hasNext()){
+            System.out.println(marcado.getNombre());
+            System.out.println(marcado.getApellidos());
+            System.out.println(marcado.getDni());
+            System.out.println(marcado.getTelefonoFamilia());
+            System.out.println(marcado.getCentro());
+        }
+    }
+    
     /**
      *Actualiza los datos del paciente selecionado por el indice de la lista
      * @param indice
      */
-    public void modificarPaciente(int indice){
-       Scanner modifica = new Scanner(System.in);
-       System.out.println("Nuevo nombre del paciente:");
-       String nombre = modifica.nextLine();
-       System.out.println("Nuevo apellido del paciente:");
-       String apellidos = modifica.nextLine();
-       System.out.println("Nuevo telefono de contacto familiar");
-       String telefono = modifica.nextLine();
-       System.out.println("Nuevo centro de ingreso");
-       String centro = modifica.nextLine();
-       getPaciente(indice).actualizarDatos(nombre, apellidos, telefono, centro);
-   }
+    public void modificarPaciente(String nombre, String apellidos, String telefono, String centro){
+        getPaciente(indice).actualizarDatos(nombre, apellidos, telefono, centro);
+    }
    
     /**
      *Se recorre la lista y devuelve los datos en formato de matriz de Strings
      * @return
      */
     public String [][] obtenerDatosTabla() {
-        String [][] arrayStock = new String [pacientes.size()][5];
+        String [][] arrayPacientes = new String [pacientes.size()][5];
         for (int indice = 0; indice < pacientes.size(); indice++  )  {
             Paciente paciente = pacientes.get(indice);
-            arrayStock[indice][0] = paciente.getNombre();
-            arrayStock[indice][1] = paciente.getApellidos();
-            arrayStock[indice][2] = paciente.getDni();
-            arrayStock[indice][3] = paciente.getTelefonoFamilia();
-            arrayStock[indice][4] = paciente.getCentro();
+            arrayPacientes[indice][0] = paciente.getNombre();
+            arrayPacientes[indice][1] = paciente.getApellidos();
+            arrayPacientes[indice][2] = paciente.getDni();
+            arrayPacientes[indice][3] = paciente.getTelefonoFamilia();
+            arrayPacientes[indice][4] = paciente.getCentro();
         }      
-        return arrayStock;
+        return arrayPacientes;
     }
 }

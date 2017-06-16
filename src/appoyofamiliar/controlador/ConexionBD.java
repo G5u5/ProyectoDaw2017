@@ -19,7 +19,7 @@ public class ConexionBD {
     
     private ConexionBD() throws SQLException {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://10.1.3.103:3306/ApoyoFamiliar","root","mysql");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/AppOyoFamiliar","root","mysql");
             stmt = conn.createStatement();
         }
         catch(SQLException e) {

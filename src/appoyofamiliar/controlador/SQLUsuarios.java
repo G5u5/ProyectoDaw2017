@@ -24,8 +24,6 @@ import java.util.*;
  */
 public class SQLUsuarios {
     private static SQLUsuarios instancia = null;
-    private Plantilla pl = new Plantilla();
-    private ConjuntoPaciente pc = new ConjuntoPaciente();
     
     public static SQLUsuarios instancia() {
         if (instancia == null) {
@@ -35,10 +33,10 @@ public class SQLUsuarios {
     }
     
     //--------------------------------------------------------------------------
-    //    DESCARGA DE DATOS. Creación de las diferentes listas.
+    //-------DESCARGA DE DATOS. Creación de las diferentes listas en la memoria del sistema.
     //--------------------------------------------------------------------------
     
-    public LinkedList<Usuario> descargarDatosU() throws SQLException {
+    public LinkedList<Usuario> descargarDatosU() {
     //Descarga los datos de la tabla "Usuario" y crea la lista correspondiente
         LinkedList<Usuario> llu = new LinkedList<Usuario>();
         
@@ -47,7 +45,7 @@ public class SQLUsuarios {
                 "select * from Usuario"
                 );
             while (rsi.next()) {
-                if(rsi.getString(9) != null){
+                if(rsi.getString(9) != null && rsi.getString(10) == null){
                     llu.add(new Empleado (rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(9)));
                     
                 } else if (rsi.getString(8) != null){
@@ -57,6 +55,34 @@ public class SQLUsuarios {
                     llu.add(new Encargado(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(9), rsi.getString(10)));
                     
                 }
+                
+                /*-------------CÓDIGO PARA PRUEBAS------------
+                System.out.println("***************");
+                System.out.println("Resultado: " + Integer.toString(rsi.getFetchDirection()));
+                System.out.println("");
+                
+                System.out.println("SEDE?: " + rsi.getString(8));
+                if (rsi.getString(8) != null){
+                    System.out.println("Sede ENCONTRADA!!!");
+                } else {
+                    System.out.println("Sede vacia...");
+                }
+                
+                System.out.println("LOCALIDAD?: " + rsi.getString(9));
+                if(rsi.getString(9) != null){
+                    System.out.println("Localidad ENCONTRADA!!!");
+                }else {
+                    System.out.println("Localidad vacia...");
+                }
+                
+                System.out.println("AREA?: " + rsi.getString(10));
+                if (rsi.getString(10) != null && rsi.getString(9) != null){
+                    System.out.println("LOCALIDAD Y AREA ENCONTRADAS!!!");
+                } else {
+                    System.out.println("localidad y area vacias...");
+                }
+                System.out.println("***************************");*/
+                
             }
             ConexionBD.desconectar();
         } 
@@ -66,7 +92,7 @@ public class SQLUsuarios {
         return llu;
     }
     
-    public LinkedList<Paciente> descargarDatosP() throws SQLException {
+    public LinkedList<Paciente> descargarDatosP() {
     //Descarga los datos de la tabla "Paciente" y crea la lista correspondiente    
         LinkedList<Paciente> llp = new LinkedList<Paciente>();
         
@@ -86,7 +112,7 @@ public class SQLUsuarios {
         return llp;
     }
     
-    public LinkedList<Salida> descargarDatosS() throws SQLException {
+    public LinkedList<Salida> descargarDatosS() {
     //Descarga los datos de la tabla "Salida" y crea la lista correspondiente
     
         LinkedList<Salida> lls = new LinkedList<Salida>();
@@ -110,7 +136,7 @@ public class SQLUsuarios {
     }
     
     //--------------------------------------------------------------------------
-    //    CARGA DE DATOS. Guarda o modifica los datos marcados en la base de datos.
+    //------CARGA DE DATOS. Guarda o modifica los datos marcados en la base de datos.
     //--------------------------------------------------------------------------
     
     // ------------- GUARDAR -----------------------
@@ -207,7 +233,7 @@ public class SQLUsuarios {
        //Guarda el objeto Salida pasado como parametro en la base de datos.
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "insert into Salida (Identificador, dniPaciente, medico, espcialidad, centro, area, descripcion, transporte, fechaInicio, fechaFin) values (" +
+                    "insert into Salida (Identificador, dniPaciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio, fechaFin) values (" +
                     "'" + sa.getEmpleado().getIdentificador() + "', " +
                     "'" + sa.getPaciente().getDni() + "', " +
                     "'" + sa.getMedico() + "', " +
