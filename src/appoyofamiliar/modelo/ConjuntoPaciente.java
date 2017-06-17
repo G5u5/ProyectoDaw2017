@@ -11,7 +11,7 @@ import java.util.*;
  * @author Felipe José Ruiz
  */
 public class ConjuntoPaciente {
-    private static LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
+    private LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
     private static ConjuntoPaciente instancia = null;
         
     /**
@@ -63,7 +63,7 @@ public class ConjuntoPaciente {
     //------- GETTERS
     //--------------------------------------------------------------------------
     
-    public static Paciente getPacienteDni(String denei){
+    public Paciente getPacienteDni(String denei){
         Paciente encontrado = null;
         boolean bandera = true;
         for (int i = 0; i < pacientes.size() && bandera; i++){
@@ -73,6 +73,10 @@ public class ConjuntoPaciente {
             }
         } 
         return encontrado;
+    }
+
+    public LinkedList<Paciente> getPacientes() {
+        return pacientes;
     }
     
     /**

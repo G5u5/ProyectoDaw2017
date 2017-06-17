@@ -110,7 +110,10 @@ public class Salida {
         return control;
     }
     
-    public void setContro(String c){
+    /**
+     * mantener, modificar, borrar, insertar
+     */
+    public void setControl(String c){
         this.control = c;
     }
 }

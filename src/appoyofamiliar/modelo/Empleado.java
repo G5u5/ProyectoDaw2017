@@ -36,8 +36,8 @@ public class Empleado extends Usuario {
      * @param telefono
      * @param direccion
      */
-    public Empleado(String nombre, String apellidos, String dni, String telefono, String direccion, String localidad) {
-        super(nombre, apellidos, dni, telefono, direccion);
+    public Empleado(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad) {
+        super(identificador, nombre, apellidos, dni, telefono, direccion);
         this.localidad = localidad;
     }
     

@@ -102,7 +102,9 @@ public class SQLUsuarios {
                     "select * from Paciente"
             );
             while (rsi.next()) {
-                llp.add(new Paciente(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5)));
+                Paciente p = new Paciente(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5));
+                p.setControl("mantener");
+                llp.add(p);
             }
             ConexionBD.desconectar();
         }
@@ -115,22 +117,39 @@ public class SQLUsuarios {
     public LinkedList<Salida> descargarDatosS() {
     //Descarga los datos de la tabla "Salida" y crea la lista correspondiente
     
-        LinkedList<Salida> lls = new LinkedList<Salida>();
-        Salida sa = null;
+        String[][] lista = null;
+        ArrayList resultados = new ArrayList();
+        LinkedList<Date[]> fechas = new LinkedList();
+        LinkedList<Salida> lls;
+        lls = new LinkedList();
+        
         try{
-            ResultSet rsi = ConexionBD.instancia().getStatement().executeQuery(
+            ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(
                     "select * from Salida"
             );
-            while (rsi.next()) {
-                sa = new Salida(obtenerEmpleado(rsi.getString(1)), obtenerPaciente(rsi.getString(2)), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(8), rsi.getDate(9));
-                if (rsi.getDate(10) != null){
-                    sa.cerrarSalida(rsi.getDate(10));
+            
+            while (rs.next()) {
+                String[] marcada = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)};
+                Date[] actuales = {rs.getDate(9), rs.getDate(10)};
+                resultados.add(marcada);
+                fechas.add(actuales);
+            }
+            rs.close();
+            for (int i = 0; i< resultados.size(); i++){
+                String[] marcada = (String[]) resultados.get(i);
+                Date[] fetchAs = fechas.get(i);
+                Salida sa = new Salida(obtenerEmpleado(marcada[0]), obtenerPaciente(marcada[1]), marcada[2], marcada[3], marcada[4], marcada[5], marcada[6], marcada[7], fetchAs[0]);
+                if (fetchAs[1] != null){
+                    sa.cerrarSalida(fetchAs[1]);
                 }
+                sa.setControl("mantener");
                 lls.add(sa);
             }
             ConexionBD.desconectar();
-        }catch (Exception e){
-            System.err.println("ERROR: Fallo al descargar los datos de las Salidas.");
+        }catch (SQLException e){
+            System.err.println("ERROR: SQLException al descargar los datos de las Salidas. " + e);
+        } catch (Exception e){
+            System.out.println("ERROR: Fallo al descargar los datos de las Salidas. " + e);
         }
         return lls;
     }
@@ -444,7 +463,7 @@ public class SQLUsuarios {
                     "select * from Usuario where Identificador='" + ident + "';" 
             );
             while (rsi.next()) {
-                em = new Empleado(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6));
+                em = new Empleado(rsi.getString(1), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(9));
             }
         }catch (Exception e){
             System.err.println("ERROR: Fallo de conexión al buscar el Empleado");

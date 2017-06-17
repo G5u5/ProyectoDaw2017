@@ -5,6 +5,7 @@
  */
 package appoyofamiliar.vista;
 
+import appoyofamiliar.controlador.SQLUsuarios;
 import appoyofamiliar.modelo.*;
 import java.awt.*;
 import java.util.*;
@@ -22,13 +23,9 @@ public class LogginJFrame extends javax.swing.JFrame {
      */
     public LogginJFrame() {
         initComponents();
+        this.usuarios = SQLUsuarios.instancia().descargarDatosU();
     }
     
-    public LogginJFrame(LinkedList<Usuario> usuarios) {
-        initComponents();
-        this.usuarios = usuarios;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

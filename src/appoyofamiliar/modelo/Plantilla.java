@@ -88,4 +88,16 @@ public class Plantilla {
         }
         return -1;
     }
+    
+    public Usuario buscarUsuario(String id){
+        Usuario us = null;
+        boolean bandera = true;
+        for (int i = 0; i < listaPlantilla.size() && bandera; i++){
+            if (listaPlantilla.get(i).getIdentificador().toLowerCase().equals(id.toLowerCase())){
+                us = listaPlantilla.get(i);
+                bandera = false;
+            }
+        }
+        return us;
+    }
 }

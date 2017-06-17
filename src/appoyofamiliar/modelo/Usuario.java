@@ -44,7 +44,8 @@ public abstract class Usuario {
      * @param telefono
      * @param direccion
      */
-    public Usuario(String nombre, String apellidos, String dni, String telefono, String direccion) {
+    public Usuario(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion) {
+        this.identificador = identificador;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;

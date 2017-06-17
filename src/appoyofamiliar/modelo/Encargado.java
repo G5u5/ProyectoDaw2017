@@ -39,8 +39,8 @@ public class Encargado extends Empleado{
      * @param telefono
      * @param direccion
      */
-    public Encargado(String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area) {
-        super(nombre, apellidos, dni, telefono, direccion, localidad);
+    public Encargado(String identificador, String nombre, String apellidos, String dni, String telefono, String direccion, String localidad, String area) {
+        super(identificador, nombre, apellidos, dni, telefono, direccion, localidad);
         this.area = area;
     }
     
