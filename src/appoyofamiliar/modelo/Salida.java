@@ -5,6 +5,7 @@
  */
 package appoyofamiliar.modelo;
 
+import java.text.*;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -44,6 +45,15 @@ public class Salida {
      */
     public void cerrarSalida(Date fechaFin){
         this.fechaFin = fechaFin;
+    }
+    
+    public void cerrarSalida(String ff){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            this.fechaFin = sdf.parse(ff);
+        } catch (Exception e){
+            System.err.println("FALLO AL ASIGNAR FECHA FIN A LA SALIDA");
+        }
     }
        
     /**

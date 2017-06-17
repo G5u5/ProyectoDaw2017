@@ -7,59 +7,35 @@ package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.*;
 import java.util.*;
+import javax.swing.*;
 import javax.swing.table.*;
 
 /**
  *
  * @author Jesús Durántez Prieto
  */
-public class VerSalidas extends javax.swing.JFrame {
+public class GestionarSalidasGrande extends javax.swing.JFrame {
     
     private Usuario usuario;
-    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
-    LinkedList<Encargado> encargados = new LinkedList<Encargado>();
-    String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
-    DefaultTableModel dtm;
+    private LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
+    private LinkedList<Encargado> encargados = new LinkedList<Encargado>();
+    private static String[] cabecera = {"ACOMPAÑANTE", "DNI PACIENTE", "MEDICO", "ESPECIALIDAD", "CENTRO", "AREA", "DESCRIPCION", "TRANSPORTE", "FECHAINICIO", "FECHAFIN"};
+    private static DefaultTableModel dtm;
     
     /**
      * Creates new form GestionarEncargados
      */
-    public VerSalidas() {
+    public GestionarSalidasGrande() {
         initComponents();
     }
     
-    
-    
-    public VerSalidas(Usuario usr, LinkedList<Usuario> usrs) {
+    public GestionarSalidasGrande(Usuario usr) {
         initComponents();
         this.usuario = usr;
-        usuarios = usrs;
-        generarLista(usrs);
-        dtm = new DefaultTableModel(generarTabla(),cabecera);
-        tablaEncargados.setModel(dtm);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
+        tablaSalidas.setModel(dtm);
     }
     
-    private void generarLista(LinkedList<Usuario> usrs){
-        for (int i = 0; i < usrs.size(); i++){
-            if (usrs.get(i) instanceof Encargado){
-                encargados.add((Encargado)usrs.get(i));
-            }
-        }
-    }
-    
-    private String[][] generarTabla(){
-        String[][] tabla = new String[encargados.size()][5];
-        for (int i = 0; i < encargados.size(); i++){
-            if(!encargados.get(i).getControl().equals("borrar")){
-                tabla[i][0]= encargados.get(i).getNombre();
-                tabla[i][1]= encargados.get(i).getApellidos();
-                tabla[i][2]= encargados.get(i).getDni();
-                tabla[i][3]= encargados.get(i).getTelefono();
-                tabla[i][4]= encargados.get(i).getArea();
-            }
-        }
-        return tabla;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,15 +45,23 @@ public class VerSalidas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEncargados = new javax.swing.JTable();
+        tablaSalidas = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("GESTION ENCARGADOS");
+        setTitle("GESTIONAR SALIDAS");
 
-        tablaEncargados.setModel(new javax.swing.table.DefaultTableModel(
+        jButton2.setText("CERRAR SALIDA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        tablaSalidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -88,7 +72,7 @@ public class VerSalidas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaEncargados);
+        jScrollPane1.setViewportView(tablaSalidas);
 
         jButton6.setText("SALIR");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -99,21 +83,23 @@ public class VerSalidas extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("VER SALIDAS");
+        jLabel1.setText("GESTION DE SALIDAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1126, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(345, 345, 345)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(123, 123, 123)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,11 +107,13 @@ public class VerSalidas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,6 +124,23 @@ public class VerSalidas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFrame frame = new JFrame("CERRAR SALIDA");
+        String fechaFin = JOptionPane.showInputDialog((new JFrame("CERRAR SALIDA")), "Escriba la fecha yyyy-mm-dd");
+        
+        if (fechaFin != null){
+            ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 0).toString(), tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 1).toString(), tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 8).toString(), fechaFin);
+            tablaSalidas.clearSelection();
+            dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
+            tablaSalidas.setModel(dtm);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void cerrarSalida(String ff){
+        //ConjuntoSalida.instancia().buscarSalida(e, p, ff);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -153,14 +158,18 @@ public class VerSalidas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VerSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasGrande.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VerSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasGrande.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VerSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasGrande.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VerSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasGrande.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -169,15 +178,16 @@ public class VerSalidas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VerSalidas().setVisible(true);
+                new GestionarSalidasGrande().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaEncargados;
+    private javax.swing.JTable tablaSalidas;
     // End of variables declaration//GEN-END:variables
 }

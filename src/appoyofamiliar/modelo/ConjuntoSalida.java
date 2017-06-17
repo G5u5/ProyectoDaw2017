@@ -77,19 +77,23 @@ public class ConjuntoSalida {
         
     }
     
+    public void cerrarSalida(String nE, String dniP, String fi, String ff){
+        // nE = nombre del empleado
+        // dniP = dni del Paciente
+        // fi = fecha inicio
+        boolean bandera = true;
+        for (int i = 0; i < salidas.size() && bandera; i++){
+            if (salidas.get(i).getEmpleado().getNombre().equals(nE) && salidas.get(i).getPaciente().getDni().equals(dniP) && salidas.get(i).getFechaInicio().toString().equals(fi)){
+                salidas.get(i).cerrarSalida(ff);
+                bandera = false;
+            }
+        }
+    }
+    
+    
     //--------------------------------------------------------------------------
     //------- GETTERS
     //--------------------------------------------------------------------------
-    
-    public Salida buscarSalida(Empleado e, Paciente p, String fi){
-        Salida rtrn = null;
-        for (Salida s : salidas){
-            if (s.getPaciente().getDni().equals(p.getDni()) && s.getEmpleado().getIdentificador().equals(e.getIdentificador()) && s.getFechaInicio().toString().equals(fi)){
-                rtrn = s;
-            }
-        }
-        return rtrn;
-    }
     
     public LinkedList<Salida> getSalidas() {
         return salidas;
