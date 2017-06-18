@@ -7,6 +7,7 @@ package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.*;
 
 /**
@@ -31,34 +32,19 @@ public class GestionarEncargados extends javax.swing.JFrame {
     public GestionarEncargados(Usuario usr) {
         initComponents();
         this.usuario = usr;
-        dtm = new DefaultTableModel(generarTabla(),cabecera);
+        dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaEncargado(), cabecera);
         tablaEncargados.setModel(dtm);
     }
     
-    private void generarLista(LinkedList<Usuario> usrs){
+    private void generarLista(){
         encargados.clear();
-        for (int i = 0; i < usrs.size(); i++){
-            if (usrs.get(i) instanceof Encargado){
-                encargados.add((Encargado)usrs.get(i));
+        for (int i = 0; i < Plantilla.instancia().getPlantilla().size(); i++){
+            if (Plantilla.instancia().getPlantilla().get(i) instanceof Encargado){
+                encargados.add((Encargado)Plantilla.instancia().getPlantilla().get(i));
             }
         }
     }
     
-    private String[][] generarTabla(){
-        generarLista(Plantilla.instancia().getPlantilla());
-        String[][] tabla = new String[encargados.size()][6];
-        for (int i = 0; i < encargados.size(); i++){
-            if(!encargados.get(i).getControl().equals("borrar")){
-                tabla[i][0]= encargados.get(i).getIdentificador();
-                tabla[i][1]= encargados.get(i).getNombre();
-                tabla[i][2]= encargados.get(i).getApellidos();
-                tabla[i][3]= encargados.get(i).getDni();
-                tabla[i][4]= encargados.get(i).getTelefono();
-                tabla[i][5]= encargados.get(i).getArea();
-            }
-        }
-        return tabla;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,25 +171,22 @@ public class GestionarEncargados extends javax.swing.JFrame {
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         int fila = tablaEncargados.getSelectedRow();
-        int col = tablaEncargados.getSelectedColumn();
-        String id = tablaEncargados.getValueAt(fila, col).toString();
+        String id = tablaEncargados.getValueAt(fila, 0).toString();
         Plantilla.instancia().borrarUsuario(id);
-        generarLista(Plantilla.instancia().getPlantilla());
-        dtm = new DefaultTableModel(generarTabla(),cabecera);
+        generarLista();
+        dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaEncargado(), cabecera);
         tablaEncargados.setModel(dtm);
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void botonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerDatosActionPerformed
         int fila = tablaEncargados.getSelectedRow();
-        int col = tablaEncargados.getSelectedColumn();
-        String id = tablaEncargados.getValueAt(fila, col).toString();
-        (new VerDatosUsuario(Plantilla.instancia().getUsuario(id))).setVisible(true);
+        String id = tablaEncargados.getValueAt(fila, 0).toString();
+        (new VerDatosUsuario(id)).setVisible(true);
     }//GEN-LAST:event_botonVerDatosActionPerformed
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         int fila = tablaEncargados.getSelectedRow();
-        int col = tablaEncargados.getSelectedColumn();
-        String id = tablaEncargados.getValueAt(fila, col).toString();
+        String id = tablaEncargados.getValueAt(fila, 0).toString();
         (new ModificarEncargado(usuario, Plantilla.instancia().getUsuario(id))).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonModificarActionPerformed

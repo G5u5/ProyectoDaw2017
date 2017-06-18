@@ -24,7 +24,16 @@ public class VerDatosUsuario extends javax.swing.JFrame {
     public VerDatosUsuario(Usuario user) {
         initComponents();
         usuario = user;
-        
+        rellenarDatos();
+    }
+    
+    public VerDatosUsuario(String id) {
+        initComponents();
+        usuario = Plantilla.instancia().getUsuario(id);
+        rellenarDatos();
+    }
+    
+    public void rellenarDatos(){
         identificador.setText(usuario.getIdentificador());
         dni.setText(usuario.getDni());
         telefono.setText(usuario.getTelefono());

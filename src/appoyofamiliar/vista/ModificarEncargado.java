@@ -280,7 +280,7 @@ public class ModificarEncargado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        Plantilla.instancia().modificarUsuario(identificadorBox.getText(), (Usuario)(new Encargado(identificadorBox.getText(), usuario.getClave(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), localidadBox.getText(), areaBox.getText())));
+        Plantilla.instancia().modificarUsuario(identificadorBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), localidadBox.getText(), areaBox.getText());
         (new GestionarEncargados(padre)).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptarActionPerformed
