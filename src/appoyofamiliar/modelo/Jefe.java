@@ -125,6 +125,8 @@ public class Jefe extends Usuario{
         Plantilla.instancia().borrarUsuario(u.getIdentificador());
     }
     
+    
+    
     /**
      * Modificar los datos del usuario Jefe
      */

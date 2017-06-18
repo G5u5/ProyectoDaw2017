@@ -16,8 +16,8 @@ import javax.swing.table.*;
 public class GestionarEncargados extends javax.swing.JFrame {
     
     LinkedList<Encargado> encargados = new LinkedList<Encargado>();
-    private Jefe usuario;
-    private String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
+    private Usuario usuario;
+    private String[] cabecera = {"IDENTIFICADOR", "NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
     private DefaultTableModel dtm;
     
     
@@ -28,15 +28,15 @@ public class GestionarEncargados extends javax.swing.JFrame {
         initComponents();
     }
     
-    public GestionarEncargados(Jefe usr) {
+    public GestionarEncargados(Usuario usr) {
         initComponents();
         this.usuario = usr;
-        generarLista(Plantilla.instancia().getPlantilla());
         dtm = new DefaultTableModel(generarTabla(),cabecera);
         tablaEncargados.setModel(dtm);
     }
     
     private void generarLista(LinkedList<Usuario> usrs){
+        encargados.clear();
         for (int i = 0; i < usrs.size(); i++){
             if (usrs.get(i) instanceof Encargado){
                 encargados.add((Encargado)usrs.get(i));
@@ -45,14 +45,16 @@ public class GestionarEncargados extends javax.swing.JFrame {
     }
     
     private String[][] generarTabla(){
-        String[][] tabla = new String[encargados.size()][5];
+        generarLista(Plantilla.instancia().getPlantilla());
+        String[][] tabla = new String[encargados.size()][6];
         for (int i = 0; i < encargados.size(); i++){
             if(!encargados.get(i).getControl().equals("borrar")){
-                tabla[i][0]= encargados.get(i).getNombre();
-                tabla[i][1]= encargados.get(i).getApellidos();
-                tabla[i][2]= encargados.get(i).getDni();
-                tabla[i][3]= encargados.get(i).getTelefono();
-                tabla[i][4]= encargados.get(i).getArea();
+                tabla[i][0]= encargados.get(i).getIdentificador();
+                tabla[i][1]= encargados.get(i).getNombre();
+                tabla[i][2]= encargados.get(i).getApellidos();
+                tabla[i][3]= encargados.get(i).getDni();
+                tabla[i][4]= encargados.get(i).getTelefono();
+                tabla[i][5]= encargados.get(i).getArea();
             }
         }
         return tabla;
@@ -66,26 +68,31 @@ public class GestionarEncargados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonCrear = new javax.swing.JButton();
+        botonModificar = new javax.swing.JButton();
         botonBorrar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonVerDatos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEncargados = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GESTION ENCARGADOS");
 
-        jButton1.setText("CREAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonCrear.setText("CREAR");
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonCrearActionPerformed(evt);
             }
         });
 
-        jButton2.setText("MODIFICAR");
+        botonModificar.setText("MODIFICAR");
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
 
         botonBorrar.setText("BORRAR");
         botonBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,10 +101,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("VER DATOS");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonVerDatos.setText("VER DATOS");
+        botonVerDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonVerDatosActionPerformed(evt);
             }
         });
 
@@ -114,10 +121,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaEncargados);
 
-        jButton6.setText("SALIR");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        botonSalir.setText("SALIR");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                botonSalirActionPerformed(evt);
             }
         });
 
@@ -134,15 +141,15 @@ public class GestionarEncargados extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                        .addComponent(botonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonVerDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -155,11 +162,11 @@ public class GestionarEncargados extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botonCrear)
                     .addComponent(botonBorrar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonModificar)
+                    .addComponent(botonVerDatos)
+                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -167,25 +174,39 @@ public class GestionarEncargados extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
+        (new NuevoEncargado()).setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_botonCrearActionPerformed
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
-        int ind = tablaEncargados.getSelectedRow();
-        usuario.borrarUsuario(encargados.get(ind));
+        int fila = tablaEncargados.getSelectedRow();
+        int col = tablaEncargados.getSelectedColumn();
+        String id = tablaEncargados.getValueAt(fila, col).toString();
+        Plantilla.instancia().borrarUsuario(id);
         generarLista(Plantilla.instancia().getPlantilla());
         dtm = new DefaultTableModel(generarTabla(),cabecera);
         tablaEncargados.setModel(dtm);
     }//GEN-LAST:event_botonBorrarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void botonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerDatosActionPerformed
+        int fila = tablaEncargados.getSelectedRow();
+        int col = tablaEncargados.getSelectedColumn();
+        String id = tablaEncargados.getValueAt(fila, col).toString();
+        (new VerDatosUsuario(Plantilla.instancia().getUsuario(id))).setVisible(true);
+    }//GEN-LAST:event_botonVerDatosActionPerformed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        int fila = tablaEncargados.getSelectedRow();
+        int col = tablaEncargados.getSelectedColumn();
+        String id = tablaEncargados.getValueAt(fila, col).toString();
+        (new ModificarEncargado(usuario, Plantilla.instancia().getUsuario(id))).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,10 +245,10 @@ public class GestionarEncargados extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton botonCrear;
+    private javax.swing.JButton botonModificar;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonVerDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaEncargados;

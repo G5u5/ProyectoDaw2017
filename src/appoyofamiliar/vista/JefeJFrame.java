@@ -5,6 +5,7 @@
  */
 package appoyofamiliar.vista;
 
+import appoyofamiliar.controlador.SQLUsuarios;
 import appoyofamiliar.modelo.*;
 import java.util.*;
 
@@ -116,7 +117,7 @@ public class JefeJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("<html>\n GESTIONAR\n<br/>\nENCARGADOS\n</html>");
+        jButton4.setText("<html>  GESTIONAR <br/> ENCARGADOS </html>");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -217,7 +218,7 @@ public class JefeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreUsuarioActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        
+        SQLUsuarios.instancia().guardarCambios();
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
@@ -239,7 +240,7 @@ public class JefeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        (new GestionarEncargados(usuario)).setVisible(true);
+        (new GestionarEncargados((Usuario)usuario)).setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

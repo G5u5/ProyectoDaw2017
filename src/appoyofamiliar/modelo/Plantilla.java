@@ -41,9 +41,20 @@ public class Plantilla {
         listaPlantilla.get(obtenerPosicionUsuario(ident)).setControl("borrar");
     }
     
-    public void modificarJefe(String identificador){
-        
+    public void modificarUsuario(String id, Usuario u){
+        boolean bandera = true;
+        for (int i = 0; i < listaPlantilla.size() && bandera; i++){
+            if (id.toLowerCase().equals(listaPlantilla.get(i).getIdentificador())){
+                listaPlantilla.remove(i);
+                u.setControl("modificar");
+                listaPlantilla.add(u);
+                bandera = false;
+            } else {
+                System.err.println("Usuario no encontrado");
+            }
+        }
     }
+    
     
     //--------------------------------------------------------------------------
     //------- GETTERS
@@ -80,7 +91,7 @@ public class Plantilla {
     //------- OTROS MÉTODOS
     //--------------------------------------------------------------------------
     
-    private int obtenerPosicionUsuario(String id){
+    public int obtenerPosicionUsuario(String id){
         for( int i = 0; i<listaPlantilla.size(); i++){
             if (listaPlantilla.get(i).getIdentificador().equals(id)){
                 return i;
