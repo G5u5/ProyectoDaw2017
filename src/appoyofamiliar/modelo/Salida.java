@@ -36,7 +36,7 @@ public class Salida {
         this.descripcion = descripcion;
         this.transporte = transporte;
         this.fechaInicio = fechaInicio;
-        this.control = "insertar";
+        this.control = "mantener";
     }
     
     /**

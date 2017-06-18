@@ -160,6 +160,74 @@ public class SQLUsuarios {
     
     // ------------- GUARDAR -----------------------
     
+    public void guardarCambios(){
+        for (Salida s: ConjuntoSalida.instancia().getSalidas()){
+            switch (s.getControl()){
+                case "mantener": 
+                    break;
+                case "borrar":
+                    borrarSalida(s);
+                    break;
+                case "insertar":
+                    guardarSalida(s);
+                    break;
+                case "modificar":
+                    modificarSalida(s);
+                    break;
+                default:
+                    System.err.println("FALLO AL GUARDAR SALIDAS: Error de control.");
+            }
+        }
+        
+        for (Usuario u: Plantilla.instancia().getPlantilla()){
+            switch (u.getControl()){
+                case "mantener": 
+                    break;
+                case "borrar":
+                    borrarUsuario(u);
+                    break;
+                case "insertar":
+                    guardarUsuario(u);
+                    break;
+                case "modificar":
+                    modificarUsuario(u);
+                    break;
+                default:
+                    System.err.println("FALLO AL GUARDAR USUARIOS: Error de control.");
+            }
+        }
+        
+        for (Paciente p: ConjuntoPaciente.instancia().getPacientes()){
+            switch (p.getControl()){
+                case "mantener": 
+                    break;
+                case "borrar":
+                    borrarPaciente(p);
+                    break;
+                case "insertar":
+                    guardarPaciente(p);
+                    break;
+                case "modificar":
+                    modificarPaciente(p);
+                    break;
+                default:
+                    System.err.println("FALLO AL GUARDAR PACIENTES: Error de control.");
+            }
+        }
+    }
+    
+    public void guardarUsuario(Usuario u){
+        if (u instanceof Encargado){
+            guardarNuevoEncargado((Encargado)u);
+        } else if (u instanceof Empleado){
+            guardarNuevoEmpleado((Empleado)u);
+        } else if (u instanceof Jefe){
+            guardarNuevoJefe((Jefe)u);
+        } else {
+            System.err.println("ERROR: tipo de Usuario incorrecto.");
+        }
+    }
+    
     public void guardarNuevoEmpleado(Empleado em) {        
         //Guarda el objeto Empleado pasado como parametro en la base de datos.
         try {
@@ -273,6 +341,18 @@ public class SQLUsuarios {
     }     
         
     // ------------- MODIFICAR -----------------------
+    
+    public void modificarUsuario(Usuario u){
+        if (u instanceof Encargado){
+            modificarEncargado((Encargado)u);
+        } else if (u instanceof Empleado){
+            modificarEmpleado((Empleado)u);
+        } else if (u instanceof Jefe){
+            modificarJefe((Jefe)u);
+        } else {
+            System.err.println("ERROR: tipo de Usuario incorrecto.");
+        }
+    }
     
     public void modificarEmpleado(Empleado em){
         /**

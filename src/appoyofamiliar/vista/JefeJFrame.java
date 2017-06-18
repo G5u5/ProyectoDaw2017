@@ -217,6 +217,7 @@ public class JefeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreUsuarioActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
