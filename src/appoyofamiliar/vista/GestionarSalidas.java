@@ -187,16 +187,22 @@ public class GestionarSalidas extends javax.swing.JFrame {
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
         int fila = tablaSalidas.getSelectedRow();
         
-        if (fila < 0 || fila >= ConjuntoSalida.instancia().obtenerDatosTabla(usuario).length){
+        if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un elemento", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JFrame frame = new JFrame("CERRAR SALIDA");
             String fechaFin = JOptionPane.showInputDialog((new JFrame("CERRAR SALIDA")), "Escriba la fecha yyyy-mm-dd");
             
             if (fechaFin != null || !(fechaFin.equals(""))){
-                ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(fila, 0).toString(), tablaSalidas.getValueAt(fila, 1).toString(), tablaSalidas.getValueAt(fila, 8).toString(), fechaFin);
+                ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(fila, 0).toString(), tablaSalidas.getValueAt(fila, 1).toString(), tablaSalidas.getValueAt(fila, 3).toString(), fechaFin);
                 tablaSalidas.clearSelection();
-                dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
+                if (salidasPendientes.isSelected()){
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(usuario),cabecera);
+                } else if (salidasRealizadas.isSelected()){
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaRealizadas(usuario),cabecera);
+                } else {
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPrevia(usuario),cabecera);
+                }
                 tablaSalidas.setModel(dtm);
             } else {
                 JOptionPane.showMessageDialog(this, "La fecha no es válida", "Error", JOptionPane.ERROR_MESSAGE);

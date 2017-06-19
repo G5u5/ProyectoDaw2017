@@ -5,6 +5,7 @@
  */
 package appoyofamiliar.vista;
 
+import appoyofamiliar.controlador.SQLUsuarios;
 import appoyofamiliar.modelo.*;
 import java.util.*;
 
@@ -160,6 +161,7 @@ public class EmpleadoJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreUsuarioActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        SQLUsuarios.instancia().guardarCambios();
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 

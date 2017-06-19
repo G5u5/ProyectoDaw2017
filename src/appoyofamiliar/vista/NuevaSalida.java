@@ -301,13 +301,7 @@ public class NuevaSalida extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaIn = null;
-        try{
-            fechaIn = sdf.parse(fechaInicioBox.getText());
-        }catch (ParseException ex){
-            System.err.println("Fallo al traducir la fecha inicio");
-        }
+        String fechaIn = fechaInicioBox.getText();
         ConjuntoSalida.instancia().nuevaSalida(new Salida(encontrarEmpleado(), encontrarPaciente(), medicoBox.getText(), especialidadBox.getText(), centroBox.getText(), areaBox.getText(), descripcionBox.getText(), transporteBox.getText(), fechaIn));
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptarActionPerformed

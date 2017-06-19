@@ -87,7 +87,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
         } 
         catch (Exception e) {
-            System.err.println("ERROR: Fallo al descargar los datos de los Usuarios.");
+            System.err.println("ERROR: Fallo al descargar los datos de los Usuarios. (SQLUsuarios.descargarDatosU)");
         }
         return llu;
     }
@@ -109,7 +109,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
         }
         catch (Exception e){
-            System.err.println("ERROR: Fallo al descargar los datos de los Pacientes.");
+            System.err.println("ERROR: Fallo al descargar los datos de los Pacientes. (SQLUsuarios.descargarDatosP)");
         }
         return llp;
     }
@@ -119,7 +119,7 @@ public class SQLUsuarios {
     
         String[][] lista = null;
         ArrayList resultados = new ArrayList();
-        LinkedList<Date[]> fechas = new LinkedList();
+        LinkedList<String[]> fechas = new LinkedList();
         LinkedList<Salida> lls;
         lls = new LinkedList();
         
@@ -130,14 +130,14 @@ public class SQLUsuarios {
             
             while (rs.next()) {
                 String[] marcada = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)};
-                Date[] actuales = {rs.getDate(9), rs.getDate(10)};
+                String[] actuales = {rs.getString(9), rs.getString(10)};
                 resultados.add(marcada);
                 fechas.add(actuales);
             }
             rs.close();
             for (int i = 0; i< resultados.size(); i++){
                 String[] marcada = (String[]) resultados.get(i);
-                Date[] fetchAs = fechas.get(i);
+                String[] fetchAs = fechas.get(i);
                 Salida sa = new Salida(obtenerEmpleado(marcada[0]), obtenerPaciente(marcada[1]), marcada[2], marcada[3], marcada[4], marcada[5], marcada[6], marcada[7], fetchAs[0]);
                 if (fetchAs[1] != null){
                     sa.cerrarSalida(fetchAs[1]);
@@ -147,9 +147,9 @@ public class SQLUsuarios {
             }
             ConexionBD.desconectar();
         }catch (SQLException e){
-            System.err.println("ERROR: SQLException al descargar los datos de las Salidas. " + e);
+            System.err.println("ERROR: SQLException al descargar los datos de las Salidas. (SQLUsuarios.descargarDatosS)" + e);
         } catch (Exception e){
-            System.out.println("ERROR: Fallo al descargar los datos de las Salidas. " + e);
+            System.err.println("ERROR: Fallo al descargar los datos de las Salidas. (SQLUsuarios.descargarDatosS)" + e);
         }
         return lls;
     }
@@ -175,7 +175,7 @@ public class SQLUsuarios {
                     modificarSalida(s);
                     break;
                 default:
-                    System.err.println("FALLO AL GUARDAR SALIDAS: Error de control.");
+                    System.err.println("FALLO AL GUARDAR SALIDAS: Error de control.(SQLUsuarios.guardarCambios)");
             }
         }
         
@@ -193,7 +193,7 @@ public class SQLUsuarios {
                     modificarUsuario(u);
                     break;
                 default:
-                    System.err.println("FALLO AL GUARDAR USUARIOS: Error de control.");
+                    System.err.println("FALLO AL GUARDAR USUARIOS: Error de control. (SQLUsuarios.guardarCambios)");
             }
         }
         
@@ -211,7 +211,7 @@ public class SQLUsuarios {
                     modificarPaciente(p);
                     break;
                 default:
-                    System.err.println("FALLO AL GUARDAR PACIENTES: Error de control.");
+                    System.err.println("FALLO AL GUARDAR PACIENTES: Error de control. (SQLUsuarios.guardarCambios)");
             }
         }
     }
@@ -224,7 +224,7 @@ public class SQLUsuarios {
         } else if (u instanceof Jefe){
             guardarNuevoJefe((Jefe)u);
         } else {
-            System.err.println("ERROR: tipo de Usuario incorrecto.");
+            System.err.println("ERROR: tipo de Usuario incorrecto. (SQLUsuarios.guardarUsuario)");
         }
     }
     
@@ -246,7 +246,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
             
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo en sentencia INSERT al crear el Empleado.");
+            System.err.println("ERROR: Fallo en sentencia INSERT al crear el Empleado. (SQLUsuarios.guardarNuevoEmpleado)");
         }        
     }
     
@@ -270,7 +270,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
             
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Encargado.");
+            System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Encargado. (SQLUsuarios.guardarNuevoEncargado)");
         }        
     }
     
@@ -293,7 +293,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
             
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Jefe.");
+            System.err.println("ERROR: Fallo en sentencia INSERT al guardar el Jefe. (SQLUsuarios.guardarNuevoJefe)");
         }        
     }
     
@@ -312,7 +312,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
             
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo en sentencia INSERT al crear el Paciente.");
+            System.err.println("ERROR: Fallo en sentencia INSERT al crear el Paciente. (SQLUsuarios.guardarPaciente)");
         }  
     }
     
@@ -336,7 +336,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
                     
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo en sentencia INSERT al crear la Salida.");
+            System.err.println("ERROR: Fallo en sentencia INSERT al crear la Salida. (SQLUsuarios.guardarSalida)");
         }   
     }     
         
@@ -350,7 +350,7 @@ public class SQLUsuarios {
         } else if (u instanceof Jefe){
             modificarJefe((Jefe)u);
         } else {
-            System.err.println("ERROR: tipo de Usuario incorrecto.");
+            System.err.println("ERROR: tipo de Usuario incorrecto. (SQLUsuarios.modificarUsuario)");
         }
     }
     
@@ -375,7 +375,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
             
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al modificar el Jefe");
+            System.err.println("ERROR: Fallo de conexión al modificar el Empleado. (SQLUsuarios.modificarEmpleado)");
         }
     }
     
@@ -400,7 +400,7 @@ public class SQLUsuarios {
                 );
             ConexionBD.desconectar();
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al modificar el Encargado");
+            System.err.println("ERROR: Fallo de conexión al modificar el Encargado. (SQLUsuarios.modificarEncargado)");
         }
     }
     
@@ -425,7 +425,7 @@ public class SQLUsuarios {
             ConexionBD.desconectar();
             
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al modificar el Jefe");
+            System.err.println("ERROR: Fallo de conexión al modificar el Jefe. (SQLUsuarios.modificarJefe)");
         }
     }
     
@@ -446,7 +446,7 @@ public class SQLUsuarios {
                 );
             ConexionBD.desconectar();
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al modificar el Paciente");
+            System.err.println("ERROR: Fallo de conexión al modificar el Paciente. (SQLUsuarios.modificarPaciente)");
         }
     }
     
@@ -469,7 +469,7 @@ public class SQLUsuarios {
                     + "' AND fechaInicio='" + s.getFechaInicio() + "';"
                 );
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al modificar el Usuario");
+            System.err.println("ERROR: Fallo de conexión al modificar Salida. (SQLUsuarios.modificarSalida)");
         }
     }
     
@@ -482,7 +482,7 @@ public class SQLUsuarios {
                     "delete from Usuario where Identificador='" + u.getIdentificador()+ "';"
                     );
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al borrar el Usuario");
+            System.err.println("ERROR: Fallo de conexión al borrar el Usuario. (SQLUsuarios.borrarUsuario)");
         }
     }
     
@@ -493,7 +493,7 @@ public class SQLUsuarios {
                     "delete from Paciente where Dni='" + p.getDni()+ "';"
                     );
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al borrar el Paciente");
+            System.err.println("ERROR: Fallo de conexión al borrar el Paciente. (SQLUsuarios.borrarPaciente)");
         }
     }
         
@@ -507,7 +507,7 @@ public class SQLUsuarios {
                             + " AND fechaInicio='" + s.getFechaInicio() + "';"
                     );
         } catch (Exception e) {
-            System.err.println("ERROR: Fallo de conexión al borrar la Salida.");
+            System.err.println("ERROR: Fallo de conexión al borrar la Salida. (SQLUsuarios.borrarSalida)");
         }
     }
     
@@ -528,7 +528,7 @@ public class SQLUsuarios {
                 pa = new Paciente(rsi.getString(1), rsi.getString(2), rsi.getString(3), rsi.getString(4), rsi.getString(5));
             }
         }catch (Exception e){
-            System.err.println("ERROR: Fallo de conexión al buscar el Paciente");
+            System.err.println("ERROR: Fallo de conexión al buscar el Paciente.  (SQLUsuarios.obtenerPaciente)");
         }
         return pa;
     }
@@ -546,7 +546,7 @@ public class SQLUsuarios {
                 em = new Empleado(rsi.getString(1), rsi.getString(3), rsi.getString(4), rsi.getString(5), rsi.getString(6), rsi.getString(7), rsi.getString(9));
             }
         }catch (Exception e){
-            System.err.println("ERROR: Fallo de conexión al buscar el Empleado");
+            System.err.println("ERROR: Fallo de conexión al buscar el Empleado.(SQLUsuarios.obtenerEmpleado)");
         }
         return em;
     }

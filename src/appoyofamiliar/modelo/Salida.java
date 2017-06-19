@@ -5,9 +5,6 @@
  */
 package appoyofamiliar.modelo;
 
-import java.text.*;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  *
@@ -22,11 +19,11 @@ public class Salida {
     private String area;
     private String descripcion;
     private String transporte;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private String control; //mantener, modificar, borrar, insertar
 
-    public Salida(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, Date fechaInicio) {
+    public Salida(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, String fechaInicio) {
         this.empleado = empleado;
         this.paciente = paciente;
         this.medico = medico;
@@ -43,18 +40,10 @@ public class Salida {
      * Se introduce una fecha de finalización para una de las salidas
      * @param fechaFin
      */
-    public void cerrarSalida(Date fechaFin){
+    public void cerrarSalida(String fechaFin){
         this.fechaFin = fechaFin;
-        this.control = "modificar";
-    }
-    
-    public void cerrarSalida(String ff){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try{
-            this.fechaFin = sdf.parse(ff);
+        if (!(this.control.equals("insertar"))){
             this.control = "modificar";
-        } catch (Exception e){
-            System.err.println("FALLO AL ASIGNAR FECHA FIN A LA SALIDA");
         }
     }
        
@@ -108,11 +97,11 @@ public class Salida {
         return transporte;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 

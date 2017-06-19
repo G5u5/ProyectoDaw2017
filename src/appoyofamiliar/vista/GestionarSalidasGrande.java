@@ -32,7 +32,7 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
     public GestionarSalidasGrande(Usuario usr) {
         initComponents();
         this.usuario = usr;
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandePendientes(usuario),cabecera);
         tablaSalidas.setModel(dtm);
     }
     
@@ -178,7 +178,14 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
             if (fechaFin != null){
                 ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(fila, 0).toString(), tablaSalidas.getValueAt(fila, 1).toString(), tablaSalidas.getValueAt(fila, 8).toString(), fechaFin);
                 tablaSalidas.clearSelection();
-                dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
+                if (salidasPendientes.isSelected()){
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandePendientes(usuario),cabecera);
+                } else if (salidasRealizadas.isSelected()){
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandeRealizadas(usuario),cabecera);
+                } else {
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrande(usuario),cabecera);
+                }
+                
                 tablaSalidas.setModel(dtm);
             } else {
                 JOptionPane.showMessageDialog(this, "La fecha no es válida", "Error", JOptionPane.ERROR_MESSAGE);
@@ -189,19 +196,19 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
 
     private void salidasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidasPendientesActionPerformed
         botonCerrar.setText("<html>Cerrar<br/>salida</html>");
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandePendientes(usuario),cabecera);
         tablaSalidas.setModel(dtm);
     }//GEN-LAST:event_salidasPendientesActionPerformed
 
     private void salidasRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidasRealizadasActionPerformed
         botonCerrar.setText("<html>Modificar<br/>hora fin</html>");
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaRealizadas(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandeRealizadas(usuario),cabecera);
         tablaSalidas.setModel(dtm);
     }//GEN-LAST:event_salidasRealizadasActionPerformed
 
     private void todasLasSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todasLasSalidasActionPerformed
         botonCerrar.setText("<html>Modificar<br/>hora fin</html>");
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPrevia(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrande(usuario),cabecera);
         tablaSalidas.setModel(dtm);
     }//GEN-LAST:event_todasLasSalidasActionPerformed
 

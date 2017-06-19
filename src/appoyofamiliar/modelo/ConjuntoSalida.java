@@ -6,7 +6,6 @@
 package appoyofamiliar.modelo;
 
 import appoyofamiliar.controlador.SQLUsuarios;
-import java.text.SimpleDateFormat;
 import java.util.*;
 /**
  *
@@ -35,13 +34,14 @@ public class ConjuntoSalida {
         salidas.add(s);
         
     }
-        
+    
     /**
      *Convierte una String en una fecha tipo Date y la retorna
      * @param fecha
      * @return
-     */
-    public Date obtenerFecha(String fecha) {
+    */
+    /* 
+    public Date convStringToFecha(String fecha) {
         Date testDate = null;
         SimpleDateFormat formatoFecha = new SimpleDateFormat("DD/MM/YYYY");
         Date retorno = null;
@@ -59,7 +59,7 @@ public class ConjuntoSalida {
             retorno = testDate;
         }
         return retorno;
-    }
+    }*/
     
     /**
      *Borra una salida
@@ -207,11 +207,57 @@ public class ConjuntoSalida {
         return tabla;
     }
     
-    public String[][] obtenerDatosTabla(Usuario u){
+    public String[][] obtenerDatosTablaGrande(Usuario u){
         String[][] tabla = new String[salidas.size()][10];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && (!salidas.get(i).getControl().equals("borrar"))){
+                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][2]= salidas.get(i).getMedico();
+                tabla[contador][3]= salidas.get(i).getEspecialidad();
+                tabla[contador][4]= salidas.get(i).getCentro();
+                tabla[contador][5]= salidas.get(i).getArea();
+                tabla[contador][6]= salidas.get(i).getDescripcion();
+                tabla[contador][7]= salidas.get(i).getTransporte();
+                tabla[contador][8]= salidas.get(i).getFechaInicio().toString();
+                if (salidas.get(i).getFechaFin() != null){
+                    tabla[contador][9]= salidas.get(i).getFechaFin().toString();
+                }
+                contador++;
+            }
+        }
+        return tabla;
+    }
+    
+    public String[][] obtenerDatosTablaGrandePendientes(Usuario u){
+        String[][] tabla = new String[salidas.size()][10];
+        int contador = 0;
+        for (int i = 0; i < salidas.size(); i++){
+            if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && salidas.get(i).getFechaFin() == null && (!salidas.get(i).getControl().equals("borrar"))){
+                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][2]= salidas.get(i).getMedico();
+                tabla[contador][3]= salidas.get(i).getEspecialidad();
+                tabla[contador][4]= salidas.get(i).getCentro();
+                tabla[contador][5]= salidas.get(i).getArea();
+                tabla[contador][6]= salidas.get(i).getDescripcion();
+                tabla[contador][7]= salidas.get(i).getTransporte();
+                tabla[contador][8]= salidas.get(i).getFechaInicio().toString();
+                if (salidas.get(i).getFechaFin() != null){
+                    tabla[contador][9]= salidas.get(i).getFechaFin().toString();
+                }
+                contador++;
+            }
+        }
+        return tabla;
+    }
+    
+    public String[][] obtenerDatosTablaGrandeRealizadas(Usuario u){
+        String[][] tabla = new String[salidas.size()][10];
+        int contador = 0;
+        for (int i = 0; i < salidas.size(); i++){
+            if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && salidas.get(i).getFechaFin() != null && (!salidas.get(i).getControl().equals("borrar"))){
                 tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
                 tabla[contador][1]= salidas.get(i).getPaciente().getDni();
                 tabla[contador][2]= salidas.get(i).getMedico();
