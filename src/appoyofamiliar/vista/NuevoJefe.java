@@ -9,48 +9,32 @@ import appoyofamiliar.modelo.*;
 import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Jesús Durántez Prieto
  */
-public class ModificarEncargado extends javax.swing.JFrame {
-    private LinkedList<Encargado> encList = new LinkedList<Encargado>();
-    private Encargado usuario;
-    private Usuario padre;
-    private GestionarEncargados gep;
+public class NuevoJefe extends javax.swing.JFrame {
+    private LinkedList<Jefe> jefeList = new LinkedList<Jefe>();
+    private Usuario usuario;
     /**
-     * Creates new form NuevoEncargado
+     * Creates new form NuevoJefe
      */
-    public ModificarEncargado() {
+    public NuevoJefe() {
         initComponents();
     }
     
-    public ModificarEncargado(Usuario padre,Usuario usuario) {
+    public NuevoJefe(Usuario usuario) {
         initComponents();
-        this.padre = padre;
-        this.usuario = (Encargado)usuario;
+        this.usuario = usuario;
         generarLista(Plantilla.instancia().getPlantilla());
-        rellenarDatos();
+        
     }
-    
-    private void rellenarDatos(){
-        identificadorBox.setText(usuario.getIdentificador());
-        localidadBox.setText(usuario.getLocalidad());
-        areaBox.setText(usuario.getArea());
-        telefonoBox.setText(usuario.getTelefono());
-        dniBox.setText(usuario.getDni());
-        nombreBox.setText(usuario.getNombre());
-        apellidosBox.setText(usuario.getApellidos());
-        direccionBox.setText(usuario.getDireccion());
-    }
-
     
     private void generarLista(LinkedList<Usuario> usrs){
         for (int i = 0; i < usrs.size(); i++){
-            if (usrs.get(i) instanceof Encargado){
-                encList.add((Encargado)usrs.get(i));
+            if (usrs.get(i) instanceof Jefe){
+                jefeList.add((Jefe)usrs.get(i));
             }
         }
     }
@@ -65,33 +49,36 @@ public class ModificarEncargado extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         identificadorBox = new javax.swing.JTextField();
+        claveBox = new javax.swing.JTextField();
         nombreBox = new javax.swing.JTextField();
         apellidosBox = new javax.swing.JTextField();
         dniBox = new javax.swing.JTextField();
         telefonoBox = new javax.swing.JTextField();
         direccionBox = new javax.swing.JTextField();
-        localidadBox = new javax.swing.JTextField();
-        areaBox = new javax.swing.JTextField();
+        sedeBox = new javax.swing.JTextField();
         botonSalir = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NUEVO ENCARGADO");
+        setTitle("NUEVO JEFE");
 
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("MODIFICAR ENCARGADO");
+        jLabel2.setText("NUEVO JEFE");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Usuario:");
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Clave:");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Nombre:");
@@ -109,15 +96,17 @@ public class ModificarEncargado extends javax.swing.JFrame {
         jLabel9.setText("Direccion:");
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Localidad:");
+        jLabel10.setText("Sede:");
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Area:");
-
-        identificadorBox.setEditable(false);
         identificadorBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 identificadorBoxActionPerformed(evt);
+            }
+        });
+
+        claveBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                claveBoxActionPerformed(evt);
             }
         });
 
@@ -152,15 +141,9 @@ public class ModificarEncargado extends javax.swing.JFrame {
             }
         });
 
-        localidadBox.addActionListener(new java.awt.event.ActionListener() {
+        sedeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                localidadBoxActionPerformed(evt);
-            }
-        });
-
-        areaBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                areaBoxActionPerformed(evt);
+                sedeBoxActionPerformed(evt);
             }
         });
 
@@ -171,7 +154,7 @@ public class ModificarEncargado extends javax.swing.JFrame {
             }
         });
 
-        botonAceptar.setText("GUARDAR");
+        botonAceptar.setText("ACEPTAR");
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
@@ -198,7 +181,7 @@ public class ModificarEncargado extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel10)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(localidadBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(sedeBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel5)
@@ -210,9 +193,9 @@ public class ModificarEncargado extends javax.swing.JFrame {
                                     .addGap(24, 24, 24)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(areaBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(claveBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,13 +221,13 @@ public class ModificarEncargado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(identificadorBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(identificadorBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(claveBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(localidadBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(areaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(sedeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dniBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,26 +259,30 @@ public class ModificarEncargado extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.setVisible(false);
-        (new GestionarEncargados(padre)).setVisible(true);
+        (new GestionarJefes(usuario)).setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        Plantilla.instancia().modificarEncargado(identificadorBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), localidadBox.getText(), areaBox.getText());
-        (new GestionarEncargados(padre)).setVisible(true);
-        this.setVisible(false);
+        if (Plantilla.instancia().obtenerPosicionUsuario(identificadorBox.getText()) == -1){
+            Plantilla.instancia().nuevoUsuario(new Jefe(identificadorBox.getText(), claveBox.getText(), nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), direccionBox.getText(), sedeBox.getText()));
+            (new GestionarJefes(usuario)).setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Identificador ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void identificadorBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificadorBoxActionPerformed
         
     }//GEN-LAST:event_identificadorBoxActionPerformed
 
-    private void localidadBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localidadBoxActionPerformed
+    private void claveBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveBoxActionPerformed
         
-    }//GEN-LAST:event_localidadBoxActionPerformed
+    }//GEN-LAST:event_claveBoxActionPerformed
 
-    private void areaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaBoxActionPerformed
+    private void sedeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sedeBoxActionPerformed
         
-    }//GEN-LAST:event_areaBoxActionPerformed
+    }//GEN-LAST:event_sedeBoxActionPerformed
 
     private void telefonoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoBoxActionPerformed
         
@@ -334,44 +321,46 @@ public class ModificarEncargado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModificarEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoJefe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModificarEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoJefe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModificarEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoJefe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModificarEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoJefe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModificarEncargado().setVisible(true);
+                new NuevoJefe().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidosBox;
-    private javax.swing.JTextField areaBox;
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JTextField claveBox;
     private javax.swing.JTextField direccionBox;
     private javax.swing.JTextField dniBox;
     private javax.swing.JTextField identificadorBox;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField localidadBox;
     private javax.swing.JTextField nombreBox;
+    private javax.swing.JTextField sedeBox;
     private javax.swing.JTextField telefonoBox;
     // End of variables declaration//GEN-END:variables
 }

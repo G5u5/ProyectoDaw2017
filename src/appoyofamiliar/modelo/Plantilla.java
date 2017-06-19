@@ -41,7 +41,7 @@ public class Plantilla {
         listaPlantilla.get(obtenerPosicionUsuario(ident)).setControl("borrar");
     }
     
-    public void modificarUsuario(String id, String nmb, String ap, String dni, String tel, String dir, String loc, String ar){
+    public void modificarEncargado(String id, String nmb, String ap, String dni, String tel, String dir, String loc, String ar){
         boolean bandera = true;
         for (int i = 0; i < listaPlantilla.size() && bandera; i++){
             if (id.toLowerCase().equals(listaPlantilla.get(i).getIdentificador())){
@@ -54,6 +54,31 @@ public class Plantilla {
         }
     }
     
+    public void modificarEmpleado(String id, String nmb, String ap, String dni, String tel, String dir, String loc){
+        boolean bandera = true;
+        for (int i = 0; i < listaPlantilla.size() && bandera; i++){
+            if (id.toLowerCase().equals(listaPlantilla.get(i).getIdentificador())){
+                ((Empleado)listaPlantilla.get(i)).modificarDatos(id, nmb, ap, dni, tel, dir, loc);
+                listaPlantilla.get(i).setControl("modificar");
+                bandera = false;
+            } else if (i == (listaPlantilla.size()-1)){
+                System.err.println("Usuario no encontrado");
+            }
+        }
+    }
+    
+    public void modificarJefe(String id, String nmb, String ap, String dni, String tel, String dir, String se){
+        boolean bandera = true;
+        for (int i = 0; i < listaPlantilla.size() && bandera; i++){
+            if (id.toLowerCase().equals(listaPlantilla.get(i).getIdentificador())){
+                ((Jefe)listaPlantilla.get(i)).modificarDatos(id, nmb, ap, dni, tel, dir, se);
+                listaPlantilla.get(i).setControl("modificar");
+                bandera = false;
+            } else if (i == (listaPlantilla.size()-1)){
+                System.err.println("Usuario no encontrado");
+            }
+        }
+    }
     
     //--------------------------------------------------------------------------
     //------- GETTERS
@@ -112,7 +137,7 @@ public class Plantilla {
         String[][] tabla = new String[listaPlantilla.size()][6];
         int contador = 0;
         for (int i = 0; i < listaPlantilla.size(); i++){
-            if (listaPlantilla.get(i) instanceof Empleado && !listaPlantilla.get(i).getControl().equals("borrar")){
+            if (listaPlantilla.get(i) instanceof Empleado && !listaPlantilla.get(i).getControl().equals("borrar") && !(listaPlantilla.get(i) instanceof Encargado)){
                 tabla[contador][0]= listaPlantilla.get(i).getIdentificador();
                 tabla[contador][1]= listaPlantilla.get(i).getNombre();
                 tabla[contador][2]= listaPlantilla.get(i).getApellidos();

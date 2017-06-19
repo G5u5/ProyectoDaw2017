@@ -14,33 +14,33 @@ import javax.swing.table.*;
  *
  * @author Jesús Durántez Prieto
  */
-public class GestionarEmpleados extends javax.swing.JFrame {
+public class GestionarJefes extends javax.swing.JFrame {
     
-    LinkedList<Empleado> empleados = new LinkedList<Empleado>();
+    LinkedList<Jefe> jefes = new LinkedList<Jefe>();
     private Usuario usuario;
-    private String[] cabecera = {"IDENTIFICADOR", "NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "LOCALIDAD"};
+    private String[] cabecera = {"IDENTIFICADOR", "NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "SEDE"};
     private DefaultTableModel dtm;
     
     
     /**
-     * Creates new form GestionarEmpleados
+     * Creates new form GestionarJefes
      */
-    public GestionarEmpleados() {
+    public GestionarJefes() {
         initComponents();
     }
     
-    public GestionarEmpleados(Usuario usr) {
+    public GestionarJefes(Usuario usr) {
         initComponents();
         this.usuario = usr;
-        dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaEmpleado(), cabecera);
-        tablaEmpleados.setModel(dtm);
+        dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaJefe(), cabecera);
+        tablaJefes.setModel(dtm);
     }
     
     private void generarLista(){
-        empleados.clear();
+        jefes.clear();
         for (int i = 0; i < Plantilla.instancia().getPlantilla().size(); i++){
-            if (Plantilla.instancia().getPlantilla().get(i) instanceof Empleado && !(Plantilla.instancia().getPlantilla().get(i) instanceof Encargado)){
-                empleados.add((Empleado)Plantilla.instancia().getPlantilla().get(i));
+            if (Plantilla.instancia().getPlantilla().get(i) instanceof Jefe){
+                jefes.add((Jefe)Plantilla.instancia().getPlantilla().get(i));
             }
         }
     }
@@ -59,12 +59,12 @@ public class GestionarEmpleados extends javax.swing.JFrame {
         botonBorrar = new javax.swing.JButton();
         botonVerDatos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEmpleados = new javax.swing.JTable();
+        tablaJefes = new javax.swing.JTable();
         botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("GESTION EMPLEADOS");
+        setTitle("GESTION JEFES");
 
         botonCrear.setText("CREAR");
         botonCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +94,7 @@ public class GestionarEmpleados extends javax.swing.JFrame {
             }
         });
 
-        tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+        tablaJefes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,7 +105,7 @@ public class GestionarEmpleados extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaEmpleados);
+        jScrollPane1.setViewportView(tablaJefes);
 
         botonSalir.setText("SALIR");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +116,7 @@ public class GestionarEmpleados extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("GESTION DE EMPLEADOS");
+        jLabel1.setText("GESTION DE JEFES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,7 +161,7 @@ public class GestionarEmpleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-        (new NuevoEmpleado(usuario)).setVisible(true);
+        (new NuevoJefe(usuario)).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonCrearActionPerformed
 
@@ -170,35 +170,35 @@ public class GestionarEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
-        int fila = tablaEmpleados.getSelectedRow();
+        int fila = tablaJefes.getSelectedRow();
         if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un usuario", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String id = tablaEmpleados.getValueAt(fila, 0).toString();
+            String id = tablaJefes.getValueAt(fila, 0).toString();
             Plantilla.instancia().borrarUsuario(id);
             generarLista();
-            dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaEmpleado(), cabecera);
-            tablaEmpleados.setModel(dtm);
+            dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaJefe(), cabecera);
+            tablaJefes.setModel(dtm);
         }
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void botonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerDatosActionPerformed
-        int fila = tablaEmpleados.getSelectedRow();
+        int fila = tablaJefes.getSelectedRow();
         if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un usuario", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String id = tablaEmpleados.getValueAt(fila, 0).toString();
+            String id = tablaJefes.getValueAt(fila, 0).toString();
             (new VerDatosUsuario(id)).setVisible(true);
         }
     }//GEN-LAST:event_botonVerDatosActionPerformed
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
-        int fila = tablaEmpleados.getSelectedRow();
+        int fila = tablaJefes.getSelectedRow();
         if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un usuario", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String id = tablaEmpleados.getValueAt(fila, 0).toString();
-            (new ModificarEmpleado(usuario, Plantilla.instancia().getUsuario(id))).setVisible(true);
+            String id = tablaJefes.getValueAt(fila, 0).toString();
+            (new ModificarJefe(usuario, Plantilla.instancia().getUsuario(id))).setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_botonModificarActionPerformed
@@ -220,21 +220,23 @@ public class GestionarEmpleados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarJefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarJefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarJefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarJefes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionarEmpleados().setVisible(true);
+                new GestionarJefes().setVisible(true);
             }
         });
     }
@@ -247,6 +249,6 @@ public class GestionarEmpleados extends javax.swing.JFrame {
     private javax.swing.JButton botonVerDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaEmpleados;
+    private javax.swing.JTable tablaJefes;
     // End of variables declaration//GEN-END:variables
 }

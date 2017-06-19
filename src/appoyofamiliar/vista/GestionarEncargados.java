@@ -171,24 +171,38 @@ public class GestionarEncargados extends javax.swing.JFrame {
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         int fila = tablaEncargados.getSelectedRow();
-        String id = tablaEncargados.getValueAt(fila, 0).toString();
-        Plantilla.instancia().borrarUsuario(id);
-        generarLista();
-        dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaEncargado(), cabecera);
-        tablaEncargados.setModel(dtm);
+        if (fila < 0){
+            JOptionPane.showMessageDialog(this, "Seleccione un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String id = tablaEncargados.getValueAt(fila, 0).toString();
+            Plantilla.instancia().borrarUsuario(id);
+            generarLista();
+            dtm = new DefaultTableModel(Plantilla.instancia().obtenerDatosTablaEncargado(), cabecera);
+            tablaEncargados.setModel(dtm);
+        }
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void botonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerDatosActionPerformed
         int fila = tablaEncargados.getSelectedRow();
-        String id = tablaEncargados.getValueAt(fila, 0).toString();
-        (new VerDatosUsuario(id)).setVisible(true);
+        if (fila < 0){
+            JOptionPane.showMessageDialog(this, "Seleccione un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String id = tablaEncargados.getValueAt(fila, 0).toString();
+            (new VerDatosUsuario(id)).setVisible(true);
+        }
+        
     }//GEN-LAST:event_botonVerDatosActionPerformed
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
         int fila = tablaEncargados.getSelectedRow();
-        String id = tablaEncargados.getValueAt(fila, 0).toString();
-        (new ModificarEncargado(usuario, Plantilla.instancia().getUsuario(id))).setVisible(true);
-        this.setVisible(false);
+        if (fila < 0){
+            JOptionPane.showMessageDialog(this, "Seleccione un usuario", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String id = tablaEncargados.getValueAt(fila, 0).toString();
+            (new ModificarEncargado(usuario, Plantilla.instancia().getUsuario(id))).setVisible(true);
+            this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_botonModificarActionPerformed
 
     /**

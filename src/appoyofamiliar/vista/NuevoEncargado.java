@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 public class NuevoEncargado extends javax.swing.JFrame {
     private LinkedList<Encargado> encList = new LinkedList<Encargado>();
     private Usuario usuario;
-    private GestionarEncargados gep;
     /**
      * Creates new form NuevoEncargado
      */
@@ -291,39 +290,39 @@ public class NuevoEncargado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void identificadorBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificadorBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_identificadorBoxActionPerformed
 
     private void claveBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_claveBoxActionPerformed
 
     private void localidadBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localidadBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_localidadBoxActionPerformed
 
     private void areaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_areaBoxActionPerformed
 
     private void telefonoBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_telefonoBoxActionPerformed
 
     private void dniBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dniBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_dniBoxActionPerformed
 
     private void nombreBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_nombreBoxActionPerformed
 
     private void apellidosBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidosBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_apellidosBoxActionPerformed
 
     private void direccionBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionBoxActionPerformed
-        botonAceptarActionPerformed(evt);
+        
     }//GEN-LAST:event_direccionBoxActionPerformed
     
     /**

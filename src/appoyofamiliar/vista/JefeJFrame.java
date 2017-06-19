@@ -54,9 +54,9 @@ public class JefeJFrame extends javax.swing.JFrame {
         nombreSede = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        gestionarEmpleados = new javax.swing.JButton();
+        gestionarEncargados = new javax.swing.JButton();
+        gestionarJefes = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,25 +109,25 @@ public class JefeJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("<html>\nGESTIONAR\n<br/>\nEMPLEADOS\n</html>");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        gestionarEmpleados.setText("<html>\nGESTIONAR\n<br/>\nEMPLEADOS\n</html>");
+        gestionarEmpleados.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gestionarEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                gestionarEmpleadosActionPerformed(evt);
             }
         });
 
-        jButton4.setText("<html>  GESTIONAR <br/> ENCARGADOS </html>");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        gestionarEncargados.setText("<html>  GESTIONAR <br/> ENCARGADOS </html>");
+        gestionarEncargados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                gestionarEncargadosActionPerformed(evt);
             }
         });
 
-        jButton5.setText("<html>\n GESTIONAR\n<br/>\nJEFES\n</html>");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        gestionarJefes.setText("<html>\n GESTIONAR\n<br/>\nJEFES\n</html>");
+        gestionarJefes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                gestionarJefesActionPerformed(evt);
             }
         });
 
@@ -162,19 +162,19 @@ public class JefeJFrame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jButton4)
+                                            .addComponent(gestionarEncargados)
                                             .addComponent(jButton1))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton3)))
+                                            .addComponent(gestionarEmpleados)))
                                     .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cambiarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jButton2)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(gestionarJefes, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -199,9 +199,9 @@ public class JefeJFrame extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gestionarEncargados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gestionarEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gestionarJefes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cambiarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,24 +232,24 @@ public class JefeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreSedeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        (new GestionarPacientes((Usuario)usuario, usuarios)).setVisible(true);
+        (new GestionarPacientes()).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         (new VerDatosPropiosJFrame(usuario)).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void gestionarEncargadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarEncargadosActionPerformed
         (new GestionarEncargados((Usuario)usuario)).setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_gestionarEncargadosActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        (new GestionarEncargados((Usuario)usuario)).setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void gestionarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarEmpleadosActionPerformed
+        (new GestionarEmpleados((Usuario)usuario)).setVisible(true);
+    }//GEN-LAST:event_gestionarEmpleadosActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void gestionarJefesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarJefesActionPerformed
+        (new GestionarJefes((Usuario)usuario)).setVisible(true);
+    }//GEN-LAST:event_gestionarJefesActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         (new VerSalidas((Usuario)usuario, usuarios)).setVisible(true);
@@ -292,11 +292,11 @@ public class JefeJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cambiarUsuario;
+    private javax.swing.JButton gestionarEmpleados;
+    private javax.swing.JButton gestionarEncargados;
+    private javax.swing.JButton gestionarJefes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

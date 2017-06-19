@@ -13,16 +13,26 @@ import javax.swing.JOptionPane;
  *
  * @author Jesús Durántez Prieto
  */
-public class NuevoPaciente extends javax.swing.JFrame {
+public class ModificarPaciente extends javax.swing.JFrame {
     
     /**
      * Creates new form NuevoEncargado
      */
-    public NuevoPaciente() {
+    public ModificarPaciente() {
         initComponents();
-        
     }
     
+    public ModificarPaciente(Paciente p) {
+        initComponents();
+        rellenarDatos(p);
+    }
+    
+    private void rellenarDatos(Paciente p){
+        nombreBox.setText(p.getNombre());
+        apellidosBox.setText(p.getApellidos());
+        telefonoBox.setText(p.getTelefonoFamilia());
+        centroBox.setText(p.getCentro());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,18 +191,10 @@ public class NuevoPaciente extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.setVisible(false);
-        (new GestionarPacientes()).setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        if (ConjuntoPaciente.instancia().buscarPosicionPaciente(dniBox.getText()) == -1){
-            ConjuntoPaciente.instancia().nuevoPaciente(new Paciente(nombreBox.getText(), apellidosBox.getText(), dniBox.getText(), telefonoBox.getText(), centroBox.getText()));
-            (new GestionarPacientes()).setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Ya existe un paciente con ese DNI", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        
+        ConjuntoPaciente.instancia().modificarPaciente(dniBox.getText(), nombreBox.getText(), apellidosBox.getText(), telefonoBox.getText(), centroBox.getText());
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void nombreBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreBoxActionPerformed
@@ -228,21 +230,23 @@ public class NuevoPaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoPaciente().setVisible(true);
+                new ModificarPaciente().setVisible(true);
             }
         });
     }

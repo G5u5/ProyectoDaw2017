@@ -47,13 +47,13 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jButton4" max="32767" attributes="0"/>
+                                          <Component id="gestionarEncargados" max="32767" attributes="0"/>
                                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jButton6" max="32767" attributes="0"/>
-                                          <Component id="jButton3" max="32767" attributes="0"/>
+                                          <Component id="gestionarEmpleados" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="salir" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
                                   <Component id="cambiarUsuario" min="-2" pref="110" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jButton2" max="32767" attributes="0"/>
-                                      <Component id="jButton5" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="gestionarJefes" min="-2" pref="110" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -100,9 +100,9 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="gestionarEncargados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="gestionarEmpleados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="gestionarJefes" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -176,29 +176,29 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="gestionarEmpleados">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;GESTIONAR&#xa;&lt;br/&gt;&#xa;EMPLEADOS&#xa;&lt;/html&gt;"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gestionarEmpleadosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="gestionarEncargados">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;  GESTIONAR &lt;br/&gt; ENCARGADOS &lt;/html&gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gestionarEncargadosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton5">
+    <Component class="javax.swing.JButton" name="gestionarJefes">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa; GESTIONAR&#xa;&lt;br/&gt;&#xa;JEFES&#xa;&lt;/html&gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gestionarJefesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">

@@ -7,6 +7,7 @@ package appoyofamiliar.vista;
 
 import appoyofamiliar.modelo.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.*;
 
 /**
@@ -15,10 +16,7 @@ import javax.swing.table.*;
  */
 public class GestionarPacientes extends javax.swing.JFrame {
     
-    private Usuario usuario;
-    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
-    LinkedList<Encargado> encargados = new LinkedList<Encargado>();
-    String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
+    String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "CENTRO"};
     DefaultTableModel dtm;
     
     /**
@@ -26,38 +24,10 @@ public class GestionarPacientes extends javax.swing.JFrame {
      */
     public GestionarPacientes() {
         initComponents();
+        dtm = new DefaultTableModel(ConjuntoPaciente.instancia().obtenerDatosTabla() ,cabecera);
+        tablaPacientes.setModel(dtm);
     }
     
-    public GestionarPacientes(Usuario usr, LinkedList<Usuario> usrs) {
-        initComponents();
-        this.usuario = usr;
-        usuarios = usrs;
-        generarLista(usrs);
-        dtm = new DefaultTableModel(generarTabla(),cabecera);
-        tablaEncargados.setModel(dtm);
-    }
-    
-    private void generarLista(LinkedList<Usuario> usrs){
-        for (int i = 0; i < usrs.size(); i++){
-            if (usrs.get(i) instanceof Encargado){
-                encargados.add((Encargado)usrs.get(i));
-            }
-        }
-    }
-    
-    private String[][] generarTabla(){
-        String[][] tabla = new String[encargados.size()][5];
-        for (int i = 0; i < encargados.size(); i++){
-            if(!encargados.get(i).getControl().equals("borrar")){
-                tabla[i][0]= encargados.get(i).getNombre();
-                tabla[i][1]= encargados.get(i).getApellidos();
-                tabla[i][2]= encargados.get(i).getDni();
-                tabla[i][3]= encargados.get(i).getTelefono();
-                tabla[i][4]= encargados.get(i).getArea();
-            }
-        }
-        return tabla;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,26 +37,30 @@ public class GestionarPacientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonCrear = new javax.swing.JButton();
+        botonModificar = new javax.swing.JButton();
         botonBorrar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEncargados = new javax.swing.JTable();
+        tablaPacientes = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GESTION ENCARGADOS");
 
-        jButton1.setText("CREAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonCrear.setText("CREAR");
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonCrearActionPerformed(evt);
             }
         });
 
-        jButton2.setText("MODIFICAR");
+        botonModificar.setText("MODIFICAR");
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
 
         botonBorrar.setText("BORRAR");
         botonBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,14 +69,7 @@ public class GestionarPacientes extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("VER DATOS");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        tablaEncargados.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -113,7 +80,7 @@ public class GestionarPacientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablaEncargados);
+        jScrollPane1.setViewportView(tablaPacientes);
 
         jButton6.setText("SALIR");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -135,15 +102,14 @@ public class GestionarPacientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -156,10 +122,9 @@ public class GestionarPacientes extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botonCrear)
                     .addComponent(botonBorrar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5)
+                    .addComponent(botonModificar)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
@@ -168,26 +133,37 @@ public class GestionarPacientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
         this.setVisible(false);
-        (new NuevoEncargado(usuario)).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        (new NuevoPaciente()).setVisible(true);
+    }//GEN-LAST:event_botonCrearActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
-        int ind = tablaEncargados.getSelectedRow();
-        Usuario marcado = encargados.get(ind);
-        int indice = usuarios.indexOf(marcado);
-        usuarios.get(indice).cambiarControl("borrar");
-        encargados.remove(marcado);
+        int fila = tablaPacientes.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String id = tablaPacientes.getValueAt(fila, 2).toString();
+            ConjuntoPaciente.instancia().borrarPaciente(id);
+            dtm = new DefaultTableModel(ConjuntoPaciente.instancia().obtenerDatosTabla() ,cabecera);
+            tablaPacientes.setModel(dtm);
+        }
     }//GEN-LAST:event_botonBorrarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        int fila = tablaPacientes.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String id = tablaPacientes.getValueAt(fila, 2).toString();
+            (new ModificarPaciente(ConjuntoPaciente.instancia().getPacienteDni(id))).setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_botonModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,12 +205,11 @@ public class GestionarPacientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton botonCrear;
+    private javax.swing.JButton botonModificar;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaEncargados;
+    private javax.swing.JTable tablaPacientes;
     // End of variables declaration//GEN-END:variables
 }
