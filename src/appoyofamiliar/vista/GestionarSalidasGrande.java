@@ -125,14 +125,20 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFrame frame = new JFrame("CERRAR SALIDA");
-        String fechaFin = JOptionPane.showInputDialog((new JFrame("CERRAR SALIDA")), "Escriba la fecha yyyy-mm-dd");
+        int fila = tablaSalidas.getSelectedRow();
         
-        if (fechaFin != null){
-            ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 0).toString(), tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 1).toString(), tablaSalidas.getValueAt(tablaSalidas.getSelectedRow(), 8).toString(), fechaFin);
-            tablaSalidas.clearSelection();
-            dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
-            tablaSalidas.setModel(dtm);
+        if (fila < 0 || fila >= ConjuntoSalida.instancia().obtenerDatosTabla(usuario).length){
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JFrame frame = new JFrame("CERRAR SALIDA");
+            String fechaFin = JOptionPane.showInputDialog((new JFrame("CERRAR SALIDA")), "Escriba la fecha yyyy-mm-dd");
+        
+            if (fechaFin != null){
+                ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(fila, 0).toString(), tablaSalidas.getValueAt(fila, 1).toString(), tablaSalidas.getValueAt(fila, 8).toString(), fechaFin);
+                tablaSalidas.clearSelection();
+                dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
+                tablaSalidas.setModel(dtm);
+            }
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
