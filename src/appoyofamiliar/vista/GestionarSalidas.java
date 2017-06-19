@@ -19,7 +19,7 @@ public class GestionarSalidas extends javax.swing.JFrame {
     private Usuario usuario;
     private LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
     private LinkedList<Encargado> encargados = new LinkedList<Encargado>();
-    private static String[] cabecera = {"ACOMPAÑANTE", "DNI PACIENTE", "MEDICO", "FECHAINICIO", "FECHAFIN"};
+    private static String[] cabecera = {"CODIGO", "ACOMPAÑANTE", "DNI PACIENTE", "MEDICO", "FECHAINICIO", "FECHAFIN"};
     private static DefaultTableModel dtm;
     
     /**
@@ -190,11 +190,10 @@ public class GestionarSalidas extends javax.swing.JFrame {
         if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un elemento", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JFrame frame = new JFrame("CERRAR SALIDA");
             String fechaFin = JOptionPane.showInputDialog((new JFrame("CERRAR SALIDA")), "Escriba la fecha yyyy-mm-dd");
             
             if (fechaFin != null || !(fechaFin.equals(""))){
-                ConjuntoSalida.instancia().cerrarSalida(tablaSalidas.getValueAt(fila, 0).toString(), tablaSalidas.getValueAt(fila, 1).toString(), tablaSalidas.getValueAt(fila, 3).toString(), fechaFin);
+                ConjuntoSalida.instancia().cerrarSalida(Integer.parseInt(tablaSalidas.getValueAt(fila, 0).toString()), fechaFin);
                 tablaSalidas.clearSelection();
                 if (salidasPendientes.isSelected()){
                     dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(usuario),cabecera);

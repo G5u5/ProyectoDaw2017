@@ -10,6 +10,8 @@ package appoyofamiliar.modelo;
  * @author Jesús Durántez Prieto
  */
 public class Administracion {
+    //Tuvo sentido cuando no se manejaba interface gráfica...
+    
     public Plantilla trabajadores; 
     private ConjuntoSalida salidas;
     private ConjuntoPaciente pacientes;

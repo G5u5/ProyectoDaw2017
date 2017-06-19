@@ -84,7 +84,7 @@ public class ModificarEncargado extends javax.swing.JFrame {
         botonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NUEVO ENCARGADO");
+        setTitle("MODIFICAR ENCARGADO");
 
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

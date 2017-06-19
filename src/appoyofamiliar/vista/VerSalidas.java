@@ -15,10 +15,7 @@ import javax.swing.table.*;
  */
 public class VerSalidas extends javax.swing.JFrame {
     
-    private Usuario usuario;
-    LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
-    LinkedList<Encargado> encargados = new LinkedList<Encargado>();
-    String[] cabecera = {"NOMBRE", "APELLIDOS", "D.N.I.", "TELEFONO", "ÁREA"};
+    String[] cabecera = {"CODIGO", "ACOMPAÑANTE", "DNI PACIENTE", "MEDICO", "ESPECIALIDAD", "CENTRO", "AREA", "DESCRIPCION", "TRANSPORTE", "FECHAINICIO", "FECHAFIN"};
     DefaultTableModel dtm;
     
     /**
@@ -26,40 +23,10 @@ public class VerSalidas extends javax.swing.JFrame {
      */
     public VerSalidas() {
         initComponents();
-    }
-    
-    
-    
-    public VerSalidas(Usuario usr, LinkedList<Usuario> usrs) {
-        initComponents();
-        this.usuario = usr;
-        usuarios = usrs;
-        generarLista(usrs);
-        dtm = new DefaultTableModel(generarTabla(),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(), cabecera);
         tablaEncargados.setModel(dtm);
     }
     
-    private void generarLista(LinkedList<Usuario> usrs){
-        for (int i = 0; i < usrs.size(); i++){
-            if (usrs.get(i) instanceof Encargado){
-                encargados.add((Encargado)usrs.get(i));
-            }
-        }
-    }
-    
-    private String[][] generarTabla(){
-        String[][] tabla = new String[encargados.size()][5];
-        for (int i = 0; i < encargados.size(); i++){
-            if(!encargados.get(i).getControl().equals("borrar")){
-                tabla[i][0]= encargados.get(i).getNombre();
-                tabla[i][1]= encargados.get(i).getApellidos();
-                tabla[i][2]= encargados.get(i).getDni();
-                tabla[i][3]= encargados.get(i).getTelefono();
-                tabla[i][4]= encargados.get(i).getArea();
-            }
-        }
-        return tabla;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,11 +38,11 @@ public class VerSalidas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEncargados = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        botonSalida = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("GESTION ENCARGADOS");
+        setTitle("VER SALIDAS");
 
         tablaEncargados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,10 +57,10 @@ public class VerSalidas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaEncargados);
 
-        jButton6.setText("SALIR");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        botonSalida.setText("SALIR");
+        botonSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                botonSalidaActionPerformed(evt);
             }
         });
 
@@ -106,15 +73,15 @@ public class VerSalidas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(471, 471, 471)
+                .addComponent(botonSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,19 +89,19 @@ public class VerSalidas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void botonSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalidaActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_botonSalidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +142,7 @@ public class VerSalidas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton botonSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaEncargados;

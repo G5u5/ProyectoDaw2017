@@ -117,30 +117,37 @@ public class SQLUsuarios {
     public LinkedList<Salida> descargarDatosS() {
     //Descarga los datos de la tabla "Salida" y crea la lista correspondiente
     
-        String[][] lista = null;
+        //ArrayList y LinkedList para el manejo de los datos.
+        //Necesarias debido a imposible concurrencia de los ResultSet (En este caso)
         ArrayList resultados = new ArrayList();
-        LinkedList<String[]> fechas = new LinkedList();
-        LinkedList<Salida> lls;
-        lls = new LinkedList();
+        ArrayList<Integer> codigos = new ArrayList();
+        LinkedList<Salida> lls = new LinkedList();
+        
+        
+        
         
         try{
             ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(
                     "select * from Salida"
-            );
+            );//Realiza la consulta, capturando todos los datos de la tabla Salida en el rs
             
             while (rs.next()) {
-                String[] marcada = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)};
-                String[] actuales = {rs.getString(9), rs.getString(10)};
+            /*
+             Hace falta liberar la conexión para poder utilizar el ResultSet en los métodos obtenerEmpleado()
+                y obtenerPaciente() que nos devuelven los objetos de las respectivas clases necesarios
+                para el constructor
+                */
+                String[] marcada = {rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)};
+                codigos.add(rs.getInt(1));
                 resultados.add(marcada);
-                fechas.add(actuales);
-            }
+            } 
             rs.close();
+            
             for (int i = 0; i< resultados.size(); i++){
                 String[] marcada = (String[]) resultados.get(i);
-                String[] fetchAs = fechas.get(i);
-                Salida sa = new Salida(obtenerEmpleado(marcada[0]), obtenerPaciente(marcada[1]), marcada[2], marcada[3], marcada[4], marcada[5], marcada[6], marcada[7], fetchAs[0]);
-                if (fetchAs[1] != null){
-                    sa.cerrarSalida(fetchAs[1]);
+                Salida sa = new Salida(codigos.get(i), obtenerEmpleado(marcada[0]), obtenerPaciente(marcada[1]), marcada[2], marcada[3], marcada[4], marcada[5], marcada[6], marcada[7], marcada[8]);
+                if (marcada[9] != null){
+                    sa.cerrarSalida(marcada[9]);
                 }
                 sa.setControl("mantener");
                 lls.add(sa);
@@ -161,24 +168,6 @@ public class SQLUsuarios {
     // ------------- GUARDAR -----------------------
     
     public void guardarCambios(){
-        for (Salida s: ConjuntoSalida.instancia().getSalidas()){
-            switch (s.getControl()){
-                case "mantener": 
-                    break;
-                case "borrar":
-                    borrarSalida(s);
-                    break;
-                case "insertar":
-                    guardarSalida(s);
-                    break;
-                case "modificar":
-                    modificarSalida(s);
-                    break;
-                default:
-                    System.err.println("FALLO AL GUARDAR SALIDAS: Error de control.(SQLUsuarios.guardarCambios)");
-            }
-        }
-        
         for (Usuario u: Plantilla.instancia().getPlantilla()){
             switch (u.getControl()){
                 case "mantener": 
@@ -212,6 +201,24 @@ public class SQLUsuarios {
                     break;
                 default:
                     System.err.println("FALLO AL GUARDAR PACIENTES: Error de control. (SQLUsuarios.guardarCambios)");
+            }
+        }
+        
+        for (Salida s: ConjuntoSalida.instancia().getSalidas()){
+            switch (s.getControl()){
+                case "mantener": 
+                    break;
+                case "borrar":
+                    borrarSalida(s);
+                    break;
+                case "insertar":
+                    guardarSalida(s);
+                    break;
+                case "modificar":
+                    modificarSalida(s);
+                    break;
+                default:
+                    System.err.println("FALLO AL GUARDAR SALIDAS: Error de control.(SQLUsuarios.guardarCambios)");
             }
         }
     }
@@ -320,7 +327,8 @@ public class SQLUsuarios {
        //Guarda el objeto Salida pasado como parametro en la base de datos.
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "insert into Salida (Identificador, dniPaciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio, fechaFin) values (" +
+                    "insert into Salida (codigo, Identificador, dniPaciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio, fechaFin) values (" +
+                    sa.getCodigo() +
                     "'" + sa.getEmpleado().getIdentificador() + "', " +
                     "'" + sa.getPaciente().getDni() + "', " +
                     "'" + sa.getMedico() + "', " +
@@ -438,7 +446,7 @@ public class SQLUsuarios {
         
         try {
             ConexionBD.instancia().getStatement().execute(
-                "update Usuario set nombre='" + p.getNombre()
+                "update paciente set nombre='" + p.getNombre()
                     + "', apellidos='" + p.getApellidos()
                     + "', telefonoFamilia='" + p.getTelefonoFamilia()
                     + "', centro='" + p.getCentro()
@@ -457,17 +465,38 @@ public class SQLUsuarios {
          * querer cambiar alguno de estos datos, se borrará la salida y se creará una nueva.
          */
         try {
-            ConexionBD.instancia().getStatement().execute(
-                "update Usuario set medico='" + s.getMedico()
-                    + "', especialidad='" + s.getEspecialidad()
-                    + "', centro='" + s.getCentro()
-                    + "', area='" + s.getArea()
-                    + "', descripcion='" + s.getDescripcion()
-                    + "', transporte='" + s.getTransporte()
-                    + "' where Identificador='" + s.getEmpleado().getIdentificador()
-                    + "' AND dniPaciente='" + s.getPaciente().getDni()
-                    + "' AND fechaInicio='" + s.getFechaInicio() + "';"
-                );
+            if (s.getFechaFin() != null){
+                ConexionBD.instancia().getStatement().execute(
+                    //UPDATE `AppOyoFamiliar`.`salida` SET `area` = 'Norte', `descripcion` = 'Extracción', `fechaFin` = '22-10-2020' WHERE `salida`.`codigoSalida` = 4;
+
+                    "update Salida set " + 
+                        "identificador='" +s.getEmpleado().getIdentificador() +
+                        "', dniPaciente='" + s.getPaciente().getDni() +
+                        "', medico='" + s.getMedico() +
+                        "', especialidad='" + s.getEspecialidad() +
+                        "', centro='" + s.getCentro() +
+                        "', area='" + s.getArea() +
+                        "', descripcion='" + s.getDescripcion() +
+                        "', transporte='" + s.getTransporte() +
+                        "', fechaInicio='" + s.getFechaInicio() +
+                        "', fechaFin='" + s.getFechaFin() +
+                        "' where codigoSalida=" + s.getCodigo() + ";"
+                    );
+            } else {
+                ConexionBD.instancia().getStatement().execute(
+                    "update Salida set identificador='" +s.getEmpleado().getIdentificador() +
+                        "', dniPaciente='" + s.getPaciente().getDni() +
+                        "', medico='" + s.getMedico() +
+                        "', especialidad='" + s.getEspecialidad() +
+                        "', centro='" + s.getCentro() +
+                        "', area='" + s.getArea() +
+                        "', descripcion='" + s.getDescripcion() +
+                        "', transporte='" + s.getTransporte() +
+                        "', fechaInicio='" + s.getFechaInicio() +
+                        "' where codigoSalida=" + s.getCodigo() + ";"
+                    );
+            }
+            ConexionBD.desconectar();
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al modificar Salida. (SQLUsuarios.modificarSalida)");
         }
@@ -502,9 +531,7 @@ public class SQLUsuarios {
         
         try {
             ConexionBD.instancia().getStatement().execute(
-                    "delete from Salida where Identificador='" + s.getEmpleado().getIdentificador() + "'"
-                            + " AND dniPaciente='" + s.getPaciente().getDni()+ "'"
-                            + " AND fechaInicio='" + s.getFechaInicio() + "';"
+                    "delete from Salida where codigo=" + s.getCodigo() + ";"
                     );
         } catch (Exception e) {
             System.err.println("ERROR: Fallo de conexión al borrar la Salida. (SQLUsuarios.borrarSalida)");

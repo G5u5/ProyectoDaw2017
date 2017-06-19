@@ -53,10 +53,11 @@ public class EmpleadoJFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PANEL DE CONTROL");
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Interface Empleado");
+        jLabel1.setText("PANEL DE CONTROL");
 
         nombreUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +92,7 @@ public class EmpleadoJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("<html>GESTION<br/> SALIDAS</html>");
+        jButton2.setText("<html>VER MIS<br/> SALIDAS</html>");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

@@ -22,8 +22,6 @@ public class ApPoyoFamiliar {
     public static void main(String[] args) {
         (new LogginJFrame()).setVisible(true);
         
-        
-
 //***************************************************************************************
 //***** PRUEBAS DE CREACION DE LA LISTA DE SALIDAS                            ***********
 //***************************************************************************************

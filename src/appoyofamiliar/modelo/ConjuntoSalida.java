@@ -14,9 +14,10 @@ import java.util.*;
 public class ConjuntoSalida {
     private LinkedList<Salida> salidas = new LinkedList<Salida>();
     private static ConjuntoSalida instancia;
-    
+    private int ultimoCodigo;
     private ConjuntoSalida(){
         salidas = SQLUsuarios.instancia().descargarDatosS();
+        this.ultimoCodigo = salidas.getLast().getCodigo() + 1;
     }
     
     public static ConjuntoSalida instancia(){
@@ -26,13 +27,10 @@ public class ConjuntoSalida {
         return instancia;
     }
     
-    /**
-     *Crea una salida
-     */
     public void nuevaSalida(Salida s){
         s.setControl("insertar");
+        this.ultimoCodigo++;
         salidas.add(s);
-        
     }
     
     /**
@@ -70,8 +68,16 @@ public class ConjuntoSalida {
     }
     
     /**
-     *Modifica algunos datos de una salida existente
-     * @param indice
+     * Modifica algunos datos de una salida existente
+     * 
+     * @param nE
+     * @param dniP
+     * @param fi
+     * @param me
+     * @param esp
+     * @param cen
+     * @param desc
+     * @param trans
      */
     public void modificarSalida(String nE, String dniP, String fi, String me, String esp, String cen, String desc, String trans){
         // nE = nombre del empleado
@@ -79,21 +85,21 @@ public class ConjuntoSalida {
         // fi = fecha inicio
         boolean bandera = true;
         for (int i = 0; i < salidas.size() && bandera; i++){
-            if (salidas.get(i).getEmpleado().getNombre().equals(nE) && salidas.get(i).getPaciente().getDni().equals(dniP) && salidas.get(i).getFechaInicio().toString().equals(fi)){
-                salidas.get(i).actualizarDatos(me, esp, cen, desc, trans);
+            if (salidas.get(i).getEmpleado().getNombre().equals(nE) && salidas.get(i).getPaciente().getDni().equals(dniP) && salidas.get(i).getFechaInicio().equals(fi)){
+                salidas.get(i).actualizarDatos(obtenerEmpleado(nE), obtenerPaciente(dniP), desc, esp, cen, desc, trans, trans);
                 salidas.get(i).setControl("modificar");
                 bandera = false;
             }
         }
     }
     
-    public void cerrarSalida(String nE, String dniP, String fi, String ff){
+    public void cerrarSalida(int cod, String ff){
         // nE = nombre del empleado
         // dniP = dni del Paciente
         // fi = fecha inicio
         boolean bandera = true;
         for (int i = 0; i < salidas.size() && bandera; i++){
-            if (salidas.get(i).getEmpleado().getNombre().equals(nE) && salidas.get(i).getPaciente().getDni().equals(dniP) && salidas.get(i).getFechaInicio().toString().equals(fi)){
+            if (salidas.get(i).getCodigo() == cod){
                 salidas.get(i).cerrarSalida(ff);
                 salidas.get(i).setControl("modificar");
                 bandera = false;
@@ -115,21 +121,22 @@ public class ConjuntoSalida {
      * @return
      */
     public String[][] obtenerDatosTabla(){
-        String[][] tabla = new String[salidas.size()][10];
+        String[][] tabla = new String[salidas.size()][11];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (!salidas.get(i).getControl().equals("borrar")){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getEspecialidad();
-                tabla[contador][4]= salidas.get(i).getCentro();
-                tabla[contador][5]= salidas.get(i).getArea();
-                tabla[contador][6]= salidas.get(i).getDescripcion();
-                tabla[contador][7]= salidas.get(i).getTransporte();
-                tabla[contador][8]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getEspecialidad();
+                tabla[contador][5]= salidas.get(i).getCentro();
+                tabla[contador][6]= salidas.get(i).getArea();
+                tabla[contador][7]= salidas.get(i).getDescripcion();
+                tabla[contador][8]= salidas.get(i).getTransporte();
+                tabla[contador][9]= salidas.get(i).getFechaInicio().toString();
                 if (salidas.get(i).getFechaFin() != null){
-                    tabla[contador][9]= salidas.get(i).getFechaFin().toString();
+                    tabla[contador][10]= salidas.get(i).getFechaFin().toString();
                 }
                 contador++;
             }
@@ -138,16 +145,17 @@ public class ConjuntoSalida {
     }
     
     public String[][] obtenerDatosTablaPrevia(){
-        String[][] tabla = new String[salidas.size()][5];
+        String[][] tabla = new String[salidas.size()][6];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (!salidas.get(i).getControl().equals("borrar")){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getFechaInicio().toString();
                 if (salidas.get(i).getFechaFin() != null){
-                    tabla[contador][4]= salidas.get(i).getFechaFin().toString();
+                    tabla[contador][5]= salidas.get(i).getFechaFin().toString();
                 }
                 contador++;
             }
@@ -155,14 +163,15 @@ public class ConjuntoSalida {
         return tabla;
     }
     public String[][] obtenerDatosTablaPreviaPendientes(Usuario u){
-        String[][] tabla = new String[salidas.size()][5];
+        String[][] tabla = new String[salidas.size()][6];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && salidas.get(i).getFechaFin() == null && (!salidas.get(i).getControl().equals("borrar"))){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getFechaInicio().toString();
                 contador++;
                 
             }
@@ -171,15 +180,16 @@ public class ConjuntoSalida {
     }
     
     public String[][] obtenerDatosTablaPreviaRealizadas(Usuario u){
-        String[][] tabla = new String[salidas.size()][5];
+        String[][] tabla = new String[salidas.size()][6];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && salidas.get(i).getFechaFin() != null && (!salidas.get(i).getControl().equals("borrar"))){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getFechaInicio().toString();
-                tabla[contador][4]= salidas.get(i).getFechaFin().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][5]= salidas.get(i).getFechaFin().toString();
                 
                 contador++;
                 
@@ -189,16 +199,17 @@ public class ConjuntoSalida {
     }
     
     public String[][] obtenerDatosTablaPrevia(Usuario u){
-        String[][] tabla = new String[salidas.size()][5];
+        String[][] tabla = new String[salidas.size()][6];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && (!salidas.get(i).getControl().equals("borrar"))){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getFechaInicio().toString();
                 if (salidas.get(i).getFechaFin() != null){
-                    tabla[contador][4]= salidas.get(i).getFechaFin().toString();
+                    tabla[contador][5]= salidas.get(i).getFechaFin().toString();
                 }
                 contador++;
                 
@@ -208,21 +219,22 @@ public class ConjuntoSalida {
     }
     
     public String[][] obtenerDatosTablaGrande(Usuario u){
-        String[][] tabla = new String[salidas.size()][10];
+        String[][] tabla = new String[salidas.size()][11];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && (!salidas.get(i).getControl().equals("borrar"))){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getEspecialidad();
-                tabla[contador][4]= salidas.get(i).getCentro();
-                tabla[contador][5]= salidas.get(i).getArea();
-                tabla[contador][6]= salidas.get(i).getDescripcion();
-                tabla[contador][7]= salidas.get(i).getTransporte();
-                tabla[contador][8]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getEspecialidad();
+                tabla[contador][5]= salidas.get(i).getCentro();
+                tabla[contador][6]= salidas.get(i).getArea();
+                tabla[contador][7]= salidas.get(i).getDescripcion();
+                tabla[contador][8]= salidas.get(i).getTransporte();
+                tabla[contador][9]= salidas.get(i).getFechaInicio().toString();
                 if (salidas.get(i).getFechaFin() != null){
-                    tabla[contador][9]= salidas.get(i).getFechaFin().toString();
+                    tabla[contador][10]= salidas.get(i).getFechaFin().toString();
                 }
                 contador++;
             }
@@ -231,22 +243,21 @@ public class ConjuntoSalida {
     }
     
     public String[][] obtenerDatosTablaGrandePendientes(Usuario u){
-        String[][] tabla = new String[salidas.size()][10];
+        String[][] tabla = new String[salidas.size()][11];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && salidas.get(i).getFechaFin() == null && (!salidas.get(i).getControl().equals("borrar"))){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getEspecialidad();
-                tabla[contador][4]= salidas.get(i).getCentro();
-                tabla[contador][5]= salidas.get(i).getArea();
-                tabla[contador][6]= salidas.get(i).getDescripcion();
-                tabla[contador][7]= salidas.get(i).getTransporte();
-                tabla[contador][8]= salidas.get(i).getFechaInicio().toString();
-                if (salidas.get(i).getFechaFin() != null){
-                    tabla[contador][9]= salidas.get(i).getFechaFin().toString();
-                }
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getEspecialidad();
+                tabla[contador][5]= salidas.get(i).getCentro();
+                tabla[contador][6]= salidas.get(i).getArea();
+                tabla[contador][7]= salidas.get(i).getDescripcion();
+                tabla[contador][8]= salidas.get(i).getTransporte();
+                tabla[contador][9]= salidas.get(i).getFechaInicio().toString();
+                
                 contador++;
             }
         }
@@ -254,25 +265,38 @@ public class ConjuntoSalida {
     }
     
     public String[][] obtenerDatosTablaGrandeRealizadas(Usuario u){
-        String[][] tabla = new String[salidas.size()][10];
+        String[][] tabla = new String[salidas.size()][11];
         int contador = 0;
         for (int i = 0; i < salidas.size(); i++){
             if (u.getIdentificador().toLowerCase().equals(salidas.get(i).getEmpleado().getIdentificador()) && salidas.get(i).getFechaFin() != null && (!salidas.get(i).getControl().equals("borrar"))){
-                tabla[contador][0]= salidas.get(i).getEmpleado().getNombre();
-                tabla[contador][1]= salidas.get(i).getPaciente().getDni();
-                tabla[contador][2]= salidas.get(i).getMedico();
-                tabla[contador][3]= salidas.get(i).getEspecialidad();
-                tabla[contador][4]= salidas.get(i).getCentro();
-                tabla[contador][5]= salidas.get(i).getArea();
-                tabla[contador][6]= salidas.get(i).getDescripcion();
-                tabla[contador][7]= salidas.get(i).getTransporte();
-                tabla[contador][8]= salidas.get(i).getFechaInicio().toString();
+                tabla[contador][0]= Integer.toString(salidas.get(i).getCodigo());
+                tabla[contador][1]= salidas.get(i).getEmpleado().getNombre();
+                tabla[contador][2]= salidas.get(i).getPaciente().getDni();
+                tabla[contador][3]= salidas.get(i).getMedico();
+                tabla[contador][4]= salidas.get(i).getEspecialidad();
+                tabla[contador][5]= salidas.get(i).getCentro();
+                tabla[contador][6]= salidas.get(i).getArea();
+                tabla[contador][7]= salidas.get(i).getDescripcion();
+                tabla[contador][8]= salidas.get(i).getTransporte();
+                tabla[contador][9]= salidas.get(i).getFechaInicio().toString();
                 if (salidas.get(i).getFechaFin() != null){
-                    tabla[contador][9]= salidas.get(i).getFechaFin().toString();
+                    tabla[contador][10]= salidas.get(i).getFechaFin().toString();
                 }
                 contador++;
             }
         }
         return tabla;
+    }
+    
+    //--------------------------------------------------------------------------
+    //------- OTROS MËTODOS
+    //--------------------------------------------------------------------------
+    
+    private Empleado obtenerEmpleado(String nE){
+        return (Empleado)Plantilla.instancia().buscarUsuario(nE);
+    }
+    
+    private Paciente obtenerPaciente(String dniP){
+        return ConjuntoPaciente.instancia().getPacienteDni(dniP);
     }
 }

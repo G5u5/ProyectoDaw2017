@@ -92,6 +92,7 @@ public class VerDatosPropiosJFrame extends javax.swing.JFrame {
         cajaDato2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DATOS PERSONALES");
 
         jButton2.setText("ACEPTAR");
         jButton2.setMaximumSize(new java.awt.Dimension(115, 32));
@@ -115,7 +116,7 @@ public class VerDatosPropiosJFrame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Datos personales");
+        jLabel3.setText("DATOS PERSONALES");
 
         jLabel4.setText("Usuario:");
 

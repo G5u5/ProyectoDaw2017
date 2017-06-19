@@ -57,11 +57,11 @@ public class ModificarPaciente extends javax.swing.JFrame {
         centroBox = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("NUEVO PACIENTE");
+        setTitle("MODIFICAR PACIENTE");
 
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("NUEVO PACIENTE");
+        jLabel2.setText("MODIFICAR PACIENTE");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Nombre:");

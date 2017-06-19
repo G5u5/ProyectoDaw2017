@@ -93,7 +93,7 @@ public class NuevaSalida extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Nueva salida");
+        jLabel2.setText("NUEVA SALIDA");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Empleado:");
@@ -302,7 +302,11 @@ public class NuevaSalida extends javax.swing.JFrame {
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         String fechaIn = fechaInicioBox.getText();
-        ConjuntoSalida.instancia().nuevaSalida(new Salida(encontrarEmpleado(), encontrarPaciente(), medicoBox.getText(), especialidadBox.getText(), centroBox.getText(), areaBox.getText(), descripcionBox.getText(), transporteBox.getText(), fechaIn));
+        int cod = ConjuntoSalida.instancia().getSalidas().getLast().getCodigo() + 1;
+        Salida sa = new Salida(cod, encontrarEmpleado(), encontrarPaciente(), medicoBox.getText(), especialidadBox.getText(), centroBox.getText(), areaBox.getText(), descripcionBox.getText(), transporteBox.getText(), fechaIn);
+        sa.setControl("insertar");
+        ConjuntoSalida.instancia().nuevaSalida(sa);
+        
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptarActionPerformed
 

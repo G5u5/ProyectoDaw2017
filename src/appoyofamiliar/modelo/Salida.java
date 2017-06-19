@@ -11,6 +11,12 @@ package appoyofamiliar.modelo;
  * @author Trinidad Ibáñez
  */
 public class Salida {
+
+    //--------------------------------------------------------------------------
+    //--------- ATRIBUTOS
+    //-------------------------------------------------------------------------- 
+    
+    private int codigoSalida;
     private Empleado empleado;
     private Paciente paciente;
     private String medico;
@@ -22,8 +28,13 @@ public class Salida {
     private String fechaInicio;
     private String fechaFin;
     private String control; //mantener, modificar, borrar, insertar
-
-    public Salida(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, String fechaInicio) {
+    
+    //--------------------------------------------------------------------------
+    //--------- CONSTRUCTOR/ES
+    //--------------------------------------------------------------------------
+    
+    public Salida(int cod, Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, String fechaInicio) {
+        this.codigoSalida = cod;
         this.empleado = empleado;
         this.paciente = paciente;
         this.medico = medico;
@@ -35,6 +46,10 @@ public class Salida {
         this.fechaInicio = fechaInicio;
         this.control = "mantener";
     }
+    
+    //--------------------------------------------------------------------------
+    //--------- MANEJO DE DATOS
+    //--------------------------------------------------------------------------    
     
     /**
      * Se introduce una fecha de finalización para una de las salidas
@@ -50,21 +65,34 @@ public class Salida {
     /**
      * Actualzia algunos datos de la salida
      * @param empleado
+     * @param paciente
      * @param medico
      * @param especialidad
      * @param centro
      * @param descripcion
+     * @param fi
      * @param transporte
-     * @param fechaInicio
+     
      */
-    public void actualizarDatos(String medico, String especialidad, String centro, String descripcion, String transporte) {
+    public void actualizarDatos(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String descripcion, String transporte, String fechaInicio) {
+        this.empleado = empleado;
+        this.paciente = paciente;
         this.medico = medico;
         this.especialidad = especialidad;
         this.centro = centro;
         this.descripcion = descripcion;
         this.transporte = transporte;
+        this.fechaInicio = fechaInicio;
     }
-
+    
+    //--------------------------------------------------------------------------
+    //--------- GETTERS
+    //--------------------------------------------------------------------------
+    
+    public int getCodigo(){
+        return this.codigoSalida;
+    }
+    
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -109,10 +137,19 @@ public class Salida {
         return control;
     }
     
+    //--------------------------------------------------------------------------
+    //--------- SETTERS
+    //--------------------------------------------------------------------------
+
+    public void setCodigoSalida(int codigoSalida) {
+        this.codigoSalida = codigoSalida;
+    }
+    
     /**
      * mantener, modificar, borrar, insertar
+     * @param control
      */
-    public void setControl(String c){
-        this.control = c;
+    public void setControl(String control){
+        this.control = control;
     }
 }
