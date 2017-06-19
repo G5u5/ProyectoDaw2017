@@ -45,19 +45,23 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
+        opcionesSalidas = new javax.swing.ButtonGroup();
+        botonCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSalidas = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        salidasPendientes = new javax.swing.JRadioButton();
+        salidasRealizadas = new javax.swing.JRadioButton();
+        todasLasSalidas = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GESTIONAR SALIDAS");
 
-        jButton2.setText("CERRAR SALIDA");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCerrar.setText("CERRAR SALIDA");
+        botonCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCerrarActionPerformed(evt);
             }
         });
 
@@ -85,6 +89,31 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("GESTION DE SALIDAS");
 
+        opcionesSalidas.add(salidasPendientes);
+        salidasPendientes.setSelected(true);
+        salidasPendientes.setText("Salidas pendientes");
+        salidasPendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salidasPendientesActionPerformed(evt);
+            }
+        });
+
+        opcionesSalidas.add(salidasRealizadas);
+        salidasRealizadas.setText("Salidas realizadas");
+        salidasRealizadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salidasRealizadasActionPerformed(evt);
+            }
+        });
+
+        opcionesSalidas.add(todasLasSalidas);
+        todasLasSalidas.setText("Todas las Salidas");
+        todasLasSalidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                todasLasSalidasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,10 +126,18 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
                         .addGap(345, 345, 345)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(123, 123, 123)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(403, 403, 403)
+                .addComponent(salidasPendientes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(salidasRealizadas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(todasLasSalidas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,11 +145,16 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salidasPendientes)
+                    .addComponent(salidasRealizadas)
+                    .addComponent(todasLasSalidas))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -124,10 +166,10 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
         int fila = tablaSalidas.getSelectedRow();
         
-        if (fila < 0 || fila >= ConjuntoSalida.instancia().obtenerDatosTabla(usuario).length){
+        if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un elemento", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JFrame frame = new JFrame("CERRAR SALIDA");
@@ -138,10 +180,30 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
                 tablaSalidas.clearSelection();
                 dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTabla(usuario),cabecera);
                 tablaSalidas.setModel(dtm);
+            } else {
+                JOptionPane.showMessageDialog(this, "La fecha no es válida", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCerrarActionPerformed
+
+    private void salidasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidasPendientesActionPerformed
+        botonCerrar.setText("<html>Cerrar<br/>salida</html>");
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(usuario),cabecera);
+        tablaSalidas.setModel(dtm);
+    }//GEN-LAST:event_salidasPendientesActionPerformed
+
+    private void salidasRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidasRealizadasActionPerformed
+        botonCerrar.setText("<html>Modificar<br/>hora fin</html>");
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaRealizadas(usuario),cabecera);
+        tablaSalidas.setModel(dtm);
+    }//GEN-LAST:event_salidasRealizadasActionPerformed
+
+    private void todasLasSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todasLasSalidasActionPerformed
+        botonCerrar.setText("<html>Modificar<br/>hora fin</html>");
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPrevia(usuario),cabecera);
+        tablaSalidas.setModel(dtm);
+    }//GEN-LAST:event_todasLasSalidasActionPerformed
 
     public void cerrarSalida(String ff){
         //ConjuntoSalida.instancia().buscarSalida(e, p, ff);
@@ -190,10 +252,14 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botonCerrar;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.ButtonGroup opcionesSalidas;
+    private javax.swing.JRadioButton salidasPendientes;
+    private javax.swing.JRadioButton salidasRealizadas;
     private javax.swing.JTable tablaSalidas;
+    private javax.swing.JRadioButton todasLasSalidas;
     // End of variables declaration//GEN-END:variables
 }

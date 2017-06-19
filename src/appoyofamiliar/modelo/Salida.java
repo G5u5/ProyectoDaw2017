@@ -45,12 +45,14 @@ public class Salida {
      */
     public void cerrarSalida(Date fechaFin){
         this.fechaFin = fechaFin;
+        this.control = "modificar";
     }
     
     public void cerrarSalida(String ff){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try{
             this.fechaFin = sdf.parse(ff);
+            this.control = "modificar";
         } catch (Exception e){
             System.err.println("FALLO AL ASIGNAR FECHA FIN A LA SALIDA");
         }
@@ -66,14 +68,12 @@ public class Salida {
      * @param transporte
      * @param fechaInicio
      */
-    public void actualizarDatos(Empleado empleado, String medico, String especialidad, String centro, String descripcion, String transporte, Date fechaInicio) {
-        this.empleado = empleado;
+    public void actualizarDatos(String medico, String especialidad, String centro, String descripcion, String transporte) {
         this.medico = medico;
         this.especialidad = especialidad;
         this.centro = centro;
         this.descripcion = descripcion;
         this.transporte = transporte;
-        this.fechaInicio = fechaInicio;
     }
 
     public Empleado getEmpleado() {
