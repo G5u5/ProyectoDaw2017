@@ -222,6 +222,7 @@ public class JefeJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void cambiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarUsuarioActionPerformed
+        SQLUsuarios.instancia().guardarCambios();
         ljfPadre.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cambiarUsuarioActionPerformed
