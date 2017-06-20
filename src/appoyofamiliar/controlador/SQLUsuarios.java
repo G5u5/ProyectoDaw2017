@@ -326,10 +326,26 @@ public class SQLUsuarios {
     public void guardarSalida(Salida sa){
        //Guarda el objeto Salida pasado como parametro en la base de datos.
         try {
-            ConexionBD.instancia().getStatement().execute(
-                    "insert into Salida (codigo, Identificador, dniPaciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio, fechaFin) values (" +
+            if (sa.getFechaFin() == null){
+                ConexionBD.instancia().getStatement().execute(
+                    "insert into salida (codigoSalida, Identificador, dniPaciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio) values (" +
                     sa.getCodigo() +
-                    "'" + sa.getEmpleado().getIdentificador() + "', " +
+                    ", '" + sa.getEmpleado().getIdentificador() + "', " +
+                    "'" + sa.getPaciente().getDni() + "', " +
+                    "'" + sa.getMedico() + "', " +
+                    "'" + sa.getEspecialidad() + "', " +
+                    "'" + sa.getCentro() + "', " +
+                    "'" + sa.getArea()+ "', " +
+                    "'" + sa.getDescripcion()+ "', " +
+                    "'" + sa.getTransporte() + "', " +
+                    "'" + sa.getFechaInicio() + "' " +
+                    ")"
+                ); 
+            } else {
+                ConexionBD.instancia().getStatement().execute(
+                    "insert into salida (codigoSalida, Identificador, dniPaciente, medico, especialidad, centro, area, descripcion, transporte, fechaInicio) values (" +
+                    sa.getCodigo() +
+                    ", '" + sa.getEmpleado().getIdentificador() + "', " +
                     "'" + sa.getPaciente().getDni() + "', " +
                     "'" + sa.getMedico() + "', " +
                     "'" + sa.getEspecialidad() + "', " +
@@ -338,9 +354,10 @@ public class SQLUsuarios {
                     "'" + sa.getDescripcion()+ "', " +
                     "'" + sa.getTransporte() + "', " +
                     "'" + sa.getFechaInicio() + "', " +
-                    "'" + sa.getFechaFin() + "'" +
+                    "'" + sa.getFechaFin() + "' " +
                     ")"
                 ); 
+            }
             ConexionBD.desconectar();
                     
         } catch (Exception e) {
