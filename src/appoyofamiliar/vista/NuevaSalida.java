@@ -306,8 +306,8 @@ public class NuevaSalida extends javax.swing.JFrame {
         Salida sa = new Salida(cod, encontrarEmpleado(), encontrarPaciente(), medicoBox.getText(), especialidadBox.getText(), centroBox.getText(), areaBox.getText(), descripcionBox.getText(), transporteBox.getText(), fechaIn);
         sa.setControl("insertar");
         ConjuntoSalida.instancia().nuevaSalida(sa);
-        
         this.setVisible(false);
+        (new GestionarSalidasEncargado(usuario)).setVisible(true);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private Empleado encontrarEmpleado(){
