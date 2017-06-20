@@ -167,26 +167,28 @@ public class GestionarSalidasGrande extends javax.swing.JFrame {
 
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
         int fila = tablaSalidas.getSelectedRow();
-        
         if (fila < 0){
             JOptionPane.showMessageDialog(this, "Seleccione un elemento", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String fechaFin = JOptionPane.showInputDialog((new JFrame("CERRAR SALIDA")), "Escriba la fecha yyyy-mm-dd");
-        
-            if (fechaFin != null){
+            
+            if (fechaFin == null){
+                /*Si pulsamos en "Cancelar", devolverá null, debemos controlar
+                este retorno lo primero, puesto que si le pedimos que haga el equals
+                siendo null, saltan errores por todos lados...*/
+            }else if (fechaFin.equals("") || fechaFin.equals("null")){
+                JOptionPane.showMessageDialog(this, "La fecha no es válida", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
                 ConjuntoSalida.instancia().cerrarSalida(Integer.parseInt(tablaSalidas.getValueAt(fila, 0).toString()), fechaFin);
                 tablaSalidas.clearSelection();
                 if (salidasPendientes.isSelected()){
-                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandePendientes(usuario),cabecera);
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(),cabecera);
                 } else if (salidasRealizadas.isSelected()){
-                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrandeRealizadas(usuario),cabecera);
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaRealizadas(),cabecera);
                 } else {
-                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaGrande(usuario),cabecera);
+                    dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPrevia(),cabecera);
                 }
-                
                 tablaSalidas.setModel(dtm);
-            } else {
-                JOptionPane.showMessageDialog(this, "La fecha no es válida", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         

@@ -64,7 +64,7 @@ public class JefeJFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PANEL DE CONTROL");
+        jLabel1.setText("PANEL DE CONTROL JEFE");
 
         nombreUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

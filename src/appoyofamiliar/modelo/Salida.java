@@ -74,15 +74,17 @@ public class Salida {
      * @param transporte
      
      */
-    public void actualizarDatos(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String descripcion, String transporte, String fechaInicio) {
+    public void actualizarDatos(Empleado empleado, Paciente paciente, String medico, String especialidad, String centro, String area, String descripcion, String transporte, String fechaInicio) {
         this.empleado = empleado;
         this.paciente = paciente;
         this.medico = medico;
         this.especialidad = especialidad;
         this.centro = centro;
+        this.area = area;
         this.descripcion = descripcion;
         this.transporte = transporte;
         this.fechaInicio = fechaInicio;
+        this.control = "modificar";
     }
     
     //--------------------------------------------------------------------------

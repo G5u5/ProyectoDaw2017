@@ -85,7 +85,7 @@ public class Plantilla {
     //--------------------------------------------------------------------------
     
     public String[][] obtenerDatosTabla(){
-        String[][] tabla = new String[listaPlantilla.size()][6];
+        String[][] tabla = new String[calcularDimension()][6];
         for (int i = 0; i < listaPlantilla.size(); i++){
             if (!listaPlantilla.get(i).getControl().equals("borrar")){
                 tabla[i][0]= listaPlantilla.get(i).getIdentificador();
@@ -98,9 +98,9 @@ public class Plantilla {
         }
         return tabla;
     }
-    
+        
     public String[][] obtenerDatosTablaJefe(){
-        String[][] tabla = new String[listaPlantilla.size()][6];
+        String[][] tabla = new String[calcularDimensionJefes()][6];
         int contador = 0;
         for (int i = 0; i < listaPlantilla.size(); i++){
             if (listaPlantilla.get(i) instanceof Jefe && !listaPlantilla.get(i).getControl().equals("borrar")){
@@ -115,9 +115,9 @@ public class Plantilla {
         }
         return tabla;
     }
-
+    
     public String[][] obtenerDatosTablaEncargado(){
-        String[][] tabla = new String[listaPlantilla.size()][6];
+        String[][] tabla = new String[calcularDimensionEncargados()][6];
         int contador = 0;
         for (int i = 0; i < listaPlantilla.size(); i++){
             if (listaPlantilla.get(i) instanceof Encargado && !listaPlantilla.get(i).getControl().equals("borrar")){
@@ -132,9 +132,9 @@ public class Plantilla {
         }
         return tabla;
     }
-    
+       
     public String[][] obtenerDatosTablaEmpleado(){
-        String[][] tabla = new String[listaPlantilla.size()][6];
+        String[][] tabla = new String[calcularDimensionEmpleados()][6];
         int contador = 0;
         for (int i = 0; i < listaPlantilla.size(); i++){
             if (listaPlantilla.get(i) instanceof Empleado && !listaPlantilla.get(i).getControl().equals("borrar") && !(listaPlantilla.get(i) instanceof Encargado)){
@@ -185,5 +185,45 @@ public class Plantilla {
             }
         }
         return us;
+    }
+        
+    private int calcularDimension(){
+        int contador = 0;
+        for (int i = 0; i < listaPlantilla.size(); i++){
+            if (!listaPlantilla.get(i).getControl().equals("borrar")){
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    private int calcularDimensionJefes(){
+        int contador = 0;
+        for (int i = 0; i < listaPlantilla.size(); i++){
+            if (listaPlantilla.get(i) instanceof Jefe && !listaPlantilla.get(i).getControl().equals("borrar")){
+                contador++;
+            }
+        }
+        return contador;
+    }
+        
+    private int calcularDimensionEncargados(){
+        int contador = 0;
+        for (int i = 0; i < listaPlantilla.size(); i++){
+            if (listaPlantilla.get(i) instanceof Encargado && !listaPlantilla.get(i).getControl().equals("borrar")){
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    private int calcularDimensionEmpleados(){
+        int contador = 0;
+        for (int i = 0; i < listaPlantilla.size(); i++){
+            if (listaPlantilla.get(i) instanceof Empleado && !listaPlantilla.get(i).getControl().equals("borrar") && !(listaPlantilla.get(i) instanceof Encargado)){
+                contador++;
+            }
+        }
+        return contador;
     }
 }

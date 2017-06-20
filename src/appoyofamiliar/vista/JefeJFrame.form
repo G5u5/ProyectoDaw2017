@@ -115,7 +115,7 @@
           <Font name="DialogInput" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="PANEL DE CONTROL"/>
+        <Property name="text" type="java.lang.String" value="PANEL DE CONTROL JEFE"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nombreUsuario">

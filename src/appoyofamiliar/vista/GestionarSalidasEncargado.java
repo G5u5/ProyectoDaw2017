@@ -14,7 +14,7 @@ import javax.swing.table.*;
  *
  * @author Jesús Durántez Prieto
  */
-public class GestionarSalidas extends javax.swing.JFrame {
+public class GestionarSalidasEncargado extends javax.swing.JFrame {
     
     private Usuario usuario;
     private LinkedList<Usuario> usuarios = new LinkedList<Usuario>();
@@ -25,14 +25,14 @@ public class GestionarSalidas extends javax.swing.JFrame {
     /**
      * Creates new form GestionarEncargados
      */
-    public GestionarSalidas() {
+    public GestionarSalidasEncargado() {
         initComponents();
     }
     
-    public GestionarSalidas(Usuario usr) {
+    public GestionarSalidasEncargado(Usuario usr) {
         initComponents();
         this.usuario = usr;
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(),cabecera);
         tablaSalidas.setModel(dtm);
     }
     
@@ -55,6 +55,8 @@ public class GestionarSalidas extends javax.swing.JFrame {
         salidasPendientes = new javax.swing.JRadioButton();
         salidasRealizadas = new javax.swing.JRadioButton();
         todasLasSalidas = new javax.swing.JRadioButton();
+        botonModificar = new javax.swing.JButton();
+        botonCrear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GESTIONAR SALIDAS");
@@ -125,36 +127,59 @@ public class GestionarSalidas extends javax.swing.JFrame {
             }
         });
 
+        botonModificar.setText("<html>MODIFICAR<br/>SALIDA</html>");
+        botonModificar.setPreferredSize(new java.awt.Dimension(120, 48));
+        botonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarActionPerformed(evt);
+            }
+        });
+
+        botonCrear.setText("CREAR");
+        botonCrear.setPreferredSize(new java.awt.Dimension(120, 48));
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(126, 126, 126)
+                                .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonVerMas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(217, 217, 217)
+                                .addComponent(salidasPendientes)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(salidasRealizadas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(todasLasSalidas)))
+                        .addGap(0, 121, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(252, 252, 252)
-                .addComponent(salidasPendientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salidasRealizadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(todasLasSalidas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonVerMas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(252, 252, 252))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,18 +187,18 @@ public class GestionarSalidas extends javax.swing.JFrame {
                     .addComponent(salidasPendientes)
                     .addComponent(salidasRealizadas)
                     .addComponent(todasLasSalidas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonVerMas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(8, 8, 8))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonVerMas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,7 +210,7 @@ public class GestionarSalidas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void botonVerMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerMasActionPerformed
-        (new GestionarSalidasGrande(usuario)).setVisible(true);
+        //(new GestionarSalidasEncargadoGrande(usuario)).setVisible(true);
     }//GEN-LAST:event_botonVerMasActionPerformed
 
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
@@ -218,27 +243,42 @@ public class GestionarSalidas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCerrarActionPerformed
 
     private void salidasRealizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidasRealizadasActionPerformed
+        
         botonCerrar.setText("<html>Modificar<br/>hora fin</html>");
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaRealizadas(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaRealizadas(),cabecera);
         tablaSalidas.setModel(dtm);
     }//GEN-LAST:event_salidasRealizadasActionPerformed
 
     private void salidasPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidasPendientesActionPerformed
         botonCerrar.setText("<html>Cerrar<br/>salida</html>");
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPreviaPendientes(),cabecera);
         tablaSalidas.setModel(dtm);
     }//GEN-LAST:event_salidasPendientesActionPerformed
 
     private void todasLasSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todasLasSalidasActionPerformed
         botonCerrar.setText("<html>Modificar<br/>hora fin</html>");
-        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPrevia(usuario),cabecera);
+        dtm = new DefaultTableModel(ConjuntoSalida.instancia().obtenerDatosTablaPrevia(),cabecera);
         tablaSalidas.setModel(dtm);
     }//GEN-LAST:event_todasLasSalidasActionPerformed
 
-    public void cerrarSalida(String ff){
-        //ConjuntoSalida.instancia().buscarSalida(e, p, ff);
-    }
-    
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
+        (new NuevaSalida(usuario)).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonCrearActionPerformed
+
+    private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+        //(new ModificarSalida(s)).setVisible(true);
+        int fila = tablaSalidas.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(this, "Seleccione un elemento", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int cod = Integer.parseInt(tablaSalidas.getValueAt(fila, 0).toString());
+            Salida s = (ConjuntoSalida.instancia().getSalida(cod));
+            (new ModificarSalida(s, this)).setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_botonModificarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,14 +296,18 @@ public class GestionarSalidas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionarSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionarSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionarSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionarSalidas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionarSalidasEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -272,13 +316,15 @@ public class GestionarSalidas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionarSalidas().setVisible(true);
+                new GestionarSalidasEncargado().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCerrar;
+    private javax.swing.JButton botonCrear;
+    private javax.swing.JButton botonModificar;
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonVerMas;
     private javax.swing.JLabel jLabel1;
